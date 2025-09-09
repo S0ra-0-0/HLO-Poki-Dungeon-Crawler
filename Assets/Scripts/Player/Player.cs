@@ -61,20 +61,33 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        moveInput = new Vector2(
-            Input.GetAxisRaw("Horizontal"),
-            Input.GetAxisRaw("Vertical")
-        ).normalized;
+        if (!isHeavyAttacking) 
+        {
+        HandleMovement();
+        }
+        else
+        {
+            HandleMovement();
 
-        // Update facing direction if moving
-        if (moveInput.sqrMagnitude > 0.01f)
-            facingDirection = Get8Direction(moveInput);
-
+            // Prevent movement while heavy attacking
+            rb.linearVelocity = Vector2.Lerp(rb.linearVelocity, Vector2.zero, deceleration * Time.fixedDeltaTime);
+        }
         HandleDashInput();
         HandleAttackInput();
         HandleAttackSwapInput();
     }
 
+    private void HandleMovement()
+    {
+        moveInput = new Vector2(
+           Input.GetAxisRaw("Horizontal"),
+           Input.GetAxisRaw("Vertical")
+       ).normalized;
+
+        // Update facing direction if moving
+        if (moveInput.sqrMagnitude > 0.01f)
+            facingDirection = Get8Direction(moveInput);
+    }
     private void HandleDashInput()
     {
         if (Input.GetKeyDown(KeyCode.Space) && Time.time >= lastDashTime + dashCooldown)
@@ -94,7 +107,7 @@ public class Player : MonoBehaviour
     private void HandleAttackInput()
     {
         // Start heavy attack charge on F down
-        if (Input.GetKeyDown(KeyCode.F)
+        if (Input.GetKeyDown(KeyCode.LeftShift)
             && !isAttacking && !isHeavyAttacking
             && Time.time >= lastHeavyAttackTime + heavyAttackCooldown)
         {
@@ -105,7 +118,7 @@ public class Player : MonoBehaviour
             return;
         }
         // Release heavy attack on F up
-        if (isChargingHeavy && isHeavyAttacking && Input.GetKeyUp(KeyCode.F))
+        if (isChargingHeavy && isHeavyAttacking && Input.GetKeyUp(KeyCode.LeftShift))
         {
             isChargingHeavy = false;
             HeavySpearGizmoDrawer.ReleaseCharge(); // Static call to notify coroutine to release
