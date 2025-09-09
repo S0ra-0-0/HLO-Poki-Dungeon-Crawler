@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class RangedAttack : IAttackType
@@ -58,6 +57,33 @@ public class RangedAttack : IAttackType
                 if (rb != null)
                 {
                     rb.linearVelocity = direction * 15f; // Adjust speed as needed
+                }
+            }
+        }
+    }
+
+    public void heavyAttack(Player player)
+    {
+        Debug.Log("Heavy Ranged Attack!");
+        // Heavy ranged attack could shoot multiple projectiles in a spread
+        Transform firePoint = player.firePoint;
+        GameObject projectilePrefab = player.projectilePrefab;
+        if (projectilePrefab != null && firePoint != null)
+        {
+            int projectileCount = 5;
+            float spreadAngle = 30f; // Total spread angle in degrees
+            Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            mouseWorldPos.z = 0f; // Ensures z is 0 cause 2D
+            Vector2 baseDirection = ((Vector2)(mouseWorldPos - firePoint.position)).normalized;
+            for (int i = 0; i < projectileCount; i++)
+            {
+                float angle = -spreadAngle / 2 + (spreadAngle / (projectileCount - 1)) * i;
+                Vector2 direction = Quaternion.Euler(0, 0, angle) * baseDirection;
+                GameObject projectile = Object.Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
+                Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
+                if (rb != null)
+                {
+                    rb.linearVelocity = direction * 12f; // Slightly slower for heavy attack
                 }
             }
         }

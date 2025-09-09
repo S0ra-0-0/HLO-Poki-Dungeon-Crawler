@@ -20,8 +20,13 @@ public class Player : MonoBehaviour
 
     [Header("Attack Settings")]
     [SerializeField] private float attackRange = 1.5f;
-    private float lastAttackTime = -100f;
+    [SerializeField] private float normalAttackCooldown = 0.3f;
+    [SerializeField] private float heavyAttackCooldown = 1.0f;
+    private float lastNormalAttackTime = -100f;
+    private float lastHeavyAttackTime = -100f;
     private bool isAttacking = false;
+    public   bool isHeavyAttacking = false;
+    private bool isChargingHeavy = false;
 
     [Header("Ranged Attack")]
     public GameObject projectilePrefab;
@@ -36,6 +41,8 @@ public class Player : MonoBehaviour
     private int currentAttackIndex = 0;
     private IAttackType currentAttackType;
 
+    public Vector2 facingDirection = Vector2.right; // Default facing right
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -45,7 +52,7 @@ public class Player : MonoBehaviour
         attackTypes = new List<IAttackType>
         {
             new SwordAttack(),
-            new DaggerAttack(),
+            new SpearAttack(),
             new RangedAttack(),
             new SummonerAttack()
         };
@@ -58,6 +65,10 @@ public class Player : MonoBehaviour
             Input.GetAxisRaw("Horizontal"),
             Input.GetAxisRaw("Vertical")
         ).normalized;
+
+        // Update facing direction if moving
+        if (moveInput.sqrMagnitude > 0.01f)
+            facingDirection = Get8Direction(moveInput);
 
         HandleDashInput();
         HandleAttackInput();
@@ -82,10 +93,31 @@ public class Player : MonoBehaviour
 
     private void HandleAttackInput()
     {
-        if (Input.GetMouseButtonDown(0) && Time.time >= lastAttackTime + currentAttackType.Cooldown)
+        // Start heavy attack charge on F down
+        if (Input.GetKeyDown(KeyCode.F)
+            && !isAttacking && !isHeavyAttacking
+            && Time.time >= lastHeavyAttackTime + heavyAttackCooldown)
+        {
+            isHeavyAttacking = true;
+            isChargingHeavy = true;
+            lastHeavyAttackTime = Time.time;
+            currentAttackType.heavyAttack(this); // Starts coroutine, handles charge
+            return;
+        }
+        // Release heavy attack on F up
+        if (isChargingHeavy && isHeavyAttacking && Input.GetKeyUp(KeyCode.F))
+        {
+            isChargingHeavy = false;
+            HeavySpearGizmoDrawer.ReleaseCharge(); // Static call to notify coroutine to release
+            return;
+        }
+        // Normal attack
+        if (Input.GetMouseButtonDown(0)
+            && !isAttacking && !isHeavyAttacking
+            && Time.time >= lastNormalAttackTime + normalAttackCooldown)
         {
             isAttacking = true;
-            lastAttackTime = Time.time;
+            lastNormalAttackTime = Time.time;
             currentAttackType.Attack(this);
             Invoke(nameof(StopAttacking), 0.1f);
         }
@@ -93,7 +125,7 @@ public class Player : MonoBehaviour
 
     private void HandleAttackSwapInput()
     {
-        // Example: Press Q/E to cycle attack types
+        //Temp Press Q/E to cycle attack types
         if (Input.GetKeyDown(KeyCode.Q))
         {
             currentAttackIndex = (currentAttackIndex - 1 + attackTypes.Count) % attackTypes.Count;
@@ -132,6 +164,24 @@ public class Player : MonoBehaviour
         }
     }
 
+    // Helper to snap to 8 directions
+    private Vector2 Get8Direction(Vector2 input)
+    {
+        if (input == Vector2.zero) return facingDirection;
+        float angle = Mathf.Atan2(input.y, input.x) * Mathf.Rad2Deg;
+        angle = (angle + 360) % 360;
+
+        if (angle >= 337.5f || angle < 22.5f) return Vector2.right;
+        if (angle >= 22.5f && angle < 67.5f) return (Vector2.right + Vector2.up).normalized;
+        if (angle >= 67.5f && angle < 112.5f) return Vector2.up;
+        if (angle >= 112.5f && angle < 157.5f) return (Vector2.left + Vector2.up).normalized;
+        if (angle >= 157.5f && angle < 202.5f) return Vector2.left;
+        if (angle >= 202.5f && angle < 247.5f) return (Vector2.left + Vector2.down).normalized;
+        if (angle >= 247.5f && angle < 292.5f) return Vector2.down;
+        if (angle >= 292.5f && angle < 337.5f) return (Vector2.right + Vector2.down).normalized;
+        return facingDirection;
+    }
+
     private void OnDrawGizmos()
     {
         // Draw dash indicator when dashing
@@ -147,15 +197,26 @@ public class Player : MonoBehaviour
         {
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(transform.position, attackRange);
-            
+
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 attackDirection = (mousePosition - (Vector2)transform.position).normalized;
             Gizmos.DrawLine(transform.position, (Vector2)transform.position + attackDirection * attackRange);
         }
+
+        // Draw facing direction indicator
+        Gizmos.color = Color.green;
+        Vector3 headPos = transform.position + Vector3.up * 0.7f;
+        Gizmos.DrawSphere(headPos, 0.08f);
+        Gizmos.DrawLine(headPos, headPos + (Vector3)facingDirection * 0.4f);
     }
 
     private void StopAttacking()
     {
         isAttacking = false;
+    }
+
+    private void StopHeavyAttacking()
+    {
+        isHeavyAttacking = false;
     }
 }

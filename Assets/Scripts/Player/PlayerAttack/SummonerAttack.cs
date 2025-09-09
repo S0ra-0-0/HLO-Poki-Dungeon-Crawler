@@ -9,4 +9,10 @@ public class SummonerAttack : IAttackType
         Debug.Log("Summoner Attack!");
         // Summon minion, etc.
     }
+
+    public void heavyAttack(Player player)
+    {
+        Debug.Log("Summoner Heavy Attack!");
+        // Summon stronger minion, etc.
+    }
 }
