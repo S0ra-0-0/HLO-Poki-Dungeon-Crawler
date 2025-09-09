@@ -3,7 +3,6 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags: []
   layers:
   - Default
   - TransparentFX
@@ -11,7 +10,7 @@ TagManager:
   - Player
   - Water
   - UI
-  - 
+  - PlayerBullet
   - 
   - 
   - 
