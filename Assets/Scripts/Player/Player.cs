@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -18,18 +20,36 @@ public class Player : MonoBehaviour
 
     [Header("Attack Settings")]
     [SerializeField] private float attackRange = 1.5f;
-    [SerializeField] private float attackCooldown = 0.5f;
     private float lastAttackTime = -100f;
     private bool isAttacking = false;
+
+    [Header("Ranged Attack")]
+    public GameObject projectilePrefab;
+    public Transform firePoint;
+
 
     private Rigidbody2D rb;
     private Vector2 moveInput;
     private Vector2 smoothVelocity;
 
+    private List<IAttackType> attackTypes;
+    private int currentAttackIndex = 0;
+    private IAttackType currentAttackType;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        rb.gravityScale = 0f; 
+        rb.gravityScale = 0f;
+
+        // Initialize attack types
+        attackTypes = new List<IAttackType>
+        {
+            new SwordAttack(),
+            new DaggerAttack(),
+            new RangedAttack(),
+            new SummonerAttack()
+        };
+        currentAttackType = attackTypes[currentAttackIndex];
     }
 
     private void Update()
@@ -41,6 +61,7 @@ public class Player : MonoBehaviour
 
         HandleDashInput();
         HandleAttackInput();
+        HandleAttackSwapInput();
     }
 
     private void HandleDashInput()
@@ -61,18 +82,30 @@ public class Player : MonoBehaviour
 
     private void HandleAttackInput()
     {
-        if (Input.GetMouseButtonDown(0) && Time.time >= lastAttackTime + attackCooldown)
+        if (Input.GetMouseButtonDown(0) && Time.time >= lastAttackTime + currentAttackType.Cooldown)
         {
             isAttacking = true;
             lastAttackTime = Time.time;
-            Debug.Log("Attack!");
+            currentAttackType.Attack(this);
             Invoke(nameof(StopAttacking), 0.1f);
         }
     }
 
-    private void StopAttacking()
+    private void HandleAttackSwapInput()
     {
-        isAttacking = false;
+        // Example: Press Q/E to cycle attack types
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            currentAttackIndex = (currentAttackIndex - 1 + attackTypes.Count) % attackTypes.Count;
+            currentAttackType = attackTypes[currentAttackIndex];
+            Debug.Log($"Switched to {currentAttackType.GetType().Name}");
+        }
+        else if (Input.GetKeyDown(KeyCode.E))
+        {
+            currentAttackIndex = (currentAttackIndex + 1) % attackTypes.Count;
+            currentAttackType = attackTypes[currentAttackIndex];
+            Debug.Log($"Switched to {currentAttackType.GetType().Name}");
+        }
     }
 
     private void FixedUpdate()
@@ -119,5 +152,10 @@ public class Player : MonoBehaviour
             Vector2 attackDirection = (mousePosition - (Vector2)transform.position).normalized;
             Gizmos.DrawLine(transform.position, (Vector2)transform.position + attackDirection * attackRange);
         }
+    }
+
+    private void StopAttacking()
+    {
+        isAttacking = false;
     }
 }
