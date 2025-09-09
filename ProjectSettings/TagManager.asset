@@ -3,8 +3,6 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags:
-  - PlayerBullet
   layers:
   - Default
   - TransparentFX
