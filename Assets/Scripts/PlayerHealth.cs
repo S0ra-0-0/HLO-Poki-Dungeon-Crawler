@@ -2,6 +2,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.Design.Serialization;
+using System.Linq;
+
+
 
 // Unity
 using UnityEngine;
@@ -11,6 +15,8 @@ public class PlayerHealth : MonoBehaviour
 {
     [Header("HP")]
     [SerializeField] private List<Heart> heartList;
+    [SerializeField] private Transform transformHPUI;
+    [SerializeField] private GameObject prefabNormalHeart;
     [SerializeField] private int maxHP;
     [SerializeField] private int currentHP;
 
@@ -25,6 +31,8 @@ public class PlayerHealth : MonoBehaviour
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+
+        heartList = transformHPUI.GetComponentsInChildren<Heart>().ToList();
 
         currentHP = maxHP = heartList.Count;
     }
@@ -64,8 +72,52 @@ public class PlayerHealth : MonoBehaviour
         isInvincibility = false;
     }
 
+    public void AddHeart(GameObject objHeart)
+    {
+        Transform transformNewHeart = Instantiate(objHeart, objHeart.transform.position, Quaternion.identity).transform;
+
+        transformNewHeart.SetParent(transformHPUI);
+        heartList.Add(transformNewHeart.GetComponent<Heart>());
+
+        HealHP(++maxHP - currentHP);
+    }
+
+    [ContextMenu("AddHeart")]
+    public void TestAddHeart()
+    {
+        AddHeart(prefabNormalHeart);
+    }
+
+    [ContextMenu("Heal")]
+    public void TestHeal()
+    {
+        HealHP(1);
+    }
+
+    private void HealHP(int healedAmount)
+    {
+        while (healedAmount-- > 0)
+        {
+            if (currentHP >= maxHP)
+            {
+                break;
+            }
+
+            heartList[currentHP++].Fill();
+        }
+    }
+
     private void DecreaseHP(int damage)
     {
-        
+        while (damage-- > 0)
+        {
+            if (--currentHP <= 0)
+            {
+                // death event
+                break;
+            }
+
+            heartList[currentHP].Empty();
+        }
     }
 }

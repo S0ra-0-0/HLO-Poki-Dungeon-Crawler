@@ -17,7 +17,7 @@ public class TempEnemy : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerDatas.playerLayer)
         {
-            gameObject.GetComponent<PlayerHealth>().Hit(power);
+            collision.GetComponent<PlayerHealth>().Hit(power);
         }
     }
 }
