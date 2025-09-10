@@ -157,8 +157,22 @@ MonoBehaviour:
   dashDuration: 0.15
   dashCooldown: 1
   attackRange: 1.5
+  normalAttackCooldown: 0.3
+  heavyAttackCooldown: 1
+  lastHeavyAttackTime: -100
+  isHeavyAttacking: 0
   projectilePrefab: {fileID: 1835898706951933378, guid: c34904f2f280cd04abe14a2cbb2cea4d, type: 3}
   firePoint: {fileID: 1995038420}
+  idleDirectionSprites:
+  - {fileID: 21300000, guid: 3aa6d635b8fc2b445a3d9b1119c55e08, type: 3}
+  - {fileID: 21300000, guid: 48607f68a05bf8140b2c0db8f8c3934a, type: 3}
+  - {fileID: 21300000, guid: f7398dbcf34786c48bdd16af615b40e6, type: 3}
+  - {fileID: 21300000, guid: e5a5ed5472e0c7546b56627aca0a5491, type: 3}
+  - {fileID: 21300000, guid: cf6bf1ecda8ce2c4c82756580ac5a13a, type: 3}
+  - {fileID: 21300000, guid: a205973959f6c3746ae614e698d67966, type: 3}
+  - {fileID: 21300000, guid: 2ddbca08a7f52954bb26a3a5bf69b184, type: 3}
+  - {fileID: 21300000, guid: 343f270c24d7c3e448501c2100986924, type: 3}
+  facingDirection: {x: 1, y: 0}
 --- !u!50 &877887997
 Rigidbody2D:
   serializedVersion: 5
@@ -251,7 +265,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.59, y: -1.8, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1995038420}

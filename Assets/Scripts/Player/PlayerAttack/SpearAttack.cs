@@ -6,7 +6,7 @@ public class SpearAttack : IAttackType
 {
     public float Cooldown => 0.2f;
 
-    private const float spearReach = 3f;
+    private const float spearReach = 2.5f;
     private const float hitRadius = .5f;
     private const int spearDamage = 2;
 
@@ -133,7 +133,7 @@ public class HeavySpearGizmoDrawer : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = flash ? Color.red : Color.white;
+        Gizmos.color = flash ? new Color(0.278f, 0.961f, 0.278f, 1.000f) : Color.white;
         Gizmos.DrawWireSphere(transform.position, radius);
     }
 }

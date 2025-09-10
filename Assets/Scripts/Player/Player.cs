@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -21,21 +20,24 @@ public class Player : MonoBehaviour
     [Header("Attack Settings")]
     [SerializeField] private float attackRange = 1.5f;
     [SerializeField] private float normalAttackCooldown = 0.3f;
-    [SerializeField] private float heavyAttackCooldown = 1.0f;
+    public float heavyAttackCooldown = 1.0f;
     private float lastNormalAttackTime = -100f;
-    private float lastHeavyAttackTime = -100f;
-    private bool isAttacking = false;
-    public   bool isHeavyAttacking = false;
-    private bool isChargingHeavy = false;
+    public float lastHeavyAttackTime = -100f;
+    public bool isAttacking = false;
+    public bool isHeavyAttacking = false;
+    public bool isChargingHeavy = false;
 
     [Header("Ranged Attack")]
     public GameObject projectilePrefab;
     public Transform firePoint;
 
+    [Header("Sprite Direction")]
+    [SerializeField] private Sprite[] idleDirectionSprites = new Sprite[8]; // Assign in Inspector: Right, UpRight, Up, UpLeft, Left, DownLeft, Down, DownRight
 
     private Rigidbody2D rb;
     private Vector2 moveInput;
     private Vector2 smoothVelocity;
+    private SpriteRenderer spriteRenderer;
 
     private List<IAttackType> attackTypes;
     private int currentAttackIndex = 0;
@@ -43,10 +45,16 @@ public class Player : MonoBehaviour
 
     public Vector2 facingDirection = Vector2.right; // Default facing right
 
+    private bool isInvulnerable = false;
+    private bool actionsDisabled = false;
+    private bool attackedThisFrame = false;
+    public bool parrySuccess = false;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = 0f;
+        spriteRenderer = GetComponent<SpriteRenderer>(); // Make sure a SpriteRenderer is attached
 
         // Initialize attack types
         attackTypes = new List<IAttackType>
@@ -61,9 +69,9 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        if (!isHeavyAttacking) 
+        if (!isHeavyAttacking || !actionsDisabled)
         {
-        HandleMovement();
+            HandleMovement();
         }
         else
         {
@@ -72,6 +80,7 @@ public class Player : MonoBehaviour
             // Prevent movement while heavy attacking
             rb.linearVelocity = Vector2.Lerp(rb.linearVelocity, Vector2.zero, deceleration * Time.fixedDeltaTime);
         }
+        UpdateSpriteDirection();
         HandleDashInput();
         HandleAttackInput();
         HandleAttackSwapInput();
@@ -107,7 +116,7 @@ public class Player : MonoBehaviour
     private void HandleAttackInput()
     {
         // Start heavy attack charge on F down
-        if (Input.GetKeyDown(KeyCode.LeftShift)
+        if (Input.GetKeyDown(KeyCode.K)
             && !isAttacking && !isHeavyAttacking
             && Time.time >= lastHeavyAttackTime + heavyAttackCooldown)
         {
@@ -118,14 +127,14 @@ public class Player : MonoBehaviour
             return;
         }
         // Release heavy attack on F up
-        if (isChargingHeavy && isHeavyAttacking && Input.GetKeyUp(KeyCode.LeftShift))
+        if (isChargingHeavy && isHeavyAttacking && Input.GetKeyUp(KeyCode.K))
         {
             isChargingHeavy = false;
             HeavySpearGizmoDrawer.ReleaseCharge(); // Static call to notify coroutine to release
             return;
         }
         // Normal attack
-        if (Input.GetMouseButtonDown(0)
+        if (Input.GetKeyUp(KeyCode.J)
             && !isAttacking && !isHeavyAttacking
             && Time.time >= lastNormalAttackTime + normalAttackCooldown)
         {
@@ -200,21 +209,11 @@ public class Player : MonoBehaviour
         // Draw dash indicator when dashing
         if (isDashing)
         {
-            Gizmos.color = Color.blue;
+            Gizmos.color = Color.cyan;
             Gizmos.DrawWireSphere(transform.position, 0.8f);
             Gizmos.DrawLine(transform.position, (Vector2)transform.position + dashDirection * 1.5f);
         }
 
-        // Draw attack range when attacking
-        if (isAttacking)
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position, attackRange);
-
-            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Vector2 attackDirection = (mousePosition - (Vector2)transform.position).normalized;
-            Gizmos.DrawLine(transform.position, (Vector2)transform.position + attackDirection * attackRange);
-        }
 
         // Draw facing direction indicator
         Gizmos.color = Color.green;
@@ -231,5 +230,54 @@ public class Player : MonoBehaviour
     private void StopHeavyAttacking()
     {
         isHeavyAttacking = false;
+    }
+
+    private void UpdateSpriteDirection()
+    {
+        // 0: Right, 1: UpRight, 2: Up, 3: UpLeft, 4: Left, 5: DownLeft, 6: Down, 7: DownRight
+        int dirIndex = 0;
+        Vector2 dir = facingDirection.normalized;
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        angle = (angle + 360) % 360;
+
+        if (angle >= 337.5f || angle < 22.5f) dirIndex = 0; // Right
+        else if (angle >= 22.5f && angle < 67.5f) dirIndex = 1; // UpRight
+        else if (angle >= 67.5f && angle < 112.5f) dirIndex = 2; // Up
+        else if (angle >= 112.5f && angle < 157.5f) dirIndex = 3; // UpLeft
+        else if (angle >= 157.5f && angle < 202.5f) dirIndex = 4; // Left
+        else if (angle >= 202.5f && angle < 247.5f) dirIndex = 5; // DownLeft
+        else if (angle >= 247.5f && angle < 292.5f) dirIndex = 6; // Down
+        else if (angle >= 292.5f && angle < 337.5f) dirIndex = 7; // DownRight
+
+        if (idleDirectionSprites != null && idleDirectionSprites.Length == 8)
+            spriteRenderer.sprite = idleDirectionSprites[dirIndex];
+    }
+
+    public void RegisterAttack()
+    {
+        attackedThisFrame = true;
+    }
+
+    public void SetInvulnerable(bool value)
+    {
+        isInvulnerable = value;
+    }
+
+    public void DisableActions(bool value)
+    {
+        actionsDisabled = value;
+    }
+
+    public bool WasAttackedThisFrame()
+    {
+        bool result = attackedThisFrame;
+        attackedThisFrame = false;
+        return result;
+    }
+
+    public void TriggerCounterAttack()
+    {
+        Debug.Log("Counterattack triggered!");
+        // Implement your counterattack logic here
     }
 }
