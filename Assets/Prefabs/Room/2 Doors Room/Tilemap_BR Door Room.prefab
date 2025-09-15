@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2233962392169805564}
   - component: {fileID: 1815322071616382628}
   - component: {fileID: 1220135055124895834}
+  - component: {fileID: 3939775817824015238}
   m_Layer: 0
   m_Name: Tilemap_BR Door Room
   m_TagString: Untagged
@@ -2236,6 +2237,22 @@ TilemapCollider2D:
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
   m_UseDelaunayMesh: 0
+--- !u!114 &3939775817824015238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2557217759186926646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e91db273545d5b49bdff9c67eb4f69e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roomType: 0
+  doorList:
+  - {fileID: 2199336250316289814}
+  - {fileID: 7159553576436416776}
 --- !u!1001 &4689342905251576459
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2293,6 +2310,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b7efd169100ec344b5f49a31bcd801b, type: 3}
+--- !u!114 &2199336250316289814 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6887824811359817117, guid: 1b7efd169100ec344b5f49a31bcd801b, type: 3}
+  m_PrefabInstance: {fileID: 4689342905251576459}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 269d21325feacae489d6037d40dce7f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &2623530660108453853 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7312512889541688662, guid: 1b7efd169100ec344b5f49a31bcd801b, type: 3}
@@ -2360,3 +2388,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6620683938153765262, guid: 2097330cf23267549b44238f623c31ae, type: 3}
   m_PrefabInstance: {fileID: 6343446203543824589}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7159553576436416776 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4274948204188494277, guid: 2097330cf23267549b44238f623c31ae, type: 3}
+  m_PrefabInstance: {fileID: 6343446203543824589}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 269d21325feacae489d6037d40dce7f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

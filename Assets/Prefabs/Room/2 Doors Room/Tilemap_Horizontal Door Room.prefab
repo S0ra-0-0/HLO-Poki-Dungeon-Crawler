@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4508402591701582252}
   - component: {fileID: 428470465096141298}
   - component: {fileID: 2234426653467017832}
+  - component: {fileID: -4995317686312269930}
   m_Layer: 0
   m_Name: Tilemap_Horizontal Door Room
   m_TagString: Untagged
@@ -2236,6 +2237,22 @@ CompositeCollider2D:
   m_OffsetDistance: 0.00005
   m_UseDelaunayMesh: 0
   m_CompositeGameObject: {fileID: 544460095549988741}
+--- !u!114 &-4995317686312269930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 544460095549988741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e91db273545d5b49bdff9c67eb4f69e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roomType: 0
+  doorList:
+  - {fileID: 6673522920668368662}
+  - {fileID: 6976725771510530399}
 --- !u!1001 &2313474821270568865
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2293,6 +2310,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 34004fd6df0431a4caee9e6994b5ee28, type: 3}
+--- !u!114 &6673522920668368662 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -250511996033044297, guid: 34004fd6df0431a4caee9e6994b5ee28, type: 3}
+  m_PrefabInstance: {fileID: 2313474821270568865}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 269d21325feacae489d6037d40dce7f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &8449904157900996481 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6151646715606499360, guid: 34004fd6df0431a4caee9e6994b5ee28, type: 3}
@@ -2360,3 +2388,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6620683938153765262, guid: 2097330cf23267549b44238f623c31ae, type: 3}
   m_PrefabInstance: {fileID: 6593803813628127386}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6976725771510530399 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4274948204188494277, guid: 2097330cf23267549b44238f623c31ae, type: 3}
+  m_PrefabInstance: {fileID: 6593803813628127386}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 269d21325feacae489d6037d40dce7f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4887710178897717475}
   - component: {fileID: 1863989371577643483}
   - component: {fileID: 1259869476547845153}
+  - component: {fileID: 5712824119139777406}
   m_Layer: 0
   m_Name: Tilemap_TBL Door Room
   m_TagString: Untagged
@@ -2249,6 +2250,23 @@ TilemapCollider2D:
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
   m_UseDelaunayMesh: 0
+--- !u!114 &5712824119139777406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2272379363855925077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e91db273545d5b49bdff9c67eb4f69e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roomType: 0
+  doorList:
+  - {fileID: 122287463638462937}
+  - {fileID: 5637741246773905638}
+  - {fileID: 9088705760117778387}
 --- !u!1001 &191281035607283556
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2311,6 +2329,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6151646715606499360, guid: 34004fd6df0431a4caee9e6994b5ee28, type: 3}
   m_PrefabInstance: {fileID: 191281035607283556}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &9088705760117778387 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -250511996033044297, guid: 34004fd6df0431a4caee9e6994b5ee28, type: 3}
+  m_PrefabInstance: {fileID: 191281035607283556}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 269d21325feacae489d6037d40dce7f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1273181581195838843
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2368,6 +2397,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b7efd169100ec344b5f49a31bcd801b, type: 3}
+--- !u!114 &5637741246773905638 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6887824811359817117, guid: 1b7efd169100ec344b5f49a31bcd801b, type: 3}
+  m_PrefabInstance: {fileID: 1273181581195838843}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 269d21325feacae489d6037d40dce7f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &8417364445736957997 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7312512889541688662, guid: 1b7efd169100ec344b5f49a31bcd801b, type: 3}
@@ -2430,6 +2470,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c9abc240f3c1a0146bd2e39bb7d51bc2, type: 3}
+--- !u!114 &122287463638462937 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3873036098791539685, guid: c9abc240f3c1a0146bd2e39bb7d51bc2, type: 3}
+  m_PrefabInstance: {fileID: 3750858587121611324}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 269d21325feacae489d6037d40dce7f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &215985600255943744 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3959490635890792060, guid: c9abc240f3c1a0146bd2e39bb7d51bc2, type: 3}

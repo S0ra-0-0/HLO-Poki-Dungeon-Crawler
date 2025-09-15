@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2807214601210036822}
   - component: {fileID: 1790475532968701899}
   - component: {fileID: 7882532488366013549}
+  - component: {fileID: -8465610292520330586}
   m_Layer: 0
   m_Name: Tilemap_TR Door Room
   m_TagString: Untagged
@@ -2236,6 +2237,22 @@ CompositeCollider2D:
   m_OffsetDistance: 0.00005
   m_UseDelaunayMesh: 0
   m_CompositeGameObject: {fileID: 7539346543775272145}
+--- !u!114 &-8465610292520330586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7539346543775272145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e91db273545d5b49bdff9c67eb4f69e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roomType: 0
+  doorList:
+  - {fileID: 4494645157444556484}
+  - {fileID: 6408217156409556272}
 --- !u!1001 &855655594333672737
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2298,6 +2315,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3959490635890792060, guid: c9abc240f3c1a0146bd2e39bb7d51bc2, type: 3}
   m_PrefabInstance: {fileID: 855655594333672737}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4494645157444556484 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3873036098791539685, guid: c9abc240f3c1a0146bd2e39bb7d51bc2, type: 3}
+  m_PrefabInstance: {fileID: 855655594333672737}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 269d21325feacae489d6037d40dce7f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7186941471738795253
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2360,3 +2388,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6620683938153765262, guid: 2097330cf23267549b44238f623c31ae, type: 3}
   m_PrefabInstance: {fileID: 7186941471738795253}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6408217156409556272 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4274948204188494277, guid: 2097330cf23267549b44238f623c31ae, type: 3}
+  m_PrefabInstance: {fileID: 7186941471738795253}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 269d21325feacae489d6037d40dce7f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
