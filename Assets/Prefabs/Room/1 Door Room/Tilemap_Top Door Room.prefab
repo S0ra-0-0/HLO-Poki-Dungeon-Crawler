@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5730723362277743051}
   - component: {fileID: 4298449297289584842}
   - component: {fileID: 7403821922622726933}
+  - component: {fileID: -2705485592880293515}
   m_Layer: 0
   m_Name: Tilemap_Top Door Room
   m_TagString: Untagged
@@ -2223,6 +2224,21 @@ TilemapCollider2D:
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
   m_UseDelaunayMesh: 0
+--- !u!114 &-2705485592880293515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4935225601152685662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e91db273545d5b49bdff9c67eb4f69e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roomType: 0
+  doorList:
+  - {fileID: 4724475694951651719}
 --- !u!1001 &8372046929255946850
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2280,6 +2296,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c9abc240f3c1a0146bd2e39bb7d51bc2, type: 3}
+--- !u!114 &4724475694951651719 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3873036098791539685, guid: c9abc240f3c1a0146bd2e39bb7d51bc2, type: 3}
+  m_PrefabInstance: {fileID: 8372046929255946850}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 269d21325feacae489d6037d40dce7f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &4818169433626430494 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3959490635890792060, guid: c9abc240f3c1a0146bd2e39bb7d51bc2, type: 3}

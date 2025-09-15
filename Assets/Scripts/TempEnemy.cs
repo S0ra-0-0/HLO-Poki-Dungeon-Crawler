@@ -15,7 +15,7 @@ public class TempEnemy : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == LayerDatas.playerLayer)
+        if (collision.gameObject.layer == LayerDatas.PLAYER_LAYER)
         {
             collision.GetComponent<PlayerHealth>().Hit(power);
         }
