@@ -1,22 +1,31 @@
 fileFormatVersion: 2
-guid: 2b5181cf273f86546931eb012aeb48b6
+guid: 371cd986c9442b048a3c4435672f1915
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3294118638624663630
-    second: death text_0
+      213: -2292112753324157842
+    second: game over text_0
   - first:
-      213: -5237792849356432538
-    second: death text_1
+      213: -2005043460271927250
+    second: game over text_1
   - first:
-      213: -6890223383837994830
-    second: death text_2
+      213: -3504091311212965816
+    second: game over text_2
   - first:
-      213: 1132739514087286582
-    second: death text_3
+      213: -1466453668021455762
+    second: game over text_3
   - first:
-      213: 4570184909654966162
-    second: death text_4
+      213: 1623148923612890048
+    second: game over text_4
+  - first:
+      213: 6857570672953505535
+    second: game over text_5
+  - first:
+      213: 7311837736200862997
+    second: game over text_6
+  - first:
+      213: -48841220564989996
+    second: game over text_7
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -49,7 +58,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -58,7 +67,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -87,7 +96,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -112,7 +121,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: death text_0
+      name: game over text_0
       rect:
         serializedVersion: 2
         x: 0
@@ -127,39 +136,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e486737e27f07bd20800000000000000
-      internalID: 3294118638624663630
+      spriteID: e6498f05897c030e0800000000000000
+      internalID: -2292112753324157842
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: death text_1
+      name: game over text_1
       rect:
         serializedVersion: 2
-        x: 15
-        y: 0
-        width: 12
-        height: 15
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 66b570f872f9f47b0800000000000000
-      internalID: -5237792849356432538
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: death text_2
-      rect:
-        serializedVersion: 2
-        x: 26
+        x: 17
         y: 0
         width: 16
         height: 15
@@ -171,17 +158,105 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2b01f3f96520160a0800000000000000
-      internalID: -6890223383837994830
+      spriteID: e2095479897ac24e0800000000000000
+      internalID: -2005043460271927250
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: death text_3
+      name: game over text_2
       rect:
         serializedVersion: 2
-        x: 45
+        x: 33
+        y: 0
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8405e969487fe5fc0800000000000000
+      internalID: -3504091311212965816
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: game over text_3
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 0
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e643306982c16abe0800000000000000
+      internalID: -1466453668021455762
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: game over text_4
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 0
+        width: 17
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0c30181a855968610800000000000000
+      internalID: 1623148923612890048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: game over text_5
+      rect:
+        serializedVersion: 2
+        x: 91
+        y: 0
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff6b78fa13cfa2f50800000000000000
+      internalID: 6857570672953505535
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: game over text_6
+      rect:
+        serializedVersion: 2
+        x: 107
         y: 0
         width: 16
         height: 15
@@ -193,19 +268,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 637a838269c48bf00800000000000000
-      internalID: 1132739514087286582
+      spriteID: 51d7c896eadd87560800000000000000
+      internalID: 7311837736200862997
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: death text_4
+      name: game over text_7
       rect:
         serializedVersion: 2
-        x: 60
+        x: 124
         y: 0
-        width: 13
+        width: 14
         height: 15
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -215,8 +290,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 29fb5d126fe8c6f30800000000000000
-      internalID: 4570184909654966162
+      spriteID: 4d7c3dd2b2b725ff0800000000000000
+      internalID: -48841220564989996
       vertices: []
       indices: 
       edges: []
@@ -225,7 +300,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -235,11 +310,14 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      death text_0: 3294118638624663630
-      death text_1: -5237792849356432538
-      death text_2: -6890223383837994830
-      death text_3: 1132739514087286582
-      death text_4: 4570184909654966162
+      game over text_0: -2292112753324157842
+      game over text_1: -2005043460271927250
+      game over text_2: -3504091311212965816
+      game over text_3: -1466453668021455762
+      game over text_4: 1623148923612890048
+      game over text_5: 6857570672953505535
+      game over text_6: 7311837736200862997
+      game over text_7: -48841220564989996
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
