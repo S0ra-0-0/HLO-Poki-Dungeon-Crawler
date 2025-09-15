@@ -13,7 +13,7 @@ TagManager:
   - Water
   - UI
   - PlayerBullet
-  - 
+  - Door
   - 
   - 
   - 
@@ -41,6 +41,15 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Door
+    uniqueID: 2037686699
+    locked: 0
+  - name: Entity
+    uniqueID: 2864735187
+    locked: 0
+  - name: Player
+    uniqueID: 1903412323
     locked: 0
   m_RenderingLayers:
   - Default
