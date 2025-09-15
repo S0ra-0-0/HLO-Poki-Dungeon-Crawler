@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 1aa0e9be9b39022469af18eb6fceecf4
+guid: f20ae01d50789ad47aa4707a4d8e67b1
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7497081903881867636
-    second: Ogre mini boss R_0
+      213: 3504921381511815983
+    second: Goblin down_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Ogre mini boss R_0
+      name: Goblin down_0
       rect:
         serializedVersion: 2
-        x: 16
-        y: 1
-        width: 33
-        height: 62
+        x: 0
+        y: 0
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 47153e4354cfa0860800000000000000
-      internalID: 7497081903881867636
+      spriteID: f23eea63d6bf3a030800000000000000
+      internalID: 3504921381511815983
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Ogre mini boss R_0: 7497081903881867636
+      Goblin down_0: 3504921381511815983
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -283,11 +283,11 @@ public class Player : MonoBehaviour
             return false;
         }
 
+        Debug.Log($"Player takes {damage} damage.");
         GetComponent<PlayerHealth>().Hit(damage);
         return true;
     }
 
-    // Ensure RegisterAttack is properly called
     public void RegisterAttack()
     {
         attackedThisFrame = true;
@@ -326,7 +326,7 @@ public class Player : MonoBehaviour
     {
         if (isActive)
         {
-            spriteRenderer.color = Color.yellow; // Glow effect during parry
+            spriteRenderer.color = Color.blue; // Glow effect during parry
         }
         else
         {
