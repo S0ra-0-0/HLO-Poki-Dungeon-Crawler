@@ -236,7 +236,7 @@ GameObject:
   - component: {fileID: 801367166}
   - component: {fileID: 801367171}
   m_Layer: 7
-  m_Name: Temp Enemy
+  m_Name: Goblin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

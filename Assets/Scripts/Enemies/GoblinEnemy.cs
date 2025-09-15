@@ -1,9 +1,13 @@
 using System.Collections;
+using System.Net.Sockets;
+using Mono.Cecil;
 using UnityEngine;
 public class GoblinEnemy : MonoBehaviour
 {
     public Player Player;
     public int Damage = 10;
+    public int maxHealth = 2;
+    public int currentHealth;
     public float AttackRange = 1.5f;
     private bool inRange = false;
     public float attackTimer = 0f;
@@ -17,6 +21,8 @@ public class GoblinEnemy : MonoBehaviour
     private Vector2 movement;
 
     private Coroutine attackRoutine;
+    private Coroutine stunRoutine;
+
 
     public State currentState = State.Idle;
     public enum State { Idle, Chasing, Attacking }
@@ -25,6 +31,7 @@ public class GoblinEnemy : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        currentHealth = maxHealth;
     }
 
     private void FixedUpdate()
@@ -126,7 +133,6 @@ public class GoblinEnemy : MonoBehaviour
         stunRoutine = StartCoroutine(StunCoroutine(duration));
     }
 
-    private Coroutine stunRoutine;
 
     private IEnumerator StunCoroutine(float duration)
     {
@@ -143,12 +149,32 @@ public class GoblinEnemy : MonoBehaviour
     private void OnDrawGizmos()
     {
        
-        if (attackTimer >= attackDelay - 0.2f) { Gizmos.color = Color.magenta; }
+        if (attackTimer >= attackDelay - 0.6f) { Gizmos.color = Color.magenta; }
         else { Gizmos.color = Color.blue; }
         Gizmos.DrawWireSphere(transform.position, AttackRange);
       
 
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, DetectionRange);
+    }
+
+    public void TakeDamage(int amount)
+    {
+        currentHealth -= amount;
+
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+        else
+        {
+            Stun(0.5f);
+        }
+    }
+
+    private void Die()
+    {
+        // Play death animation or effects here maybe
+        Destroy(gameObject);
     }
 }

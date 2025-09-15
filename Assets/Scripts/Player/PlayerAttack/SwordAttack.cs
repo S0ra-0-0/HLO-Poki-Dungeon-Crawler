@@ -6,10 +6,10 @@ using UnityEngine;
 
 public class SwordAttack : IAttackType
 {
-    private const float ParryWindow = 0.3f;
+    private const float ParryWindow = 0.6f;
     private const float ParryCooldown = 1.0f;
     private const float ParryRadius = 1.2f;
-    private const float ParryIframes = 0.3f;
+    private const float ParryIframes = 0.6f;
 
     public float Cooldown => 0.5f;
 
@@ -34,7 +34,7 @@ public class SwordAttack : IAttackType
             if (angle >= -60f && angle <= 60f)
             {
                 Debug.Log($"[SwordAttack] Attacking {enemy.name} with 3 damage");
-                enemy.SendMessage("TakeDamage", 3, SendMessageOptions.DontRequireReceiver);
+                enemy.SendMessage("TakeDamage", 1, SendMessageOptions.DontRequireReceiver);
             }
         }
     }

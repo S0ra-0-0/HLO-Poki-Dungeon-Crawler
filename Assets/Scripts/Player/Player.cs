@@ -326,7 +326,7 @@ public class Player : MonoBehaviour
     {
         if (isActive)
         {
-            spriteRenderer.color = Color.yellow; // Glow effect during parry
+            spriteRenderer.color = Color.blue; // Glow effect during parry
         }
         else
         {
