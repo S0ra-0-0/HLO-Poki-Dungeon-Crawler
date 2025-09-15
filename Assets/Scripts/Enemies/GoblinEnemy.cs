@@ -117,8 +117,6 @@ public class GoblinEnemy : MonoBehaviour
         }
     }
 
-
-    // Updated GoblinEnemy.cs (add these methods)
     public void Stun(float duration)
     {
         if (stunRoutine != null)
@@ -141,12 +139,6 @@ public class GoblinEnemy : MonoBehaviour
         //animator.SetBool("isStunned", false);
         stunRoutine = null;
     }
-
-  
-
-
-
-
 
     private void OnDrawGizmos()
     {
