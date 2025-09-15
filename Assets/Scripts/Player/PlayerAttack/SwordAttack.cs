@@ -1,152 +1,139 @@
-using UnityEngine;
+// Updated SwordAttack.cs with extensive debugging
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 
 public class SwordAttack : IAttackType
 {
+    private const float ParryWindow = 0.3f;
+    private const float ParryCooldown = 1.0f;
+    private const float ParryRadius = 1.2f;
+    private const float ParryIframes = 0.3f;
+
     public float Cooldown => 0.5f;
-    private const float parryWindow = 0.3f;
-    private const float parryCooldown = 1.0f;
 
     public void Attack(Player player)
     {
-        Debug.Log("Sword Attack!");
-        // Use OverlapCircleAll to approximate an arc by filtering by angle
-        var enemies = Physics2D.OverlapCircleAll(player.transform.position, 1.5f, LayerMask.GetMask("Enemy"));
-        float minAngle = Vector2.SignedAngle(Vector2.right, player.facingDirection) - 45f;
-        float maxAngle = Vector2.SignedAngle(Vector2.right, player.facingDirection) + 45f;
+        Debug.Log("[SwordAttack] Normal attack executed");
+        var enemies = Physics2D.OverlapCircleAll(
+            player.transform.position,
+            1.5f,
+            LayerMask.GetMask("Enemy")
+        );
+
+        Debug.Log($"[SwordAttack] Found {enemies.Length} enemies in range");
+
         foreach (var enemy in enemies)
         {
             Vector2 toEnemy = (Vector2)enemy.transform.position - (Vector2)player.transform.position;
             float angle = Vector2.SignedAngle(player.facingDirection, toEnemy.normalized);
+
+            Debug.Log($"[SwordAttack] Enemy {enemy.name} at angle {angle}° (facing: {player.facingDirection})");
+
             if (angle >= -60f && angle <= 60f)
             {
+                Debug.Log($"[SwordAttack] Attacking {enemy.name} with 3 damage");
                 enemy.SendMessage("TakeDamage", 3, SendMessageOptions.DontRequireReceiver);
             }
         }
-
-#if UNITY_EDITOR
-        // Draw the arc/slash for the attack
-        DrawAttackArc(player.transform.position, player.facingDirection, 1.5f, 90f, Color.magenta, 0.2f);
-#endif
     }
 
     public void heavyAttack(Player player)
     {
+        Debug.Log($"[SwordAttack] Heavy attack initiated. Last heavy attack: {player.lastHeavyAttackTime}, Current time: {Time.time}, Cooldown: {ParryCooldown}");
+
+        if (Time.time < player.lastHeavyAttackTime + ParryCooldown)
+        {
+            Debug.Log("[SwordAttack] Heavy attack on cooldown - aborting");
+            return;
+        }
+
+        Debug.Log("[SwordAttack] Starting parry coroutine");
         player.StartCoroutine(ParryCoroutine(player));
     }
 
     private IEnumerator ParryCoroutine(Player player)
     {
         player.isHeavyAttacking = true;
-        player.parrySuccess = false;
-        
-        // Store original state
-        var rb = player.GetComponent<Rigidbody2D>();
-        Vector2 originalVelocity = rb.linearVelocity;
-        rb.linearVelocity = Vector2.zero;
-        rb.bodyType = RigidbodyType2D.Kinematic;
+        player.lastHeavyAttackTime = Time.time;
+        player.SetParryVisual(true);
+        player.SetInvulnerable(true); // Make player invulnerable during parry attempt
 
-        // Create gizmo drawer for parry box
-        var drawer = player.gameObject.AddComponent<ParryGizmoDrawer>();
-        drawer.Init(1.0f, 0.8f, 0.5f);
+        List<GameObject> attackingEnemies = new List<GameObject>();
+        float parryTimer = 0f;
+        bool parrySuccess = false;
 
-        float timer = 0f;
-        
-        // Parry window
-        while (timer < parryWindow && !player.parrySuccess)
+        // Track if any enemy was in attack state during the window
+        bool enemyWasAttacking = false;
+
+        while (parryTimer < ParryWindow)
         {
-            timer += Time.deltaTime;
-            
-            if (player.WasAttackedThisFrame())
+            parryTimer += Time.deltaTime;
+
+            var enemies = Physics2D.OverlapCircleAll(
+                player.transform.position,
+                ParryRadius,
+                LayerMask.GetMask("Enemy")
+            );
+
+            foreach (var enemy in enemies)
             {
-                player.parrySuccess = true;
-                Debug.Log("Parry Success! Counterattack enabled.");
-                player.TriggerCounterAttack();
+                GoblinEnemy goblin = enemy.GetComponent<GoblinEnemy>();
+                if (goblin != null && goblin.currentState == GoblinEnemy.State.Attacking)
+                {
+                    if (!attackingEnemies.Contains(enemy.gameObject))
+                    {
+                        attackingEnemies.Add(enemy.gameObject);
+                        enemyWasAttacking = true; // Mark that an enemy was attacking
+                    }
+                }
+            }
+
+            // If an enemy was attacking AND the player was hit, it's a successful parry
+            if (player.WasAttackedThisFrame() && enemyWasAttacking)
+            {
+                parrySuccess = true;
+                Debug.Log("[ParryCoroutine] PARRY SUCCESS! Enemy was attacking and player was hit.");
                 break;
             }
-            
+
             yield return null;
         }
 
-        // Cleanup
-        Object.Destroy(drawer);
-        if (rb != null)
+        if (parrySuccess)
         {
-            rb.bodyType = RigidbodyType2D.Dynamic;
-            rb.linearVelocity = originalVelocity;
+            Debug.Log("[ParryCoroutine] Executing counterattack on " + attackingEnemies.Count + " enemies");
+
+            foreach (var enemy in attackingEnemies)
+            {
+                if (enemy != null)
+                {
+                    enemy.SendMessage("TakeDamage", 5, SendMessageOptions.DontRequireReceiver);
+                    enemy.SendMessage("Stun", 0.5f, SendMessageOptions.DontRequireReceiver);
+                }
+            }
+
+            yield return player.StartCoroutine(CounterFreezeFrames(0.1f));
+            yield return new WaitForSeconds(ParryIframes);
         }
+        else
+        {
+            Debug.Log("[ParryCoroutine] PARRY FAILED - Either no enemies were attacking or player wasn't hit.");
+        }
+
+        player.SetParryVisual(false);
+        player.SetInvulnerable(false);
         player.isHeavyAttacking = false;
-        
-        if (!player.parrySuccess)
-        {
-            Debug.Log("Parry missed.");
-        }
     }
 
-#if UNITY_EDITOR
-    // Helper to draw an arc in the Scene view
-    private void DrawAttackArc(Vector2 center, Vector2 facing, float radius, float angle, Color color, float duration)
+
+    private IEnumerator CounterFreezeFrames(float duration)
     {
-        int segments = 16;
-        float halfAngle = angle / 2f;
-        float startAngle = Vector2.SignedAngle(Vector2.right, facing) - halfAngle;
-        float deltaAngle = angle / segments;
-
-        Vector2 prevPoint = center + (Vector2)(Quaternion.Euler(0, 0, startAngle) * Vector2.right * radius);
-        for (int i = 1; i <= segments; i++)
-        {
-            float currentAngle = startAngle + deltaAngle * i;
-            Vector2 nextPoint = center + (Vector2)(Quaternion.Euler(0, 0, currentAngle) * Vector2.right * radius);
-            Debug.DrawLine(prevPoint, nextPoint, color, duration);
-            prevPoint = nextPoint;
-        }
-        // Optionally, draw lines from center to arc ends
-        Vector2 arcStart = center + (Vector2)(Quaternion.Euler(0, 0, startAngle) * Vector2.right * radius);
-        Vector2 arcEnd = center + (Vector2)(Quaternion.Euler(0, 0, startAngle + angle) * Vector2.right * radius);
-        Debug.DrawLine(center, arcStart, color, duration);
-        Debug.DrawLine(center, arcEnd, color, duration);
+        Debug.Log("[CounterFreezeFrames] Starting freeze frame effect");
+        Time.timeScale = 0.1f;
+        yield return new WaitForSecondsRealtime(duration);
+        Time.timeScale = 1f;
+        Debug.Log("[CounterFreezeFrames] Freeze frame effect ended");
     }
-
-    // Gizmo drawer for the parry box
-    public class ParryGizmoDrawer : MonoBehaviour
-    {
-        private float distance;
-        private float width;
-        private float height;
-        private bool isActive = true;
-
-        public void Init(float distance, float width, float height)
-        {
-            this.distance = distance;
-            this.width = width;
-            this.height = height;
-        }
-
-        private void OnDrawGizmos()
-        {
-            if (!isActive) return;
-            
-            var player = GetComponent<Player>();
-            if (player == null) return;
-
-            Vector2 facing = player.facingDirection.normalized;
-            Vector2 right = new Vector2(-facing.y, facing.x);
-            
-            Vector2 boxCenter = (Vector2)transform.position + facing * distance;
-            Vector2 halfRight = right * (width / 2f);
-            Vector2 halfForward = facing * (height / 2f);
-
-            Vector2 topLeft = boxCenter - halfRight + halfForward;
-            Vector2 topRight = boxCenter + halfRight + halfForward;
-            Vector2 bottomLeft = boxCenter - halfRight - halfForward;
-            Vector2 bottomRight = boxCenter + halfRight - halfForward;
-
-            Gizmos.color = Color.cyan;
-            Gizmos.DrawLine(topLeft, topRight);
-            Gizmos.DrawLine(topRight, bottomRight);
-            Gizmos.DrawLine(bottomRight, bottomLeft);
-            Gizmos.DrawLine(bottomLeft, topLeft);
-        }
-    }
-#endif
 }

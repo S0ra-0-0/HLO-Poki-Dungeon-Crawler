@@ -22,7 +22,7 @@ public class PlayerHealth : MonoBehaviour
 
     [Header("Invincibility")]
     [SerializeField] private float invincibilityTime;
-    [SerializeField] private bool isInvincibility;
+    public bool isInvincibility;
 
     [Header("Sprite")]
     [SerializeField] private SpriteRenderer spriteRenderer;
@@ -46,6 +46,7 @@ public class PlayerHealth : MonoBehaviour
         isInvincibility = true;
         StartCoroutine(CoroutineSignInvincibility());
     }
+
 
     private IEnumerator CoroutineSignInvincibility()
     {

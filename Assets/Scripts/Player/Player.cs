@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -46,6 +47,8 @@ public class Player : MonoBehaviour
     public Vector2 facingDirection = Vector2.right; // Default facing right
 
     private bool isInvulnerable = false;
+    public bool IsInvulnerable => isInvulnerable || isDashing;
+
     private bool actionsDisabled = false;
     private bool attackedThisFrame = false;
     public bool parrySuccess = false;
@@ -112,30 +115,18 @@ public class Player : MonoBehaviour
     {
         isDashing = false;
     }
-
     private void HandleAttackInput()
     {
-        // Start heavy attack charge on F down
+        // Heavy attack (parry)
         if (Input.GetKeyDown(KeyCode.K)
             && !isAttacking && !isHeavyAttacking
             && Time.time >= lastHeavyAttackTime + heavyAttackCooldown)
         {
-            isHeavyAttacking = true;
-            isChargingHeavy = true;
-            lastHeavyAttackTime = Time.time;
-            currentAttackType.heavyAttack(this); // Starts coroutine, handles charge
-            return;
+            currentAttackType.heavyAttack(this);
         }
-        // Release heavy attack on F up
-        if (isChargingHeavy && isHeavyAttacking && Input.GetKeyUp(KeyCode.K))
-        {
-            isChargingHeavy = false;
-            HeavySpearGizmoDrawer.ReleaseCharge(); // Static call to notify coroutine to release
-            return;
-        }
-        // Normal attack
-        if (Input.GetKeyUp(KeyCode.J)
-            && !isAttacking && !isHeavyAttacking
+
+        // Normal attack (unchanged)
+        if (Input.GetKeyUp(KeyCode.J) && !isAttacking && !isHeavyAttacking
             && Time.time >= lastNormalAttackTime + normalAttackCooldown)
         {
             isAttacking = true;
@@ -253,14 +244,11 @@ public class Player : MonoBehaviour
             spriteRenderer.sprite = idleDirectionSprites[dirIndex];
     }
 
-    public void RegisterAttack()
-    {
-        attackedThisFrame = true;
-    }
-
     public void SetInvulnerable(bool value)
     {
-        isInvulnerable = value;
+        PlayerHealth playerHealth = GetComponent<PlayerHealth>();
+        playerHealth.isInvincibility = value;
+
     }
 
     public void DisableActions(bool value)
@@ -275,9 +263,76 @@ public class Player : MonoBehaviour
         return result;
     }
 
+    
+    public bool TryTakeDamage(int damage)
+    {
+       
+        RegisterAttack();
+
+        if (parrySuccess)
+        {
+            Debug.Log("Parry successful! No damage taken.");
+            parrySuccess = false;
+            TriggerCounterAttack();
+            return false;
+        }
+
+        if (isInvulnerable || isDashing)
+        {
+            Debug.Log("Player invulnerable, no damage taken.");
+            return false;
+        }
+
+        GetComponent<PlayerHealth>().Hit(damage);
+        return true;
+    }
+
+    // Ensure RegisterAttack is properly called
+    public void RegisterAttack()
+    {
+        attackedThisFrame = true;
+        Debug.Log("[Player] Attack registered this frame!");
+    }
+
+
     public void TriggerCounterAttack()
     {
         Debug.Log("Counterattack triggered!");
-        // Implement your counterattack logic here
+
+        var enemies = Physics2D.OverlapCircleAll(transform.position, 1.5f, LayerMask.GetMask("Enemy"));
+        foreach (var enemy in enemies)
+        {
+            Vector2 toEnemy = (Vector2)enemy.transform.position - (Vector2)transform.position;
+            float angle = Vector2.SignedAngle(facingDirection, toEnemy.normalized);
+
+            if (angle >= -60f && angle <= 60f)
+            {
+                enemy.SendMessage("TakeDamage", 5, SendMessageOptions.DontRequireReceiver);
+                Debug.Log($"Counter hit {enemy.name}");
+            }
+        }
+
+        StartCoroutine(CounterFreezeFrames(.5f));
     }
+
+    private IEnumerator CounterFreezeFrames(float duration)
+    {
+        Time.timeScale = 0f;
+        yield return new WaitForSecondsRealtime(duration);
+        Time.timeScale = 1f;
+    }
+
+    public void SetParryVisual(bool isActive)
+    {
+        if (isActive)
+        {
+            spriteRenderer.color = Color.yellow; // Glow effect during parry
+        }
+        else
+        {
+            spriteRenderer.color = Color.white; // Restore normal color
+        }
+    }
+
+
 }
