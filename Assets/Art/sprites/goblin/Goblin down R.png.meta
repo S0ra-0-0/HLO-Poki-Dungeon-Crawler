@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 71129048cb76df34fb25a18483e667a5
+guid: 5c4c627b640dc884f84c758594051d24
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 283750073769578317
-    second: Goblin down R_0
+      213: 5416026572731371977
+    second: Goblin down L_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,7 +100,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Goblin down R_0
+      name: Goblin down L_0
       rect:
         serializedVersion: 2
         x: 1
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d4fc600503510f300800000000000000
-      internalID: 283750073769578317
+      spriteID: 9c1dab9f877992b40800000000000000
+      internalID: 5416026572731371977
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Goblin down R_0: 283750073769578317
+      Goblin down L_0: 5416026572731371977
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
