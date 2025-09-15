@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6151646715606499360}
   - component: {fileID: 1420870680584648743}
   - component: {fileID: 1411742798473131179}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: door sprite_Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
