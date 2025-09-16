@@ -35,6 +35,15 @@ public class Player : MonoBehaviour
     [Header("Sprite Direction")]
     [SerializeField] private Sprite[] idleDirectionSprites = new Sprite[8]; // Assign in Inspector: Right, UpRight, Up, UpLeft, Left, DownLeft, Down, DownRight
 
+    [Header("Hit Flash")]
+    [SerializeField] private Material flashMaterial; // Assign FlashMaterial in Inspector
+    private Material originalMaterial;
+    private Coroutine flashRoutine;
+
+    [Header("Weapons")]
+    public GameObject swordPrefab;
+
+
     private Rigidbody2D rb;
     private Vector2 moveInput;
     private Vector2 smoothVelocity;
@@ -57,7 +66,12 @@ public class Player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = 0f;
-        spriteRenderer = GetComponent<SpriteRenderer>(); // Make sure a SpriteRenderer is attached
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
+        rb = GetComponent<Rigidbody2D>();
+        rb.gravityScale = 0f;
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        originalMaterial = spriteRenderer.material; // Store original material
 
         // Initialize attack types
         attackTypes = new List<IAttackType>
@@ -68,6 +82,27 @@ public class Player : MonoBehaviour
             new SummonerAttack()
         };
         currentAttackType = attackTypes[currentAttackIndex];
+    }
+
+    public void FlashRed(float duration = 0.1f)
+    {
+        if (flashRoutine != null)
+            StopCoroutine(flashRoutine);
+
+        flashRoutine = StartCoroutine(FlashRoutine(duration));
+    }
+
+    private IEnumerator FlashRoutine(float duration)
+    {
+        // Switch to flash material
+        spriteRenderer.material = flashMaterial;
+        flashMaterial.SetFloat("_FlashAmount", 1f); // Full flash
+
+        yield return new WaitForSeconds(duration);
+
+        // Revert to original material
+        spriteRenderer.material = originalMaterial;
+        flashRoutine = null;
     }
 
     private void Update()
@@ -263,10 +298,9 @@ public class Player : MonoBehaviour
         return result;
     }
 
-    
+
     public bool TryTakeDamage(int damage)
     {
-       
         RegisterAttack();
 
         if (parrySuccess)
@@ -284,9 +318,11 @@ public class Player : MonoBehaviour
         }
 
         Debug.Log($"Player takes {damage} damage.");
+        FlashRed(); // Flash red when hit
         GetComponent<PlayerHealth>().Hit(damage);
         return true;
     }
+
 
     public void RegisterAttack()
     {

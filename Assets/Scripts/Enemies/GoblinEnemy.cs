@@ -19,6 +19,13 @@ public class GoblinEnemy : MonoBehaviour
     private Rigidbody2D rb;
     private Animator animator;
     private Vector2 movement;
+    private SpriteRenderer spriteRenderer;
+
+
+
+    [Header("Sprite Direction")]
+    [SerializeField] private Sprite[] idleDirectionSprites = new Sprite[8]; // Assign in Inspector: Right, UpRight, Up, UpLeft, Left, DownLeft, Down, DownRight
+    public Vector2 facingDirection = Vector2.right; // Default facing right
 
     private Coroutine attackRoutine;
     private Coroutine stunRoutine;
@@ -29,6 +36,7 @@ public class GoblinEnemy : MonoBehaviour
 
     void Start()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         currentHealth = maxHealth;
@@ -53,6 +61,12 @@ public class GoblinEnemy : MonoBehaviour
         }
         HandleState();
     }
+
+    private void Update()
+    {
+        UpdateSpriteDirection();
+
+    }
     private void HandleState()
     {
         if (stunRoutine != null)
@@ -61,21 +75,25 @@ public class GoblinEnemy : MonoBehaviour
             return;
         }
 
+        Vector2 directionToPlayer = (Player.transform.position - transform.position).normalized;
+
         switch (currentState)
         {
             case State.Idle:
-                //animator.SetBool("isRunning", false);
                 rb.linearVelocity = Vector2.zero;
                 break;
+
             case State.Chasing:
-                //animator.SetBool("isRunning", true);
-                Vector2 direction = (Player.transform.position - transform.position).normalized;
-                movement = direction * speed;
+                movement = directionToPlayer * speed;
                 rb.linearVelocity = movement;
+                // Update facing direction to match movement
+                facingDirection = directionToPlayer;
                 break;
+
             case State.Attacking:
                 rb.linearVelocity = Vector2.zero;
-                //animator.SetBool("isRunning", false);
+                // Update facing direction to always face the player during attack
+                facingDirection = directionToPlayer;
                 if (attackRoutine == null && Time.time >= lastAttackTime + AttackCooldown)
                 {
                     attackRoutine = StartCoroutine(Attack());
@@ -84,6 +102,7 @@ public class GoblinEnemy : MonoBehaviour
                 break;
         }
     }
+
 
     IEnumerator Attack()
     {
@@ -107,9 +126,28 @@ public class GoblinEnemy : MonoBehaviour
         attackRoutine = null;
     }
 
+    private void UpdateSpriteDirection()
+    {
+        // 0: Right, 1: UpRight, 2: Up, 3: UpLeft, 4: Left, 5: DownLeft, 6: Down, 7: DownRight
+        int dirIndex = 0;
+        Vector2 dir = facingDirection.normalized;
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        angle = (angle + 360) % 360;
+
+        if (angle >= 337.5f || angle < 22.5f) dirIndex = 0; // Right
+        else if (angle >= 22.5f && angle < 67.5f) dirIndex = 1; // UpRight
+        else if (angle >= 67.5f && angle < 112.5f) dirIndex = 2; // Up
+        else if (angle >= 112.5f && angle < 157.5f) dirIndex = 3; // UpLeft
+        else if (angle >= 157.5f && angle < 202.5f) dirIndex = 4; // Left
+        else if (angle >= 202.5f && angle < 247.5f) dirIndex = 5; // DownLeft
+        else if (angle >= 247.5f && angle < 292.5f) dirIndex = 6; // Down
+        else if (angle >= 292.5f && angle < 337.5f) dirIndex = 7; // DownRight
+
+        if (idleDirectionSprites != null && idleDirectionSprites.Length == 8)
+            spriteRenderer.sprite = idleDirectionSprites[dirIndex];
+    }
 
 
-    
     private void DealDamage()
     {
         if (Player == null) return;
@@ -148,11 +186,11 @@ public class GoblinEnemy : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-       
+
         if (attackTimer >= attackDelay - 0.6f) { Gizmos.color = Color.magenta; }
         else { Gizmos.color = Color.blue; }
         Gizmos.DrawWireSphere(transform.position, AttackRange);
-      
+
 
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, DetectionRange);
@@ -162,15 +200,10 @@ public class GoblinEnemy : MonoBehaviour
     {
         currentHealth -= amount;
 
-        if (currentHealth <= 0)
-        {
-            Die();
-        }
-        else
-        {
-            Stun(0.5f);
-        }
+        if (currentHealth <= 0) Die();
+        else Stun(0.5f);
     }
+
 
     private void Die()
     {
