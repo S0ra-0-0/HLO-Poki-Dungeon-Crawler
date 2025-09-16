@@ -1119,20 +1119,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1464912404623044549, guid: 1ca26a0be0415b045a8e3c64477e7151, type: 3}
-      propertyPath: flickerNumber
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1464912404623044549, guid: 1ca26a0be0415b045a8e3c64477e7151, type: 3}
       propertyPath: transformHPUI
       value: 
       objectReference: {fileID: 1385173894}
-    - target: {fileID: 4399123878465499207, guid: 1ca26a0be0415b045a8e3c64477e7151, type: 3}
-      propertyPath: m_SortingOrder
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5327870854238468306, guid: 1ca26a0be0415b045a8e3c64477e7151, type: 3}
       propertyPath: m_Name
       value: Temp Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 6008011499033396497, guid: 1ca26a0be0415b045a8e3c64477e7151, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6999247802568337802, guid: 1ca26a0be0415b045a8e3c64477e7151, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1177,10 +1173,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5327870854238468306, guid: 1ca26a0be0415b045a8e3c64477e7151, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 815487438}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ca26a0be0415b045a8e3c64477e7151, type: 3}
 --- !u!4 &793370827 stripped
 Transform:
@@ -1214,57 +1207,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e91db273545d5b49bdff9c67eb4f69e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &815487432 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5327870854238468306, guid: 1ca26a0be0415b045a8e3c64477e7151, type: 3}
-  m_PrefabInstance: {fileID: 786082395}
-  m_PrefabAsset: {fileID: 0}
---- !u!61 &815487438
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 815487432}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
 --- !u!1001 &862613683
 PrefabInstance:
   m_ObjectHideFlags: 0
