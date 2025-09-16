@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8898537300459342377}
   - component: {fileID: 4656135852021616783}
   - component: {fileID: -3195698254844987717}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tilemap_TL Door Room
   m_TagString: Untagged
   m_Icon: {fileID: 0}

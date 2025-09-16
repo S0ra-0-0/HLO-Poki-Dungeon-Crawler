@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 428470465096141298}
   - component: {fileID: 2234426653467017832}
   - component: {fileID: -4995317686312269930}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tilemap_Horizontal Door Room
   m_TagString: Untagged
   m_Icon: {fileID: 0}

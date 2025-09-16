@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7651606043374496981}
   - component: {fileID: 8301956146113035906}
   - component: {fileID: -634302239088272724}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tilemap_Vertical Door Room
   m_TagString: Untagged
   m_Icon: {fileID: 0}

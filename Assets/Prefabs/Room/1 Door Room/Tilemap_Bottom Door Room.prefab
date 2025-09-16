@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2519452813146016143}
   - component: {fileID: 1140772507027936129}
   - component: {fileID: 3017393502951508084}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tilemap_Bottom Door Room
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8810930080797000876}
   - component: {fileID: 6146389646173277569}
   - component: {fileID: 1136172844895719305}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tilemap_BLR Door Room
   m_TagString: Untagged
   m_Icon: {fileID: 0}
