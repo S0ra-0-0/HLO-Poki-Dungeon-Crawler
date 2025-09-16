@@ -14,7 +14,7 @@ public class MapUI : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        otherMap.TurnOnOrOff(true);
+        if (otherMap) otherMap.TurnOnOrOff(true);
         TurnOnOrOff(false);
     }
 

@@ -42,7 +42,7 @@ namespace HLO.Room
             isDiscovered = true;
             gameObject.SetActive(true);
         }
-        
+
         public virtual void EnterRoom(DoorDirectionType prevDoorDirection, Transform visitor)
         {
             SetVisitorPosition(prevDoorDirection, visitor);
@@ -57,6 +57,7 @@ namespace HLO.Room
 
         protected virtual void SetVisitorPosition(DoorDirectionType prevDoorDirection, Transform visitor)
         {
+            visitor.gameObject.SetActive(false);
             Vector3 newVisitorPos = visitor.position;
 
             switch (prevDoorDirection)
@@ -79,7 +80,13 @@ namespace HLO.Room
             }
 
             visitor.position = newVisitorPos;
-            Camera.main.GetComponent<CameraMovement>().Move(transform.position, 0.5f, onEnterRoom);
+            visitor.gameObject.SetActive(false);
+
+            Camera.main.GetComponent<CameraMovement>().Move(transform.position, 0.5f, ()=>
+            {
+                onEnterRoom?.Invoke();
+                visitor.gameObject.SetActive(true);
+            });
         }
     }
 }
