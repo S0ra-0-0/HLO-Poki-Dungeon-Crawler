@@ -16,6 +16,7 @@ public class SwordAttack : MonoBehaviour, IAttackType
     public void Attack(Player player)
     {
         Debug.Log("[SwordAttack] Normal attack executed");
+        player.audioSource.PlayOneShot(player.swordSwingSound);
 
         Vector3 spawnPosition = player.transform.position + (Vector3)player.facingDirection * .5f;
 
@@ -67,6 +68,7 @@ public class SwordAttack : MonoBehaviour, IAttackType
         }
 
         Debug.Log("[SwordAttack] Starting parry coroutine");
+        player.audioSource.PlayOneShot(player.parrySound);
         player.StartCoroutine(ParryCoroutine(player));
     }
 

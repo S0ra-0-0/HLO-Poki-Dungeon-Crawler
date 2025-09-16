@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
 public class Player : MonoBehaviour
 {
     [Header("Movement Settings")]
@@ -44,13 +43,15 @@ public class Player : MonoBehaviour
     public GameObject swordPrefab;
 
     [Header("Sound Effects")]
+    public AudioSource audioSource;
     public AudioClip swordSwingSound;
     public AudioClip parrySound;
     public AudioClip dashSound;
     public AudioClip hitSound;
     public AudioClip walkingSound;
-
-
+    public float walingClipLength = 1f;
+    float timer;
+    public float volume = 1;
 
     private Rigidbody2D rb;
     private Vector2 moveInput;
@@ -69,6 +70,9 @@ public class Player : MonoBehaviour
     private bool actionsDisabled = false;
     private bool attackedThisFrame = false;
     public bool parrySuccess = false;
+
+
+
 
     private void Awake()
     {
@@ -115,6 +119,14 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        timer += Time.deltaTime;
+        if (timer > walingClipLength)
+        {
+            audioSource.PlayOneShot(walkingSound);
+            timer = 0;
+        }
+
+
         if (!isHeavyAttacking || !actionsDisabled)
         {
             HandleMovement();
@@ -150,6 +162,7 @@ public class Player : MonoBehaviour
             isDashing = true;
             lastDashTime = Time.time;
             dashDirection = moveInput.magnitude > 0.1f ? moveInput.normalized : Vector2.right;
+            audioSource.PlayOneShot(dashSound);
             Invoke(nameof(StopDashing), dashDuration);
         }
     }
@@ -327,6 +340,7 @@ public class Player : MonoBehaviour
 
         Debug.Log($"Player takes {damage} damage.");
         FlashRed(); // Flash red when hit
+        audioSource.PlayOneShot(hitSound, volume);
         GetComponent<PlayerHealth>().Hit(damage);
         return true;
     }

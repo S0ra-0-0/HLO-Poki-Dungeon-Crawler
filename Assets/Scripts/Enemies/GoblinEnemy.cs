@@ -5,6 +5,7 @@ using UnityEngine;
 public class GoblinEnemy : MonoBehaviour
 {
     public Player Player;
+    [Header("Stats")]
     public int Damage = 10;
     public int maxHealth = 2;
     public int currentHealth;
@@ -21,6 +22,9 @@ public class GoblinEnemy : MonoBehaviour
     private Vector2 movement;
     private SpriteRenderer spriteRenderer;
 
+    public GameObject AttackIndicator;
+    private GameObject attackIndicatorInstance;
+
 
 
     [Header("Sprite Direction")]
@@ -30,7 +34,7 @@ public class GoblinEnemy : MonoBehaviour
     private Coroutine attackRoutine;
     private Coroutine stunRoutine;
 
-
+    [Header("State")]
     public State currentState = State.Idle;
     public enum State { Idle, Chasing, Attacking }
 
@@ -39,6 +43,7 @@ public class GoblinEnemy : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        Player = FindAnyObjectByType<Player>();
         currentHealth = maxHealth;
     }
 
@@ -66,7 +71,24 @@ public class GoblinEnemy : MonoBehaviour
     {
         UpdateSpriteDirection();
 
+        if (attackTimer >= attackDelay - 0.6f)
+        {
+            if (attackIndicatorInstance == null)
+            {
+                Vector3 spawnPosition = transform.position + new Vector3(0, .5f, 0); 
+                attackIndicatorInstance = Instantiate(AttackIndicator, spawnPosition, Quaternion.identity, transform);
+            }
+            attackIndicatorInstance.SetActive(true);
+        }
+        else
+        {
+            if (attackIndicatorInstance != null)
+            {
+                attackIndicatorInstance.SetActive(false);
+            }
+        }
     }
+
     private void HandleState()
     {
         if (stunRoutine != null)
