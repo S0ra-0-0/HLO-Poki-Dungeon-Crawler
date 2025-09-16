@@ -15,9 +15,10 @@ public class TempDungeonSetter : MonoBehaviour
 {
     [SerializeField] private Transform dungeon;
 
-    private void Start()
+    private void Awake()
     {
-        foreach (var room in dungeon.GetComponentsInChildren<RoomBase>())
+        RoomBase[] rooms = dungeon.GetComponentsInChildren<RoomBase>();
+        foreach (var room in rooms)
         {
             foreach (var door in room.DoorList)
             {
@@ -56,6 +57,12 @@ public class TempDungeonSetter : MonoBehaviour
                     }
                 }
             }
+        }
+
+        foreach (var room in rooms)
+        {
+            if(!room.IsDiscovered || room.RoomType != RoomType.Starting)
+                room.gameObject.SetActive(false);
         }
     }
 }

@@ -8,13 +8,14 @@ using UnityEngine;
 
 // HLO
 using HLO.Door;
-using TreeEditor;
+using HLO.Layer;
 
 namespace HLO.Room
 {
     public enum RoomType
     {
         Normal,
+        Starting,
         Shop,
         Boss
     }
@@ -23,6 +24,7 @@ namespace HLO.Room
     {
         [SerializeField] private RoomType roomType; public RoomType RoomType => roomType;
         [SerializeField] protected List<DoorBase> doorList = new List<DoorBase>(); public List<DoorBase> DoorList => doorList;
+        [SerializeField] protected bool isDiscovered; public bool IsDiscovered => isDiscovered;
 
         protected Action onEnterRoom;
         protected Action onClearRoom;
@@ -35,6 +37,12 @@ namespace HLO.Room
         public virtual void RegisterOnClearRoom(Action action) => onClearRoom += action;
         public virtual void UnregisterOnClearRoom(Action action) => onClearRoom -= action;
 
+        public virtual void Discover()
+        {
+            isDiscovered = true;
+            gameObject.SetActive(true);
+        }
+        
         public virtual void EnterRoom(DoorDirectionType prevDoorDirection, Transform visitor)
         {
             SetVisitorPosition(prevDoorDirection, visitor);
