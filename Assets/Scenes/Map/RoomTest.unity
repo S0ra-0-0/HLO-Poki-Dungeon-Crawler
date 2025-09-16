@@ -3566,6 +3566,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: a205973959f6c3746ae614e698d67966, type: 3}
   - {fileID: 21300000, guid: 2ddbca08a7f52954bb26a3a5bf69b184, type: 3}
   - {fileID: 21300000, guid: 343f270c24d7c3e448501c2100986924, type: 3}
+  flashMaterial: {fileID: 0}
+  swordPrefab: {fileID: 0}
   facingDirection: {x: 1, y: 0}
   parrySuccess: 0
 --- !u!50 &1919505237

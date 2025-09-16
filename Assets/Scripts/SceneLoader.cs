@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,7 +6,7 @@ public class SceneLoader : MonoBehaviour
     public string sceneToLoad = "Your scene name here"; 
     public void LoadScene()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(sceneToLoad);
+       SceneManager.LoadScene(sceneToLoad);
     }
 
     public void QuitGame()

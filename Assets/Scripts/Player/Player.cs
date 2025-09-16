@@ -43,6 +43,14 @@ public class Player : MonoBehaviour
     [Header("Weapons")]
     public GameObject swordPrefab;
 
+    [Header("Sound Effects")]
+    public AudioClip swordSwingSound;
+    public AudioClip parrySound;
+    public AudioClip dashSound;
+    public AudioClip hitSound;
+    public AudioClip walkingSound;
+
+
 
     private Rigidbody2D rb;
     private Vector2 moveInput;
