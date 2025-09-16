@@ -77,7 +77,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2037686699
   m_SortingLayer: 1
-  m_SortingOrder: 0
+  m_SortingOrder: -10
   m_Sprite: {fileID: -4598365245650590453, guid: 0f1055bacff9bd640be36c4f8b6a54b7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -147,6 +147,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 269d21325feacae489d6037d40dce7f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ConnectedRoom: {fileID: 0}
+  connectedRoom: {fileID: 0}
   doorDirectionType: 3
   isOpen: 1
