@@ -16,16 +16,18 @@ namespace HLO.Door
     {
         SpriteRenderer spriteRenderer;
 
-        private void Start()
+        private void Awake()
         {
             spriteRenderer = GetComponent<SpriteRenderer>();
 
             RoomBase thisRoom = transform.parent.GetComponent<RoomBase>();
             thisRoom.RegisterOnEnterRoom(Close);
-            thisRoom.RegisterOnClearRoom(()=>
+            thisRoom.RegisterOnEnterRoom(DiscoverConnectedRoom);
+            thisRoom.RegisterOnClearRoom(() =>
             {
                 Open();
                 thisRoom.UnregisterOnEnterRoom(Close);
+                thisRoom.UnregisterOnEnterRoom(DiscoverConnectedRoom);
             });
         }
 
@@ -41,6 +43,12 @@ namespace HLO.Door
         {
             base.Open();
 
+            Collider2D other = Physics2D.OverlapBox(transform.position, GetComponent<BoxCollider2D>().size, 0f, 1 << LayerDatas.PLAYER_LAYER);
+            if (other)
+            {
+                connectedRoom.EnterRoom(DoorDirectionType, other.transform);
+            }
+
             // TODO: Animation will be added later
             spriteRenderer.enabled = false;
         }
@@ -51,6 +59,11 @@ namespace HLO.Door
 
             // TODO: Animation will be added later
             spriteRenderer.enabled = true;
+        }
+
+        protected void DiscoverConnectedRoom()
+        {
+            connectedRoom.Discover();
         }
     }
 }
