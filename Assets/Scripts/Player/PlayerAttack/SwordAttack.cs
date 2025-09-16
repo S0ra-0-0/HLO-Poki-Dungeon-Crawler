@@ -1,10 +1,10 @@
-// Updated SwordAttack.cs with extensive debugging
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
-public class SwordAttack : IAttackType
+public class SwordAttack : MonoBehaviour, IAttackType
 {
     private const float ParryWindow = 0.6f;
     private const float ParryCooldown = 1.0f;
@@ -16,28 +16,45 @@ public class SwordAttack : IAttackType
     public void Attack(Player player)
     {
         Debug.Log("[SwordAttack] Normal attack executed");
+
+        Vector3 spawnPosition = player.transform.position + (Vector3)player.facingDirection * .5f;
+
+        GameObject swordHolder = Instantiate(
+            player.swordPrefab, 
+            spawnPosition,
+            Quaternion.identity 
+        );
+
+        float angle = Mathf.Atan2(player.facingDirection.y, player.facingDirection.x) * Mathf.Rad2Deg;
+        swordHolder.transform.rotation = Quaternion.Euler(0, 0, angle);
+
+        swordHolder.transform.parent = player.transform;
+
+        Destroy(swordHolder, 0.3f);
+
         var enemies = Physics2D.OverlapCircleAll(
             player.transform.position,
             1.5f,
             LayerMask.GetMask("Enemy")
         );
-
         Debug.Log($"[SwordAttack] Found {enemies.Length} enemies in range");
 
         foreach (var enemy in enemies)
         {
             Vector2 toEnemy = (Vector2)enemy.transform.position - (Vector2)player.transform.position;
-            float angle = Vector2.SignedAngle(player.facingDirection, toEnemy.normalized);
+            float enemyAngle = Vector2.SignedAngle(player.facingDirection, toEnemy.normalized);
+            Debug.Log($"[SwordAttack] Enemy {enemy.name} at angle {enemyAngle}° (facing: {player.facingDirection})");
 
-            Debug.Log($"[SwordAttack] Enemy {enemy.name} at angle {angle}° (facing: {player.facingDirection})");
-
-            if (angle >= -60f && angle <= 60f)
+            if (enemyAngle >= -60f && enemyAngle <= 60f)
             {
-                Debug.Log($"[SwordAttack] Attacking {enemy.name} with 3 damage");
+                Debug.Log($"[SwordAttack] Attacking {enemy.name} with 1 damage");
                 enemy.SendMessage("TakeDamage", 1, SendMessageOptions.DontRequireReceiver);
             }
         }
     }
+
+
+
 
     public void heavyAttack(Player player)
     {

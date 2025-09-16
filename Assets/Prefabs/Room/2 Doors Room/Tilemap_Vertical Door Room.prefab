@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7651606043374496981}
   - component: {fileID: 8301956146113035906}
   - component: {fileID: -634302239088272724}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tilemap_Vertical Door Room
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2068,7 +2068,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -10
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16

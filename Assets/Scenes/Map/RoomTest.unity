@@ -189,6 +189,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 674547785}
     m_Modifications:
+    - target: {fileID: 2923565301565782745, guid: 5ed4f6cf89caa2449a281d0d6de3d637, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4724475694951651719, guid: 5ed4f6cf89caa2449a281d0d6de3d637, type: 3}
+      propertyPath: isOpen
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4724475694951651719, guid: 5ed4f6cf89caa2449a281d0d6de3d637, type: 3}
+      propertyPath: ConnectedRoom
+      value: 
+      objectReference: {fileID: 891699299}
+    - target: {fileID: 4724475694951651719, guid: 5ed4f6cf89caa2449a281d0d6de3d637, type: 3}
+      propertyPath: doorDirectionType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4935225601152685662, guid: 5ed4f6cf89caa2449a281d0d6de3d637, type: 3}
       propertyPath: m_Name
       value: Tilemap_Top Door Room
@@ -437,6 +453,51 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5125399990544147939, guid: f566fe0984f89bd4c9c4e74527732eb9, type: 3}
   m_PrefabInstance: {fileID: 365951804}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &394881937
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 394881939}
+  - component: {fileID: 394881938}
+  m_Layer: 0
+  m_Name: TempDungeonSetter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &394881938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 394881937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b19cc6507e3e92e42aa4ae8257f87bee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dungeon: {fileID: 674547785}
+--- !u!4 &394881939
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 394881937}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &415650725
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -561,6 +622,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5125399990544147939, guid: f566fe0984f89bd4c9c4e74527732eb9, type: 3}
   m_PrefabInstance: {fileID: 498159436}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &522744885 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -634302239088272724, guid: f566fe0984f89bd4c9c4e74527732eb9, type: 3}
+  m_PrefabInstance: {fileID: 365951804}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e91db273545d5b49bdff9c67eb4f69e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &548044160
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -771,6 +843,7 @@ GameObject:
   - component: {fileID: 754928504}
   - component: {fileID: 754928503}
   - component: {fileID: 754928506}
+  - component: {fileID: 754928507}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -896,6 +969,19 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!114 &754928507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 754928502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da5185ea2383dd543882355dc77d3998, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMoving: 0
 --- !u!1001 &792847411
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1028,6 +1114,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 674547785}
     m_Modifications:
+    - target: {fileID: 1186478158997539160, guid: fd5d61207e767dd4f912e778ce4b3b48, type: 3}
+      propertyPath: ConnectedRoom
+      value: 
+      objectReference: {fileID: 1811594801}
+    - target: {fileID: 2507591464663383482, guid: fd5d61207e767dd4f912e778ce4b3b48, type: 3}
+      propertyPath: ConnectedRoom
+      value: 
+      objectReference: {fileID: 1793408495}
     - target: {fileID: 3212679327112686972, guid: fd5d61207e767dd4f912e778ce4b3b48, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1068,10 +1162,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3594069715696282944, guid: fd5d61207e767dd4f912e778ce4b3b48, type: 3}
+      propertyPath: ConnectedRoom
+      value: 
+      objectReference: {fileID: 1691069672}
     - target: {fileID: 7166092459821029441, guid: fd5d61207e767dd4f912e778ce4b3b48, type: 3}
       propertyPath: m_Name
       value: Tilemap_4 Door Room
       objectReference: {fileID: 0}
+    - target: {fileID: 9058716216577892571, guid: fd5d61207e767dd4f912e778ce4b3b48, type: 3}
+      propertyPath: ConnectedRoom
+      value: 
+      objectReference: {fileID: 522744885}
     - target: {fileID: 9082726080696775882, guid: fd5d61207e767dd4f912e778ce4b3b48, type: 3}
       propertyPath: m_CompositePaths.m_Paths.Array.data[0].Array.data[0].x
       value: 8.99997
@@ -2194,6 +2296,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3212679327112686972, guid: fd5d61207e767dd4f912e778ce4b3b48, type: 3}
   m_PrefabInstance: {fileID: 891699297}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &891699299 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -7753452787071321016, guid: fd5d61207e767dd4f912e778ce4b3b48, type: 3}
+  m_PrefabInstance: {fileID: 891699297}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e91db273545d5b49bdff9c67eb4f69e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1031190185
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2512,6 +2625,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 674547785}
     m_Modifications:
+    - target: {fileID: 403574907489998307, guid: a40a32161f96bb34ab0c971f20a35bf4, type: 3}
+      propertyPath: ConnectedRoom
+      value: 
+      objectReference: {fileID: 1982357859}
     - target: {fileID: 3881363881868020190, guid: a40a32161f96bb34ab0c971f20a35bf4, type: 3}
       propertyPath: m_Name
       value: Tilemap_TBR Door Room
@@ -2556,6 +2673,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4690019408482486076, guid: a40a32161f96bb34ab0c971f20a35bf4, type: 3}
+      propertyPath: ConnectedRoom
+      value: 
+      objectReference: {fileID: 1859031829}
+    - target: {fileID: 7280064532131760020, guid: a40a32161f96bb34ab0c971f20a35bf4, type: 3}
+      propertyPath: ConnectedRoom
+      value: 
+      objectReference: {fileID: 1793408495}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2636,6 +2761,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 674547785}
     m_Modifications:
+    - target: {fileID: 4724475694951651719, guid: 5ed4f6cf89caa2449a281d0d6de3d637, type: 3}
+      propertyPath: ConnectedRoom
+      value: 
+      objectReference: {fileID: 1859031829}
     - target: {fileID: 4935225601152685662, guid: 5ed4f6cf89caa2449a281d0d6de3d637, type: 3}
       propertyPath: m_Name
       value: Tilemap_Top Door Room (1)
@@ -2690,6 +2819,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5752606213263214644, guid: 5ed4f6cf89caa2449a281d0d6de3d637, type: 3}
   m_PrefabInstance: {fileID: 1415037485}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1415037487 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -2705485592880293515, guid: 5ed4f6cf89caa2449a281d0d6de3d637, type: 3}
+  m_PrefabInstance: {fileID: 1415037485}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e91db273545d5b49bdff9c67eb4f69e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1426457583
 GameObject:
   m_ObjectHideFlags: 0
@@ -2845,6 +2985,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 796604763640635949, guid: 1e9a500125c347a41bd364646cdbd93e, type: 3}
   m_PrefabInstance: {fileID: 1551750230}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1583307190 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -8305976390938530274, guid: a40a32161f96bb34ab0c971f20a35bf4, type: 3}
+  m_PrefabInstance: {fileID: 1241279341}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e91db273545d5b49bdff9c67eb4f69e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1659301678
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3031,6 +3182,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 12044388947870342, guid: 55c54058a281e374baeea03916c13703, type: 3}
   m_PrefabInstance: {fileID: 1691069670}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1691069672 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1107153003463851886, guid: 55c54058a281e374baeea03916c13703, type: 3}
+  m_PrefabInstance: {fileID: 1691069670}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e91db273545d5b49bdff9c67eb4f69e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1748804022
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3207,6 +3369,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6673522920668368662, guid: d218c39140a3f494691aa8914f46f614, type: 3}
+      propertyPath: ConnectedRoom
+      value: 
+      objectReference: {fileID: 1583307190}
+    - target: {fileID: 6976725771510530399, guid: d218c39140a3f494691aa8914f46f614, type: 3}
+      propertyPath: ConnectedRoom
+      value: 
+      objectReference: {fileID: 891699299}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3217,6 +3387,28 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1616328178933486550, guid: d218c39140a3f494691aa8914f46f614, type: 3}
   m_PrefabInstance: {fileID: 1793408493}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1793408495 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -4995317686312269930, guid: d218c39140a3f494691aa8914f46f614, type: 3}
+  m_PrefabInstance: {fileID: 1793408493}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e91db273545d5b49bdff9c67eb4f69e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1811594801 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -2705485592880293515, guid: 5ed4f6cf89caa2449a281d0d6de3d637, type: 3}
+  m_PrefabInstance: {fileID: 79634000}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e91db273545d5b49bdff9c67eb4f69e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1859031827
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3225,6 +3417,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 674547785}
     m_Modifications:
+    - target: {fileID: 122287463638462937, guid: 26664958c0b7ba643a2471862b80e3c9, type: 3}
+      propertyPath: ConnectedRoom
+      value: 
+      objectReference: {fileID: 1583307190}
     - target: {fileID: 2272379363855925077, guid: 26664958c0b7ba643a2471862b80e3c9, type: 3}
       propertyPath: m_Name
       value: Tilemap_TBL Door Room (2)
@@ -3269,6 +3465,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5637741246773905638, guid: 26664958c0b7ba643a2471862b80e3c9, type: 3}
+      propertyPath: ConnectedRoom
+      value: 
+      objectReference: {fileID: 1415037487}
+    - target: {fileID: 9088705760117778387, guid: 26664958c0b7ba643a2471862b80e3c9, type: 3}
+      propertyPath: ConnectedRoom
+      value: 
+      objectReference: {fileID: 2002375947}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3279,6 +3483,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4122296388831240310, guid: 26664958c0b7ba643a2471862b80e3c9, type: 3}
   m_PrefabInstance: {fileID: 1859031827}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1859031829 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5712824119139777406, guid: 26664958c0b7ba643a2471862b80e3c9, type: 3}
+  m_PrefabInstance: {fileID: 1859031827}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e91db273545d5b49bdff9c67eb4f69e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1919505234
 GameObject:
   m_ObjectHideFlags: 0
@@ -3307,8 +3522,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1919505234}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.15, y: -0.25, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3351,6 +3566,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: a205973959f6c3746ae614e698d67966, type: 3}
   - {fileID: 21300000, guid: 2ddbca08a7f52954bb26a3a5bf69b184, type: 3}
   - {fileID: 21300000, guid: 343f270c24d7c3e448501c2100986924, type: 3}
+  flashMaterial: {fileID: 0}
+  swordPrefab: {fileID: 0}
   facingDirection: {x: 1, y: 0}
   parrySuccess: 0
 --- !u!50 &1919505237
@@ -3533,6 +3750,28 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4122296388831240310, guid: 26664958c0b7ba643a2471862b80e3c9, type: 3}
   m_PrefabInstance: {fileID: 1982357857}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1982357859 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5712824119139777406, guid: 26664958c0b7ba643a2471862b80e3c9, type: 3}
+  m_PrefabInstance: {fileID: 1982357857}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e91db273545d5b49bdff9c67eb4f69e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2002375947 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -7753452787071321016, guid: fd5d61207e767dd4f912e778ce4b3b48, type: 3}
+  m_PrefabInstance: {fileID: 1061983810}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e91db273545d5b49bdff9c67eb4f69e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -3540,3 +3779,4 @@ SceneRoots:
   - {fileID: 754928505}
   - {fileID: 1919505235}
   - {fileID: 674547785}
+  - {fileID: 394881939}
