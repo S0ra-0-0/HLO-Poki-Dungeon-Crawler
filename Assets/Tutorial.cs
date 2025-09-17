@@ -30,6 +30,7 @@ public class Tutorial : MonoBehaviour
     {
         if (IsMovementKeyPressed() && wasdTutorialImage.activeSelf)
         {
+            PokiUnitySDK.Instance.gameplayStart();
             wasdTutorialImage.SetActive(false);
             attackTutorialImage.SetActive(true);
         }

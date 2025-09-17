@@ -6,7 +6,8 @@ public class SceneLoader : MonoBehaviour
     public string sceneToLoad = "Your scene name here"; 
     public void LoadScene()
     {
-       SceneManager.LoadScene(sceneToLoad);
+        SceneManager.LoadScene(sceneToLoad);
+        Debug.Log($"Loading scene: {sceneToLoad}");
     }
 
     public void QuitGame()

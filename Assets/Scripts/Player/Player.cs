@@ -82,6 +82,10 @@ public class Player : MonoBehaviour
         rb.gravityScale = 0f;
         spriteRenderer = GetComponent<SpriteRenderer>();
         originalMaterial = spriteRenderer.material; // Store original material
+        if(PokiUnitySDK.FindAnyObjectByType<PokiUnitySDK>() != null)
+        {
+            PokiUnitySDK.Instance.init();
+        }
 
         // Initialize attack types
         attackTypes = new List<IAttackType>

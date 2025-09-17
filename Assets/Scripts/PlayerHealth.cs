@@ -124,6 +124,7 @@ public class PlayerHealth : MonoBehaviour
     }
     private void Die()
     {
+        PokiUnitySDK.Instance.gameplayStop();
         SceneManager.LoadScene("DeathScene");
     }
 }

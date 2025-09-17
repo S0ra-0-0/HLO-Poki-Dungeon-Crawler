@@ -1,11 +1,5 @@
-// System
-using System;
-using System.Collections;
-using System.Collections.Generic;
-
 // Unity
 using UnityEngine;
-using Unity.VisualScripting;
 using UnityEngine.EventSystems;
 
 public class MapUI : MonoBehaviour, IPointerClickHandler
