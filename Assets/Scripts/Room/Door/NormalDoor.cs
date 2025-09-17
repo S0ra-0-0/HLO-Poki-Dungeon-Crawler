@@ -16,18 +16,22 @@ namespace HLO.Door
     {
         SpriteRenderer spriteRenderer;
 
-        private void Awake()
+        protected override void Awake()
         {
-            spriteRenderer = GetComponent<SpriteRenderer>();
+            base.Awake();
 
-            RoomBase thisRoom = transform.parent.GetComponent<RoomBase>();
+            spriteRenderer = GetComponent<SpriteRenderer>();
+        }
+
+        protected override void RegisterRoomAction(RoomBase thisRoom)
+        {
+            base.RegisterRoomAction(thisRoom);
+
             thisRoom.RegisterOnEnterRoom(Close);
-            thisRoom.RegisterOnEnterRoom(DiscoverConnectedRoom);
             thisRoom.RegisterOnClearRoom(() =>
             {
                 Open();
                 thisRoom.UnregisterOnEnterRoom(Close);
-                thisRoom.UnregisterOnEnterRoom(DiscoverConnectedRoom);
             });
         }
 
@@ -59,11 +63,6 @@ namespace HLO.Door
 
             // TODO: Animation will be added later
             spriteRenderer.enabled = true;
-        }
-
-        protected void DiscoverConnectedRoom()
-        {
-            connectedRoom.Discover();
         }
     }
 }

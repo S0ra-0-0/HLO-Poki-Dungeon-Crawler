@@ -1,0 +1,66 @@
+// System
+using System;
+using System.Collections;
+using System.Collections.Generic;
+
+// Unity
+using UnityEngine;
+
+// HLO
+using HLO.Enemy.Spawn;
+
+namespace HLO.Room
+{
+    public class NormalEnemyRoom : RoomBase
+    {
+        [SerializeField] EnemySpawner enemySpawner;
+        [SerializeField] bool enemySpawned;
+        [SerializeField] List<GameObject> remainedEnemyList;
+
+        private void Awake()
+        {
+            enemySpawner = GetComponent<EnemySpawner>();
+
+            if (enemySpawner)
+            {
+                RegisterOnEnterRoom(SpawnEnemy);
+                RegisterOnClearRoom(() =>
+                {
+                    UnregisterOnEnterRoom(SpawnEnemy);
+                });
+            }
+            else
+            {
+                Debug.LogWarning($"{gameObject.name} doesn't have {nameof(EnemySpawner)}.");
+            }
+        }
+
+        private void SpawnEnemy()
+        {
+            enemySpawned = true;
+            remainedEnemyList = enemySpawner.Spawn();
+        }
+
+        private void Update()
+        {
+            if (!enemySpawned) return;
+
+            if (remainedEnemyList.Count > 0) // TODO: It's very very bad. We should fix it. 
+                                             // I want to register an action that is invoked when an enemy class dies.
+            {
+                for (int i = 0; i < remainedEnemyList.Count; i++)
+                {
+                    if (!remainedEnemyList[i])
+                    {
+                        remainedEnemyList.RemoveAt(i--);
+                    }
+                }
+            }
+            else
+            {
+                enemySpawned = false;
+                ClearRoom();
+            }
+        }
+    }
+}
