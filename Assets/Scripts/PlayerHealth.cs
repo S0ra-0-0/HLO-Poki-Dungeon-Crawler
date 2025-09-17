@@ -10,6 +10,7 @@ using System.Linq;
 // Unity
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -114,11 +115,15 @@ public class PlayerHealth : MonoBehaviour
         {
             if (--currentHP <= 0)
             {
-                // death event
+                Die();
                 break;
             }
 
             heartList[currentHP].Empty();
         }
+    }
+    private void Die()
+    {
+        SceneManager.LoadScene("DeathScene");
     }
 }

@@ -16,7 +16,6 @@ public class SwordAttack : MonoBehaviour, IAttackType
     public void Attack(Player player)
     {
         Debug.Log("[SwordAttack] Normal attack executed");
-        player.audioSource.PlayOneShot(player.swordSwingSound);
 
         Vector3 spawnPosition = player.transform.position + (Vector3)player.facingDirection * .5f;
 
@@ -39,6 +38,9 @@ public class SwordAttack : MonoBehaviour, IAttackType
             LayerMask.GetMask("Enemy")
         );
         Debug.Log($"[SwordAttack] Found {enemies.Length} enemies in range");
+
+        if (enemies.Length == 0) player.audioSource.PlayOneShot(player.swordSwingNothingSound);
+        else player.audioSource.PlayOneShot(player.swordSwingEnemySound);
 
         foreach (var enemy in enemies)
         {

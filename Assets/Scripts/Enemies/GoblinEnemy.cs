@@ -2,6 +2,7 @@ using System.Collections;
 using System.Net.Sockets;
 using Mono.Cecil;
 using UnityEngine;
+using UnityEngine.UI;
 public class GoblinEnemy : MonoBehaviour
 {
     public Player Player;
@@ -15,6 +16,8 @@ public class GoblinEnemy : MonoBehaviour
     public float attackDelay = 1.5f;
     public float DetectionRange = 5.0f;
     public float AttackCooldown = 2.0f;
+    public Image Hpbackground;
+    public Image HpFill;
     private float lastAttackTime = -Mathf.Infinity;
     private int speed = 2;
 
@@ -82,7 +85,7 @@ public class GoblinEnemy : MonoBehaviour
         {
             if (attackIndicatorInstance == null)
             {
-                Vector3 spawnPosition = transform.position + new Vector3(0, .5f, 0); 
+                Vector3 spawnPosition = transform.position + new Vector3(0, .75f, 0); 
                 attackIndicatorInstance = Instantiate(AttackIndicator, spawnPosition, Quaternion.identity, transform);
             }
             attackIndicatorInstance.SetActive(true);
@@ -217,7 +220,7 @@ public class GoblinEnemy : MonoBehaviour
     {
         currentHealth -= amount;
         HitFlash();
-
+        HpFill.fillAmount = (float)currentHealth / maxHealth;
         if (currentHealth <= 0) Die();
         else Stun(0.5f);
     }
@@ -245,7 +248,7 @@ public class GoblinEnemy : MonoBehaviour
 
     private void Die()
     {
-        // Play death animation or effects here maybe
+       
         Destroy(gameObject);
     }
 }

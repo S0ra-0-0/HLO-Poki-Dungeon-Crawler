@@ -45,14 +45,15 @@ public class Player : MonoBehaviour
 
     [Header("Sound Effects")]
     public AudioSource audioSource;
-    public AudioClip swordSwingSound;
+    public AudioClip swordSwingNothingSound;
+    public AudioClip swordSwingEnemySound;
     public AudioClip parrySound;
     public AudioClip dashSound;
     public AudioClip hitSound;
     public AudioClip walkingSound;
     public float walkingClipLength = 1f;
     float timer;
-    public float volume = 1;
+    public float volume = .5f;
 
     private Rigidbody2D rb;
     private Vector2 moveInput;
