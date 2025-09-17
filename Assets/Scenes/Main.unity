@@ -4784,7 +4784,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: To Parry
+  m_text: To Counter
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 72567c668faa4ee49864bff2ef3fc249, type: 2}
   m_sharedMaterial: {fileID: -8195449959865670584, guid: 72567c668faa4ee49864bff2ef3fc249, type: 2}
@@ -5892,6 +5892,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TutorialGoblin
       objectReference: {fileID: 0}
+    - target: {fileID: 3114535838592290526, guid: 9f01eef77b55769449379de43c5889bf, type: 3}
+      propertyPath: flashMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: c12bc7a3463026e488c02be998c54a45, type: 2}
     - target: {fileID: 4222890344185899580, guid: 9f01eef77b55769449379de43c5889bf, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

@@ -17,6 +17,12 @@ public class GoblinEnemy : MonoBehaviour
     public float AttackCooldown = 2.0f;
     private float lastAttackTime = -Mathf.Infinity;
     private int speed = 2;
+
+    [Header("Hit Flash")]
+    [SerializeField] private Material flashMaterial; // Assign FlashMaterial in Inspector
+    private Material originalMaterial;
+    private Coroutine flashRoutine;
+
     private Rigidbody2D rb;
     private Animator animator;
     private Vector2 movement;
@@ -45,6 +51,7 @@ public class GoblinEnemy : MonoBehaviour
         animator = GetComponent<Animator>();
         Player = FindAnyObjectByType<Player>();
         currentHealth = maxHealth;
+        originalMaterial = spriteRenderer.material; // Store original material
     }
 
     private void FixedUpdate()
@@ -209,11 +216,32 @@ public class GoblinEnemy : MonoBehaviour
     public void TakeDamage(int amount)
     {
         currentHealth -= amount;
+        HitFlash();
 
         if (currentHealth <= 0) Die();
         else Stun(0.5f);
     }
 
+    public void HitFlash(float duration = 0.1f)
+    {
+        if (flashRoutine != null)
+            StopCoroutine(flashRoutine);
+
+        flashRoutine = StartCoroutine(FlashRoutine(duration));
+    }
+
+    private IEnumerator FlashRoutine(float duration)
+    {
+        // Switch to flash material
+        spriteRenderer.material = flashMaterial;
+        flashMaterial.SetFloat("_FlashAmount", 1f); // Full flash
+
+        yield return new WaitForSeconds(duration);
+
+        // Revert to original material
+        spriteRenderer.material = originalMaterial;
+        flashRoutine = null;
+    }
 
     private void Die()
     {

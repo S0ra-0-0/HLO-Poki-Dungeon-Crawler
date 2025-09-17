@@ -80,10 +80,6 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = 0f;
         spriteRenderer = GetComponent<SpriteRenderer>();
-
-        rb = GetComponent<Rigidbody2D>();
-        rb.gravityScale = 0f;
-        spriteRenderer = GetComponent<SpriteRenderer>();
         originalMaterial = spriteRenderer.material; // Store original material
 
         // Initialize attack types
