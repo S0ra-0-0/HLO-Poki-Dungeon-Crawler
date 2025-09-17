@@ -41,6 +41,7 @@ public class Player : MonoBehaviour
 
     [Header("Weapons")]
     public GameObject swordPrefab;
+    public Color parryColor;
 
     [Header("Sound Effects")]
     public AudioSource audioSource;
@@ -49,7 +50,7 @@ public class Player : MonoBehaviour
     public AudioClip dashSound;
     public AudioClip hitSound;
     public AudioClip walkingSound;
-    public float walingClipLength = 1f;
+    public float walkingClipLength = 1f;
     float timer;
     public float volume = 1;
 
@@ -120,7 +121,7 @@ public class Player : MonoBehaviour
     private void Update()
     {
         timer += Time.deltaTime;
-        if (timer > walingClipLength)
+        if (timer > walkingClipLength)
         {
             audioSource.PlayOneShot(walkingSound);
             timer = 0;
@@ -157,7 +158,7 @@ public class Player : MonoBehaviour
     }
     private void HandleDashInput()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && Time.time >= lastDashTime + dashCooldown)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && Time.time >= lastDashTime + dashCooldown)
         {
             isDashing = true;
             lastDashTime = Time.time;
@@ -194,19 +195,19 @@ public class Player : MonoBehaviour
 
     private void HandleAttackSwapInput()
     {
-        //Temp Press Q/E to cycle attack types
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            currentAttackIndex = (currentAttackIndex - 1 + attackTypes.Count) % attackTypes.Count;
-            currentAttackType = attackTypes[currentAttackIndex];
-            Debug.Log($"Switched to {currentAttackType.GetType().Name}");
-        }
-        else if (Input.GetKeyDown(KeyCode.E))
-        {
-            currentAttackIndex = (currentAttackIndex + 1) % attackTypes.Count;
-            currentAttackType = attackTypes[currentAttackIndex];
-            Debug.Log($"Switched to {currentAttackType.GetType().Name}");
-        }
+        ////Temp Press Q/E to cycle attack types
+        //if (Input.GetKeyDown(KeyCode.Q))
+        //{
+        //    currentAttackIndex = (currentAttackIndex - 1 + attackTypes.Count) % attackTypes.Count;
+        //    currentAttackType = attackTypes[currentAttackIndex];
+        //    Debug.Log($"Switched to {currentAttackType.GetType().Name}");
+        //}
+        //else if (Input.GetKeyDown(KeyCode.E))
+        //{
+        //    currentAttackIndex = (currentAttackIndex + 1) % attackTypes.Count;
+        //    currentAttackType = attackTypes[currentAttackIndex];
+        //    Debug.Log($"Switched to {currentAttackType.GetType().Name}");
+        //}
     }
 
     private void FixedUpdate()
@@ -384,11 +385,11 @@ public class Player : MonoBehaviour
     {
         if (isActive)
         {
-            spriteRenderer.color = Color.blue; // Glow effect during parry
+            spriteRenderer.color = parryColor; 
         }
         else
         {
-            spriteRenderer.color = Color.white; // Restore normal color
+            spriteRenderer.color = Color.white; 
         }
     }
 

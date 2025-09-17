@@ -71,7 +71,7 @@ public class GoblinEnemy : MonoBehaviour
     {
         UpdateSpriteDirection();
 
-        if (attackTimer >= attackDelay - 0.6f)
+        if (attackTimer >= attackDelay - 0.5f)
         {
             if (attackIndicatorInstance == null)
             {
@@ -204,18 +204,6 @@ public class GoblinEnemy : MonoBehaviour
 
         //animator.SetBool("isStunned", false);
         stunRoutine = null;
-    }
-
-    private void OnDrawGizmos()
-    {
-
-        if (attackTimer >= attackDelay - 0.6f) { Gizmos.color = Color.magenta; }
-        else { Gizmos.color = Color.blue; }
-        Gizmos.DrawWireSphere(transform.position, AttackRange);
-
-
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, DetectionRange);
     }
 
     public void TakeDamage(int amount)
