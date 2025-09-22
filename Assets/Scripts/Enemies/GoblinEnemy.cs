@@ -250,4 +250,12 @@ public class GoblinEnemy : MonoBehaviour
        
         Destroy(gameObject);
     }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, AttackRange);
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, DetectionRange);
+    }
 }

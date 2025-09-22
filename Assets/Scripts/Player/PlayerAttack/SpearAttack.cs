@@ -8,11 +8,11 @@ public class SpearAttack : IAttackType
 
     private const float spearReach = 2.5f;
     private const float hitRadius = .5f;
-    private const int spearDamage = 2;
+    private const int spearDamage = 1;
 
     // Heavy attack config
     private readonly float[] stageTimes = { 0.25f, .5f, 1f };
-    private readonly int[] stageDamages = { 4, 8, 12 };
+    private readonly float[] stageDamages = { 1, 1,5f, 2};
     private readonly float[] stageRadii = { .75f, 1.5f, 3.0f };
 
     public void Attack(Player player)
@@ -30,9 +30,9 @@ public class SpearAttack : IAttackType
             enemy.SendMessage("TakeDamage", spearDamage, SendMessageOptions.DontRequireReceiver);
         }
 
-#if UNITY_EDITOR
+
         Debug.DrawLine(player.transform.position, attackPosition, Color.magenta, 0.2f);
-#endif
+
     }
 
     // Called when charge starts
@@ -79,7 +79,7 @@ public class SpearAttack : IAttackType
 
         // Final radius and damage based on charge
         float finalRadius = drawer.CurrentRadius;
-        int finalDamage = stageDamages[stage];
+        float finalDamage = stageDamages[stage];
 
         // Visual feedback for attack (optional)
         drawer.SetAttackFlash();

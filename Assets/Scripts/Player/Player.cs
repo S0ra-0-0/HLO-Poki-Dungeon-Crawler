@@ -124,7 +124,7 @@ public class Player : MonoBehaviour
         timer += Time.deltaTime;
         if (timer > walkingClipLength)
         {
-            audioSource.PlayOneShot(walkingSound);
+            //audioSource.PlayOneShot(walkingSound);
             timer = 0;
         }
 
@@ -175,7 +175,6 @@ public class Player : MonoBehaviour
     }
     private void HandleAttackInput()
     {
-        // Heavy attack (parry)
         if (Input.GetKeyDown(KeyCode.K)
             && !isAttacking && !isHeavyAttacking
             && Time.time >= lastHeavyAttackTime + heavyAttackCooldown)
@@ -183,7 +182,6 @@ public class Player : MonoBehaviour
             currentAttackType.heavyAttack(this);
         }
 
-        // Normal attack (unchanged)
         if (Input.GetKeyUp(KeyCode.J) && !isAttacking && !isHeavyAttacking
             && Time.time >= lastNormalAttackTime + normalAttackCooldown)
         {
@@ -196,19 +194,19 @@ public class Player : MonoBehaviour
 
     private void HandleAttackSwapInput()
     {
-        ////Temp Press Q/E to cycle attack types
-        //if (Input.GetKeyDown(KeyCode.Q))
-        //{
-        //    currentAttackIndex = (currentAttackIndex - 1 + attackTypes.Count) % attackTypes.Count;
-        //    currentAttackType = attackTypes[currentAttackIndex];
-        //    Debug.Log($"Switched to {currentAttackType.GetType().Name}");
-        //}
-        //else if (Input.GetKeyDown(KeyCode.E))
-        //{
-        //    currentAttackIndex = (currentAttackIndex + 1) % attackTypes.Count;
-        //    currentAttackType = attackTypes[currentAttackIndex];
-        //    Debug.Log($"Switched to {currentAttackType.GetType().Name}");
-        //}
+        //Temp Press Q/E to cycle attack types
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            currentAttackIndex = (currentAttackIndex - 1 + attackTypes.Count) % attackTypes.Count;
+            currentAttackType = attackTypes[currentAttackIndex];
+            Debug.Log($"Switched to {currentAttackType.GetType().Name}");
+        }
+        else if (Input.GetKeyDown(KeyCode.E))
+        {
+            currentAttackIndex = (currentAttackIndex + 1) % attackTypes.Count;
+            currentAttackType = attackTypes[currentAttackIndex];
+            Debug.Log($"Switched to {currentAttackType.GetType().Name}");
+        }
     }
 
     private void FixedUpdate()
@@ -255,15 +253,6 @@ public class Player : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        // Draw dash indicator when dashing
-        if (isDashing)
-        {
-            Gizmos.color = Color.cyan;
-            Gizmos.DrawWireSphere(transform.position, 0.8f);
-            Gizmos.DrawLine(transform.position, (Vector2)transform.position + dashDirection * 1.5f);
-        }
-
-
         // Draw facing direction indicator
         Gizmos.color = Color.green;
         Vector3 headPos = transform.position + Vector3.up * 0.7f;
