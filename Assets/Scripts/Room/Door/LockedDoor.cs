@@ -17,6 +17,8 @@ namespace HLO.Door
 
         protected override void Awake()
         {
+            base.Awake();
+            
             Close();
         }
 

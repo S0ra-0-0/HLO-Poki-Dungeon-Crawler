@@ -14,7 +14,7 @@ namespace HLO.Door
 {
     public class NormalDoor : DoorBase
     {
-        SpriteRenderer spriteRenderer;
+        [SerializeField] protected SpriteRenderer spriteRenderer;
 
         protected override void Awake()
         {
