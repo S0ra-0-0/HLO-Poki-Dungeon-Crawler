@@ -1,7 +1,7 @@
-using System.Collections;
 using UnityEngine;
+using System.Collections;
 using UnityEngine.UI;
-public class GoblinEnemy : MonoBehaviour
+public class GoblinRangeEnemy : MonoBehaviour
 {
     public Player Player;
     [Header("Stats")]
@@ -18,9 +18,10 @@ public class GoblinEnemy : MonoBehaviour
     public Image HpFill;
     private float lastAttackTime = -Mathf.Infinity;
     private int speed = 2;
+    public GameObject projectilePrefab;
 
     [Header("Hit Flash")]
-    [SerializeField] private Material flashMaterial; 
+    [SerializeField] private Material flashMaterial;
     private Material originalMaterial;
     private Coroutine flashRoutine;
 
@@ -83,7 +84,7 @@ public class GoblinEnemy : MonoBehaviour
         {
             if (attackIndicatorInstance == null)
             {
-                Vector3 spawnPosition = transform.position + new Vector3(0, .75f, 0); 
+                Vector3 spawnPosition = transform.position + new Vector3(0, .75f, 0);
                 attackIndicatorInstance = Instantiate(AttackIndicator, spawnPosition, Quaternion.identity, transform);
             }
             attackIndicatorInstance.SetActive(true);
@@ -145,7 +146,7 @@ public class GoblinEnemy : MonoBehaviour
 
             if (attackTimer >= attackDelay)
             {
-                DealDamage();
+                ShootProjectile();
                 attackTimer = 0f;
             }
 
@@ -155,7 +156,40 @@ public class GoblinEnemy : MonoBehaviour
         attackTimer = 0f;
         attackRoutine = null;
     }
+    private void ShootProjectile()
+    {
+        Debug.Log("Goblin shoots a projectile towards the player!");
+        if (projectilePrefab != null)
+        {
+            Vector2 directionToPlayer = (Player.transform.position - transform.position).normalized;
+            GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
 
+            // Set the projectile's direction
+            Projectile projectileComponent = projectile.GetComponent<Projectile>();
+            if (projectileComponent != null)
+            {
+                projectileComponent.Initialize(directionToPlayer, Damage,gameObject);
+            }
+        }
+        else
+        {
+            Debug.LogError("Projectile prefab not found!");
+        }
+    }
+
+    private void DealDamage()
+    {
+        if (Player == null) return;
+
+        // Explicitly tell the player it was attacked
+        Player.RegisterAttack();
+
+        if (!Player.TryTakeDamage(Damage))
+        {
+            Debug.Log("Goblin's attack was blocked by parry or invuln.");
+            return;
+        }
+    }
     private void UpdateSpriteDirection()
     {
         // 0: Right, 1: UpRight, 2: Up, 3: UpLeft, 4: Left, 5: DownLeft, 6: Down, 7: DownRight
@@ -175,21 +209,6 @@ public class GoblinEnemy : MonoBehaviour
 
         if (idleDirectionSprites != null && idleDirectionSprites.Length == 8)
             spriteRenderer.sprite = idleDirectionSprites[dirIndex];
-    }
-
-
-    private void DealDamage()
-    {
-        if (Player == null) return;
-
-        // Explicitly tell the player it was attacked
-        Player.RegisterAttack();
-
-        if (!Player.TryTakeDamage(Damage))
-        {
-            Debug.Log("Goblin's attack was blocked by parry or invuln.");
-            return;
-        }
     }
 
     public void Stun(float duration)
@@ -246,7 +265,7 @@ public class GoblinEnemy : MonoBehaviour
 
     private void Die()
     {
-       
+
         Destroy(gameObject);
     }
 

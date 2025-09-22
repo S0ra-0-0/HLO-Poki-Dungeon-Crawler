@@ -318,7 +318,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 10000
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 0
@@ -349,12 +349,14 @@ MonoBehaviour:
   Damage: 0
   maxHealth: 2
   currentHealth: 0
-  AttackRange: 0
+  AttackRange: 1.5
   attackTimer: 0
-  attackDelay: 0
+  attackDelay: 1
   DetectionRange: 0
-  AttackCooldown: 0
-  flashMaterial: {fileID: 0}
+  AttackCooldown: 1
+  Hpbackground: {fileID: 2757595672167012076}
+  HpFill: {fileID: 5447753076103460288}
+  flashMaterial: {fileID: 2100000, guid: c12bc7a3463026e488c02be998c54a45, type: 2}
   AttackIndicator: {fileID: 8485125466935941487, guid: 476cf636d4383a54b975e9264e5306ac, type: 3}
   idleDirectionSprites:
   - {fileID: 21300000, guid: 40404cfa4989a184383ed21485934d6a, type: 3}

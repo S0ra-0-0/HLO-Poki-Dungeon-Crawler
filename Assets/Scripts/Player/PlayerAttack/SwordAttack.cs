@@ -37,6 +37,20 @@ public class SwordAttack : MonoBehaviour, IAttackType
             1.5f,
             LayerMask.GetMask("Enemy")
         );
+
+        var projectiles = Physics2D.OverlapCircleAll(
+            player.transform.position,
+            1.5f,
+            LayerMask.GetMask("Projectile")
+        );
+        Debug.Log($"[SwordAttack] Found {projectiles.Length} projectiles in range");
+
+
+        foreach (var proj in projectiles)
+        {
+            Debug.Log($"[SwordAttack] Deflecting projectile {proj.name}");
+            proj.SendMessage("Deflect", player.facingDirection, SendMessageOptions.DontRequireReceiver);
+        }
         Debug.Log($"[SwordAttack] Found {enemies.Length} enemies in range");
 
         if (enemies.Length == 0) player.audioSource.PlayOneShot(player.swordSwingNothingSound);
