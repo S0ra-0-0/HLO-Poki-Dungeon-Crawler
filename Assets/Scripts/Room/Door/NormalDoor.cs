@@ -21,6 +21,7 @@ namespace HLO.Door
             base.Awake();
 
             spriteRenderer = GetComponent<SpriteRenderer>();
+            spriteRenderer.enabled = false;
         }
 
         protected override void RegisterRoomAction(RoomBase thisRoom)
