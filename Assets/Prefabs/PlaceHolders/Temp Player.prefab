@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 1464912404623044549}
   - component: {fileID: 535401906660523576}
   - component: {fileID: 6008011499033396497}
+  - component: {fileID: 3715738707509408962}
   m_Layer: 3
   m_Name: Temp Player
   m_TagString: Player
@@ -110,8 +111,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1903412323
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 3aa6d635b8fc2b445a3d9b1119c55e08, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -170,7 +171,7 @@ MonoBehaviour:
   dashDuration: 0.15
   dashCooldown: 1
   attackRange: 1.5
-  normalAttackCooldown: 0.3
+  normalAttackCooldown: 0.9
   heavyAttackCooldown: 1
   lastHeavyAttackTime: -100
   isAttacking: 0
@@ -189,14 +190,15 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 343f270c24d7c3e448501c2100986924, type: 3}
   flashMaterial: {fileID: 2100000, guid: 4cdb45d0098659f44adc75182464e527, type: 2}
   swordPrefab: {fileID: 5925944416369875127, guid: 85482a373b96a6549b2db9064c8e4075, type: 3}
-  parryColor: {r: 0, g: 0.07405424, b: 1, a: 0}
+  parryColor: {r: 0.45098042, g: 0.5037126, b: 1, a: 1}
   audioSource: {fileID: 6008011499033396497}
-  swordSwingSound: {fileID: 0}
-  parrySound: {fileID: 0}
-  dashSound: {fileID: 8300000, guid: 87c37d387b6813547829019680dc1c9d, type: 3}
-  hitSound: {fileID: 0}
+  swordSwingNothingSound: {fileID: 8300000, guid: 4c1bac9cf11755141b1a306bbda56191, type: 3}
+  swordSwingEnemySound: {fileID: 8300000, guid: 4562b909c32057c4096aff32a5d842ef, type: 3}
+  parrySound: {fileID: 8300000, guid: 0d512d74531f3b94999e2c59b9aefe42, type: 3}
+  dashSound: {fileID: 8300000, guid: 6561ad4271bfd6f47996331a26902755, type: 3}
+  hitSound: {fileID: 8300000, guid: bb4a5f7be241c104eaff24ce126c33c2, type: 3}
   walkingSound: {fileID: 0}
-  walingClipLength: 1
+  walkingClipLength: 1
   volume: 1
   facingDirection: {x: 1, y: 0}
   parrySuccess: 0
@@ -288,7 +290,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 1.0586338
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
@@ -364,3 +366,25 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &3715738707509408962
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5327870854238468306}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: dde781d38a30f2d4db3761eec8faa92a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
