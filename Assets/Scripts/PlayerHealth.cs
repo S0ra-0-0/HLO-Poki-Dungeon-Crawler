@@ -23,7 +23,7 @@ public class PlayerHealth : MonoBehaviour
 
     [Header("Invincibility")]
     [SerializeField] private float invincibilityTime;
-    public bool isInvincibility;
+    private bool isInvincibility; public bool IsInvincibility => isInvincibility;
 
     [Header("Sprite")]
     [SerializeField] private SpriteRenderer spriteRenderer;
@@ -38,13 +38,15 @@ public class PlayerHealth : MonoBehaviour
         currentHP = maxHP = heartList.Count;
     }
 
+    public void SetInvincibility(bool value) => isInvincibility = value;
+
     public void Hit(int damage)
     {
-        if (isInvincibility) { return; }
+        if (IsInvincibility) { return; }
 
         DecreaseHP(damage);
 
-        isInvincibility = true;
+        SetInvincibility(true);
         StartCoroutine(CoroutineSignInvincibility());
     }
 
@@ -71,7 +73,7 @@ public class PlayerHealth : MonoBehaviour
         color.a = 1f;
         spriteRenderer.color = color;
 
-        isInvincibility = false;
+        SetInvincibility(false);
     }
 
     public void AddHeart(GameObject objHeart)
