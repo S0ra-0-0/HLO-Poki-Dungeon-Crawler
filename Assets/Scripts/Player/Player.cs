@@ -294,7 +294,7 @@ public class Player : MonoBehaviour
     public void SetInvulnerable(bool value)
     {
         PlayerHealth playerHealth = GetComponent<PlayerHealth>();
-        playerHealth.isInvincibility = value;
+        playerHealth.SetInvincibility(value);
 
     }
 
