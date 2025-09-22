@@ -4,7 +4,11 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - PlayerBullet
+  - Enemy
+  - Projectile
+  - DeflectedProjectile
+  - PlayerProjectile
+  - Wall
   layers:
   - Default
   - TransparentFX
@@ -16,7 +20,7 @@ TagManager:
   - Door
   - Room
   - MapIcon
-  - 
+  - Projectile
   - 
   - 
   - 

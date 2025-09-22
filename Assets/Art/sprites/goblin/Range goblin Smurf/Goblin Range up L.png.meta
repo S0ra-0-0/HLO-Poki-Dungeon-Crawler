@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 3216216e769f42f499ced01110da77e5
+guid: 1579a7de59821254d9f4c9343f996ded
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1249757994095943046
-    second: door sprite bottom_0
+      213: 6252412030482392952
+    second: Goblin up R_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 30
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -96,17 +96,30 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: door sprite bottom_0
+      name: Goblin up R_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 1
         y: 0
-        width: 60
-        height: 30
+        width: 14
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 68d1b4d2648085110800000000000000
-      internalID: 1249757994095943046
+      spriteID: 87728427d9705c650800000000000000
+      internalID: 6252412030482392952
       vertices: []
       indices: 
       edges: []
@@ -135,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      door sprite bottom_0: 1249757994095943046
+      Goblin up R_0: 6252412030482392952
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

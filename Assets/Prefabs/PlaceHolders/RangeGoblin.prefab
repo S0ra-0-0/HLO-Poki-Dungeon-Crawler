@@ -87,11 +87,11 @@ GameObject:
   - component: {fileID: 2531753283122634084}
   - component: {fileID: 2040125458234731755}
   - component: {fileID: 2637725888919085938}
-  - component: {fileID: 2065351647414785451}
   - component: {fileID: 875942205697625614}
   - component: {fileID: 5084177389558193777}
+  - component: {fileID: 8442178313410794814}
   m_Layer: 6
-  m_Name: Goblin
+  m_Name: RangeGoblin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -157,7 +157,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 40404cfa4989a184383ed21485934d6a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3c137e4fdd63fa14d9d3f2e5cb3e4445, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -231,42 +231,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &2065351647414785451
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6775749300026828733}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce2d47854fbb37b4abac92e15da32fa4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Player: {fileID: 0}
-  Damage: 1
-  maxHealth: 2
-  currentHealth: 0
-  AttackRange: 1.5
-  attackTimer: 0
-  attackDelay: 1
-  DetectionRange: 25
-  AttackCooldown: 1
-  Hpbackground: {fileID: 572009039144382903}
-  HpFill: {fileID: 8275116856458185071}
-  flashMaterial: {fileID: 2100000, guid: c12bc7a3463026e488c02be998c54a45, type: 2}
-  AttackIndicator: {fileID: 8485125466935941487, guid: 476cf636d4383a54b975e9264e5306ac, type: 3}
-  idleDirectionSprites:
-  - {fileID: 21300000, guid: 40404cfa4989a184383ed21485934d6a, type: 3}
-  - {fileID: 21300000, guid: b00387690031e954d9f65087203e2170, type: 3}
-  - {fileID: 21300000, guid: f849cfd69f930d949b517e7bf322b11a, type: 3}
-  - {fileID: 21300000, guid: 7ed9854fa4bd1614ba18787d9fdd8f0e, type: 3}
-  - {fileID: 21300000, guid: ef34cb0d10f14b04fa20009aba2912f2, type: 3}
-  - {fileID: 21300000, guid: 71129048cb76df34fb25a18483e667a5, type: 3}
-  - {fileID: 21300000, guid: f20ae01d50789ad47aa4707a4d8e67b1, type: 3}
-  - {fileID: 21300000, guid: 5c4c627b640dc884f84c758594051d24, type: 3}
-  facingDirection: {x: 1, y: 0}
-  currentState: 0
 --- !u!95 &875942205697625614
 Animator:
   serializedVersion: 7
@@ -386,6 +350,43 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &8442178313410794814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6775749300026828733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13a15d2be5be969499bbe1856768417b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Player: {fileID: 0}
+  Damage: 1
+  maxHealth: 3
+  currentHealth: 0
+  AttackRange: 4
+  attackTimer: 0
+  attackDelay: 1.5
+  DetectionRange: 5
+  AttackCooldown: 2
+  Hpbackground: {fileID: 572009039144382903}
+  HpFill: {fileID: 8275116856458185071}
+  projectilePrefab: {fileID: 7494674805625948090, guid: ce6e745f798fb6a43aeebfc7b574e6e7, type: 3}
+  flashMaterial: {fileID: 2100000, guid: c12bc7a3463026e488c02be998c54a45, type: 2}
+  AttackIndicator: {fileID: 8485125466935941487, guid: 476cf636d4383a54b975e9264e5306ac, type: 3}
+  idleDirectionSprites:
+  - {fileID: 21300000, guid: 3c137e4fdd63fa14d9d3f2e5cb3e4445, type: 3}
+  - {fileID: 21300000, guid: b96266742681c6544a986c550e6fc842, type: 3}
+  - {fileID: 21300000, guid: a186ccf34ecf9814d9e1a94f0b0eef3e, type: 3}
+  - {fileID: 21300000, guid: 1579a7de59821254d9f4c9343f996ded, type: 3}
+  - {fileID: 21300000, guid: 290e55c877ec21f488bc9263e7577d07, type: 3}
+  - {fileID: 21300000, guid: 290451e6240725b448e164d7e356f665, type: 3}
+  - {fileID: 21300000, guid: 69680c6c1bf80e245ad11efe087afdca, type: 3}
+  - {fileID: 21300000, guid: 98f231f7ef7ae494eb180d132b35ff14, type: 3}
+  facingDirection: {x: 1, y: 0}
+  currentState: 0
 --- !u!1 &7228508594388030656
 GameObject:
   m_ObjectHideFlags: 0
