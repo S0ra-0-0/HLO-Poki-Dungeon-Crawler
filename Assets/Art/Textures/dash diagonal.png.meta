@@ -1,28 +1,40 @@
 fileFormatVersion: 2
-guid: 98aa4d346412740429877afcce6ea2e7
+guid: e888df56cbcd40544bea52c80a2779df
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 353339797334947468
-    second: parry effect texture_0
+      213: -693549056248844506
+    second: dash diagonal_0
   - first:
-      213: -1113597550504073187
-    second: parry effect texture_1
+      213: 1743595955442904699
+    second: dash diagonal_1
   - first:
-      213: 6634789036890486188
-    second: parry effect texture_2
+      213: -4863584791729965564
+    second: dash diagonal_2
   - first:
-      213: -3674592693056227257
-    second: parry effect texture_3
+      213: -3839324606029605945
+    second: dash diagonal_3
   - first:
-      213: 4801340116176034180
-    second: parry effect texture_4
+      213: -2773728623705212529
+    second: dash diagonal_4
   - first:
-      213: 4991543117568398998
-    second: parry effect texture_5
+      213: -7993567552198488255
+    second: dash diagonal_5
   - first:
-      213: 6608818986028605082
-    second: parry effect texture_6
+      213: -1058617650567635860
+    second: dash diagonal_6
+  - first:
+      213: 8978185795864224751
+    second: dash diagonal_7
+  - first:
+      213: 4684731775799657821
+    second: dash diagonal_8
+  - first:
+      213: -1269525083577111062
+    second: dash diagonal_9
+  - first:
+      213: -4330922147978252922
+    second: dash diagonal_10
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -118,11 +130,11 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: parry effect texture_0
+      name: dash diagonal_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 32
+        y: 65
         width: 32
         height: 32
       alignment: 0
@@ -133,18 +145,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c8678217ca057e400800000000000000
-      internalID: 353339797334947468
+      spriteID: 62feaf3dec40066f0800000000000000
+      internalID: -693549056248844506
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: parry effect texture_1
+      name: dash diagonal_1
       rect:
         serializedVersion: 2
         x: 32
-        y: 32
+        y: 65
         width: 32
         height: 32
       alignment: 0
@@ -155,40 +167,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d18a57b8de4bb80f0800000000000000
-      internalID: -1113597550504073187
+      spriteID: b7e6bf3984f723810800000000000000
+      internalID: 1743595955442904699
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: parry effect texture_2
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 32
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: ca57387f971831c50800000000000000
-      internalID: 6634789036890486188
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: parry effect texture_3
+      name: dash diagonal_2
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 33
         width: 32
         height: 32
       alignment: 0
@@ -199,18 +189,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 748332c1a69310dc0800000000000000
-      internalID: -3674592693056227257
+      spriteID: 40671f97663118cb0800000000000000
+      internalID: -4863584791729965564
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: parry effect texture_4
+      name: dash diagonal_3
       rect:
         serializedVersion: 2
         x: 32
-        y: 0
+        y: 33
         width: 32
         height: 32
       alignment: 0
@@ -221,18 +211,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4895186a569c1a240800000000000000
-      internalID: 4801340116176034180
+      spriteID: 7c35038cc9af7bac0800000000000000
+      internalID: -3839324606029605945
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: parry effect texture_5
+      name: dash diagonal_4
       rect:
         serializedVersion: 2
-        x: 64
-        y: 0
+        x: 0
+        y: 1
         width: 32
         height: 32
       alignment: 0
@@ -243,8 +233,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 696d5b3e406854540800000000000000
-      internalID: 4991543117568398998
+      spriteID: f89b7b8338cb189d0800000000000000
+      internalID: -2773728623705212529
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dash diagonal_5
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 1
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 14fce1bb9a4211190800000000000000
+      internalID: -7993567552198488255
       vertices: []
       indices: 
       edges: []
@@ -253,7 +265,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 25e7e859100edfa458196d58a5dea0f4
+    spriteID: 8fd67f755ecbbca41a0d6dc75fc72216
     internalID: 0
     vertices: []
     indices: 
@@ -263,12 +275,12 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      parry effect texture_0: 353339797334947468
-      parry effect texture_1: -1113597550504073187
-      parry effect texture_2: 6634789036890486188
-      parry effect texture_3: -3674592693056227257
-      parry effect texture_4: 4801340116176034180
-      parry effect texture_5: 4991543117568398998
+      dash diagonal_0: -693549056248844506
+      dash diagonal_1: 1743595955442904699
+      dash diagonal_2: -4863584791729965564
+      dash diagonal_3: -3839324606029605945
+      dash diagonal_4: -2773728623705212529
+      dash diagonal_5: -7993567552198488255
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
