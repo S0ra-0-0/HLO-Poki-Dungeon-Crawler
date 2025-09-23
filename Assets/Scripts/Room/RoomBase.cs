@@ -16,8 +16,9 @@ namespace HLO.Room
     {
         Normal,
         Starting,
+        Tutorial,
         Shop,
-        Boss
+        Boss,
     }
 
     public class RoomBase : MonoBehaviour

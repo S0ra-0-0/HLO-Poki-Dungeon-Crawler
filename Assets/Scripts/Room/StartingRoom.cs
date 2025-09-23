@@ -12,6 +12,7 @@ namespace HLO.Room
     {
         protected void Start()
         {
+            Discover();
             onEnterRoom?.Invoke();
             SetRoomType(RoomType.Starting);
             ClearRoom();

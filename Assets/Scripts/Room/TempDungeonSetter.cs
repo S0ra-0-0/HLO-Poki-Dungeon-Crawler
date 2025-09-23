@@ -61,7 +61,7 @@ public class TempDungeonSetter : MonoBehaviour
 
         foreach (var room in rooms)
         {
-            if(!room.IsDiscovered || room.RoomType != RoomType.Starting)
+            if(!room.IsDiscovered)
                 room.gameObject.SetActive(false);
         }
     }

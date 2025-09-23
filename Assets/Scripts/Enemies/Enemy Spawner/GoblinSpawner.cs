@@ -11,7 +11,7 @@ namespace HLO.Enemy.Spawn
 {
     public class GoblinSpawner : EnemySpawner
     {
-        public override  List<GameObject> Spawn()
+        public override List<GameObject> Spawn()
         {
             List<Transform> spawnpointList = enemySpawnpointGroup.GetComponentsInChildren<Transform>().ToList();
             List<GameObject> enemyList = new List<GameObject>();
@@ -21,7 +21,7 @@ namespace HLO.Enemy.Spawn
 
             for (int i = 0; i < enemyAmount; i++)
             {
-                enemyList.Add(Instantiate(enemyPrefabs[0], spawnpointList[i].position, Quaternion.identity));
+                enemyList.Add(Instantiate(enemyPrefabs[Random.Range(0, enemyPrefabs.Length)], spawnpointList[i].position, Quaternion.identity));
             }
 
             return enemyList;
