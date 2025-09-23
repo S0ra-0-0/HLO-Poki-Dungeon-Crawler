@@ -37,14 +37,16 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    private void UpdateKeyAmount(int getKeyAmount)
+    public void UpdateKeyAmount(int getKeyAmount)
     {
         keyAmount = Mathf.Clamp(KeyAmount + getKeyAmount, MIN_AMOUNT, MAX_AMOUNT);
         textKeyAmount.text = keyAmount.ToString("D2");
     }
 
+#if UNITY_EDITOR
     [ContextMenu("Give A Key")]
-    public void GiveAKey(int keyAmount) => UpdateKeyAmount(keyAmount);
+    public void GiveAKey() => UpdateKeyAmount(1);
+#endif
     #endregion
 
     #region Coins
@@ -61,13 +63,15 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    private void UpdateCoins(int getCoins)
+    public void UpdateCoins(int getCoins)
     {
         coins = Mathf.Clamp(coins + getCoins, MIN_AMOUNT, MAX_AMOUNT);
         textCoins.text = coins.ToString("D2");
     }
 
+#if UNITY_EDITOR
     [ContextMenu("Give Coins")]
-    public void GiveCoins(int coinAmount) => UpdateCoins(coinAmount);
+    public void GiveCoins() => UpdateCoins(10);
+#endif
     #endregion
 }

@@ -316,5 +316,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   priceText: {fileID: 4214255631278124787}
   price: 0
-  tooltipPositionOffset: {x: 0, y: 2}
+  tooltipPositionOffset: {x: 0, y: 1.2}
   healAmount: 1

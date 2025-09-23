@@ -9,7 +9,7 @@ public class KeyPicup : MonoBehaviour
             Inventory playerInventory = collision.gameObject.GetComponent<Inventory>();
             if (playerInventory != null)
             {
-                playerInventory.GiveAKey(1);
+                playerInventory.UpdateKeyAmount(1);
                 Destroy(gameObject);
             }
         }

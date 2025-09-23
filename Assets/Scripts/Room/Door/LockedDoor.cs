@@ -33,23 +33,24 @@ namespace HLO.Door
                 }
                 else if (other.gameObject.GetComponent<Inventory>().UseKeys(necessaryKeyAmount))
                 {
-                    Open();
+                    _lock.Unlock();
+                    StartCoroutine(EnterWaitCoroutine(other.transform));
                 }
             }
         }
 
-        protected override void Open()
+        private IEnumerator EnterWaitCoroutine(Transform playerTransform)
         {
-            base.Open();
+            playerTransform.gameObject.SetActive(false);
 
-            Collider2D other = Physics2D.OverlapBox(transform.position, GetComponent<BoxCollider2D>().size, 0f, 1 << LayerDatas.PLAYER_LAYER);
-            if (other)
-            {
-                connectedRoom.EnterRoom(DoorDirectionType, other.transform);
-            }
+            yield return new WaitForSeconds(0.5f);
 
+            _lock.Hide();
             GetComponent<SpriteRenderer>().enabled = false;
-            _lock.Unlock();
+
+            Open();
+
+            connectedRoom.EnterRoom(DoorDirectionType, playerTransform);
         }
     }
 }

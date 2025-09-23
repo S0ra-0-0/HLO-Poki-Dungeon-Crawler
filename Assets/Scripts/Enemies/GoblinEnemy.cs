@@ -256,7 +256,7 @@ public class GoblinEnemy : MonoBehaviour
           Player.hasDefeatedTutorialGoblin = true;
         }
 
-        playerInventory.GiveCoins(1);
+        playerInventory.UpdateCoins(1);
 
         if (GameManager.instance.AttemptKeyDrop())
         {
