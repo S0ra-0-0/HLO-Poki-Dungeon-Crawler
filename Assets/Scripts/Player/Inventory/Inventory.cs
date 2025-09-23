@@ -44,7 +44,7 @@ public class Inventory : MonoBehaviour
     }
 
     [ContextMenu("Give A Key")]
-    private void GiveAKey() => UpdateKeyAmount(1);
+    public void GiveAKey(int keyAmount) => UpdateKeyAmount(keyAmount);
     #endregion
 
     #region Coins
@@ -68,6 +68,6 @@ public class Inventory : MonoBehaviour
     }
 
     [ContextMenu("Give Coins")]
-    private void GiveCoins() => UpdateCoins(10);
+    public void GiveCoins(int coinAmount) => UpdateCoins(coinAmount);
     #endregion
 }

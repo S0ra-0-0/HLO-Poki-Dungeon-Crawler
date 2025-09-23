@@ -1,9 +1,10 @@
-using UnityEngine;
 using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 public class GoblinRangeEnemy : MonoBehaviour
 {
     public Player Player;
+    public Inventory playerInventory;
     [Header("Stats")]
     public int Damage = 10;
     public int maxHealth = 2;
@@ -19,6 +20,8 @@ public class GoblinRangeEnemy : MonoBehaviour
     private float lastAttackTime = -Mathf.Infinity;
     private int speed = 2;
     public GameObject projectilePrefab;
+    [SerializeField] private GameObject Key;
+
 
     [Header("Hit Flash")]
     [SerializeField] private Material flashMaterial;
@@ -52,6 +55,7 @@ public class GoblinRangeEnemy : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         Player = FindAnyObjectByType<Player>();
+        playerInventory = FindAnyObjectByType<Inventory>();
         currentHealth = maxHealth;
         originalMaterial = spriteRenderer.material; // Store original material
     }
@@ -168,7 +172,7 @@ public class GoblinRangeEnemy : MonoBehaviour
             Projectile projectileComponent = projectile.GetComponent<Projectile>();
             if (projectileComponent != null)
             {
-                projectileComponent.Initialize(directionToPlayer, Damage,gameObject);
+                projectileComponent.Initialize(directionToPlayer, Damage, gameObject);
             }
         }
         else
@@ -265,7 +269,22 @@ public class GoblinRangeEnemy : MonoBehaviour
 
     private void Die()
     {
+        if (Player != null)
+        {
+            Player.hasDefeatedTutorialGoblin = true;
+        }
 
+        playerInventory.GiveCoins(1);
+
+        if (GameManager.instance.AttemptKeyDrop())
+        {
+            Instantiate(Key, transform.position, Quaternion.identity);
+            GameManager.instance.monstersKilled = 0;
+        }
+        else
+        {
+            GameManager.instance.monstersKilled++;
+        }
         Destroy(gameObject);
     }
 

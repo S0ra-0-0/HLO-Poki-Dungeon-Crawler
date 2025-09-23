@@ -1,10 +1,10 @@
 using System.Collections;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 public class GoblinEnemy : MonoBehaviour
 {
     public Player Player;
+    public Inventory playerInventory;
     [Header("Stats")]
     public int Damage = 10;
     public int maxHealth = 2;
@@ -34,6 +34,8 @@ public class GoblinEnemy : MonoBehaviour
     public GameObject AttackIndicator;
     private GameObject attackIndicatorInstance;
 
+    [SerializeField] private GameObject Key;
+
 
 
     [Header("Sprite Direction")]
@@ -53,6 +55,7 @@ public class GoblinEnemy : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         Player = FindAnyObjectByType<Player>();
+        playerInventory = FindAnyObjectByType<Inventory>();
         currentHealth = maxHealth;
         originalMaterial = spriteRenderer.material; // Store original material
     }
@@ -252,6 +255,22 @@ public class GoblinEnemy : MonoBehaviour
         {
           Player.hasDefeatedTutorialGoblin = true;
         }
+
+        playerInventory.GiveCoins(1);
+
+        if (GameManager.instance.AttemptKeyDrop())
+        {
+
+            Instantiate(Key, transform.position, Quaternion.identity);
+            GameManager.instance.monstersKilled = 0;
+           
+        }
+        else
+        {
+            GameManager.instance.monstersKilled++;
+        }
+
+
         Destroy(gameObject);
     }
 

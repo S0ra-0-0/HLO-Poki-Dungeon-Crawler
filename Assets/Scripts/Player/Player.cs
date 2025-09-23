@@ -83,10 +83,7 @@ public class Player : MonoBehaviour
         rb.gravityScale = 0f;
         spriteRenderer = GetComponent<SpriteRenderer>();
         originalMaterial = spriteRenderer.material; // Store original material
-        if (PokiUnitySDK.FindAnyObjectByType<PokiUnitySDK>() != null)
-        {
-            PokiUnitySDK.Instance.init();
-        }
+        
 
         // Initialize attack types
         attackTypes = new List<IAttackType>
@@ -98,6 +95,16 @@ public class Player : MonoBehaviour
         };
         currentAttackType = attackTypes[currentAttackIndex];
     }
+
+    private void OnEnable()
+    {
+        isHeavyAttacking = false;
+        isInvulnerable = false;
+        PlayerHealth playerHealth = GetComponent<PlayerHealth>();
+        playerHealth.isInvincibility = false;
+        SetParryVisual(false);
+    }
+
 
     public void FlashRed(float duration = 0.1f)
     {
@@ -142,7 +149,7 @@ public class Player : MonoBehaviour
             rb.linearVelocity = Vector2.Lerp(rb.linearVelocity, Vector2.zero, deceleration * Time.fixedDeltaTime);
         }
         UpdateSpriteDirection();
-        HandleDashInput();
+        //HandleDashInput();
         HandleAttackInput();
         HandleAttackSwapInput();
     }
@@ -336,6 +343,7 @@ public class Player : MonoBehaviour
         FlashRed(); // Flash red when hit
         audioSource.PlayOneShot(hitSound, volume);
         GetComponent<PlayerHealth>().Hit(damage);
+        isHeavyAttacking = false;
         return true;
     }
 

@@ -364,17 +364,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 0}
+  playerInventory: {fileID: 0}
   Damage: 1
   maxHealth: 3
   currentHealth: 0
-  AttackRange: 4
+  AttackRange: 7
   attackTimer: 0
   attackDelay: 1.5
   DetectionRange: 10
-  AttackCooldown: 2
+  AttackCooldown: 1
   Hpbackground: {fileID: 572009039144382903}
   HpFill: {fileID: 8275116856458185071}
   projectilePrefab: {fileID: 7494674805625948090, guid: ce6e745f798fb6a43aeebfc7b574e6e7, type: 3}
+  Key: {fileID: 8730183321954095066, guid: afc0b3bbed4456d44b8073b75ce49647, type: 3}
   flashMaterial: {fileID: 2100000, guid: c12bc7a3463026e488c02be998c54a45, type: 2}
   AttackIndicator: {fileID: 8485125466935941487, guid: 476cf636d4383a54b975e9264e5306ac, type: 3}
   idleDirectionSprites:
