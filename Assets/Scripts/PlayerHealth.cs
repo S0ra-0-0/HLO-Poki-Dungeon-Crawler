@@ -23,7 +23,7 @@ public class PlayerHealth : MonoBehaviour
 
     [Header("Invincibility")]
     [SerializeField] private float invincibilityTime;
-    private bool isInvincibility; public bool IsInvincibility => isInvincibility;
+    public bool isInvincibility; public bool IsInvincibility => isInvincibility;
 
     [Header("Sprite")]
     [SerializeField] private SpriteRenderer spriteRenderer;
@@ -126,6 +126,7 @@ public class PlayerHealth : MonoBehaviour
     }
     private void Die()
     {
+        GameManager.FindAnyObjectByType<GameManager>().monstersKilled = 0;
         PokiUnitySDK.Instance.gameplayStop();
         SceneManager.LoadScene("DeathScene");
     }

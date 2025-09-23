@@ -18,17 +18,20 @@ public class Projectile : MonoBehaviour
     {
         // Move the projectile
         transform.Translate(direction * speed * Time.deltaTime);
+
+        Destroy(gameObject, 5f); 
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // Check if the collision is with the shooter and the projectile is not deflected
+        Debug.Log($"Projectile collided with {collision.gameObject.name} with tag{collision.gameObject.tag}");
+      
         if (collision.gameObject == shooter && !gameObject.CompareTag("DeflectedProjectile"))
         {
             return; // Ignore collision with the shooter
         }
 
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Player") && !gameObject.CompareTag("DeflectedProjectile"))
         {
             Player player = collision.GetComponent<Player>();
             if (player != null)
@@ -40,7 +43,7 @@ public class Projectile : MonoBehaviour
         }
         else if (collision.CompareTag("Enemy") && gameObject.CompareTag("DeflectedProjectile"))
         {
-            collision.SendMessage("TakeDamage", 2, SendMessageOptions.DontRequireReceiver);
+            collision.SendMessage("TakeDamage", 5, SendMessageOptions.DontRequireReceiver);
             Destroy(gameObject);
         }
         else if (collision.CompareTag("Wall") || collision.CompareTag("Enemy") || collision.CompareTag("DeflectedProjectile"))

@@ -245,6 +245,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 0}
+  playerInventory: {fileID: 0}
   Damage: 1
   maxHealth: 2
   currentHealth: 0
@@ -258,6 +259,7 @@ MonoBehaviour:
   isTutorial: 0
   flashMaterial: {fileID: 2100000, guid: c12bc7a3463026e488c02be998c54a45, type: 2}
   AttackIndicator: {fileID: 8485125466935941487, guid: 476cf636d4383a54b975e9264e5306ac, type: 3}
+  Key: {fileID: 8730183321954095066, guid: afc0b3bbed4456d44b8073b75ce49647, type: 3}
   idleDirectionSprites:
   - {fileID: 21300000, guid: 40404cfa4989a184383ed21485934d6a, type: 3}
   - {fileID: 21300000, guid: b00387690031e954d9f65087203e2170, type: 3}
