@@ -120,7 +120,7 @@ public class SwordAttack : MonoBehaviour, IAttackType
                     if (!attackingEnemies.Contains(enemy.gameObject))
                     {
                         attackingEnemies.Add(enemy.gameObject);
-                        enemyWasAttacking = true; // Mark that an enemy was attacking
+                        enemyWasAttacking = true;
                     }
                 }
             }
@@ -144,7 +144,7 @@ public class SwordAttack : MonoBehaviour, IAttackType
             {
                 if (enemy != null)
                 {
-                    enemy.SendMessage("TakeDamage", 5, SendMessageOptions.DontRequireReceiver);
+                    enemy.SendMessage("TakeDamage", 2, SendMessageOptions.DontRequireReceiver);
                     enemy.SendMessage("Stun", 0.5f, SendMessageOptions.DontRequireReceiver);
                 }
             }

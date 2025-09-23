@@ -59,6 +59,7 @@ public class Player : MonoBehaviour
     private Vector2 moveInput;
     private Vector2 smoothVelocity;
     private SpriteRenderer spriteRenderer;
+    public bool hasDefeatedTutorialGoblin = false;
 
     private List<IAttackType> attackTypes;
     private int currentAttackIndex = 0;
@@ -82,7 +83,7 @@ public class Player : MonoBehaviour
         rb.gravityScale = 0f;
         spriteRenderer = GetComponent<SpriteRenderer>();
         originalMaterial = spriteRenderer.material; // Store original material
-        if(PokiUnitySDK.FindAnyObjectByType<PokiUnitySDK>() != null)
+        if (PokiUnitySDK.FindAnyObjectByType<PokiUnitySDK>() != null)
         {
             PokiUnitySDK.Instance.init();
         }
@@ -182,7 +183,7 @@ public class Player : MonoBehaviour
             currentAttackType.heavyAttack(this);
         }
 
-        if (Input.GetKeyUp(KeyCode.J) && !isAttacking && !isHeavyAttacking
+        if (Input.GetKeyUp(KeyCode.J) && hasDefeatedTutorialGoblin && !isAttacking && !isHeavyAttacking
             && Time.time >= lastNormalAttackTime + normalAttackCooldown)
         {
             isAttacking = true;
@@ -194,6 +195,7 @@ public class Player : MonoBehaviour
 
     private void HandleAttackSwapInput()
     {
+        /*
         //Temp Press Q/E to cycle attack types
         if (Input.GetKeyDown(KeyCode.Q))
         {
@@ -207,6 +209,7 @@ public class Player : MonoBehaviour
             currentAttackType = attackTypes[currentAttackIndex];
             Debug.Log($"Switched to {currentAttackType.GetType().Name}");
         }
+        */
     }
 
     private void FixedUpdate()
@@ -375,11 +378,11 @@ public class Player : MonoBehaviour
     {
         if (isActive)
         {
-            spriteRenderer.color = parryColor; 
+            spriteRenderer.color = parryColor;
         }
         else
         {
-            spriteRenderer.color = Color.white; 
+            spriteRenderer.color = Color.white;
         }
     }
 

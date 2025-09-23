@@ -1,4 +1,5 @@
 using System.Collections;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 public class GoblinEnemy : MonoBehaviour
@@ -18,6 +19,7 @@ public class GoblinEnemy : MonoBehaviour
     public Image HpFill;
     private float lastAttackTime = -Mathf.Infinity;
     private int speed = 2;
+    [SerializeField] bool isTutorial;   
 
     [Header("Hit Flash")]
     [SerializeField] private Material flashMaterial; 
@@ -246,7 +248,10 @@ public class GoblinEnemy : MonoBehaviour
 
     private void Die()
     {
-       
+       if (isTutorial && Player != null)
+        {
+          Player.hasDefeatedTutorialGoblin = true;
+        }
         Destroy(gameObject);
     }
 
