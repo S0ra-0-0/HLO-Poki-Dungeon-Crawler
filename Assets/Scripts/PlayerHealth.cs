@@ -98,7 +98,7 @@ public class PlayerHealth : MonoBehaviour
         HealHP(1);
     }
 
-    private void HealHP(int healedAmount)
+    public void HealHP(int healedAmount)
     {
         while (healedAmount-- > 0)
         {

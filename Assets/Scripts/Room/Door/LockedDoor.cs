@@ -14,11 +14,12 @@ namespace HLO.Door
     public class LockedDoor : DoorBase
     {
         [SerializeField] private int necessaryKeyAmount = 1;
+        [SerializeField] private Lock _lock;
 
         protected override void Awake()
         {
             base.Awake();
-            
+
             Close();
         }
 
@@ -48,6 +49,7 @@ namespace HLO.Door
             }
 
             GetComponent<SpriteRenderer>().enabled = false;
+            _lock.Unlock();
         }
     }
 }
