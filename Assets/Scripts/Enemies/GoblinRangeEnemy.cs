@@ -279,7 +279,6 @@ public class GoblinRangeEnemy : MonoBehaviour
         if (GameManager.instance.AttemptKeyDrop())
         {
             Instantiate(Key, transform.position, Quaternion.identity);
-            Destroy(Key);
             GameManager.instance.monstersKilled = 0;
         }
         else

@@ -56,5 +56,6 @@ public class Projectile : MonoBehaviour
     {
         direction = reflection.normalized;
         gameObject.tag = "DeflectedProjectile";
+        gameObject.GetComponent<SpriteRenderer>().color = Color.green; 
     }
 }

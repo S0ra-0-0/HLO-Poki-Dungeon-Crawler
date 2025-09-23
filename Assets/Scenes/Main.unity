@@ -17222,6 +17222,10 @@ PrefabInstance:
       value: TutorialGoblin
       objectReference: {fileID: 0}
     - target: {fileID: 3114535838592290526, guid: 9f01eef77b55769449379de43c5889bf, type: 3}
+      propertyPath: Key
+      value: 
+      objectReference: {fileID: 8730183321954095066, guid: afc0b3bbed4456d44b8073b75ce49647, type: 3}
+    - target: {fileID: 3114535838592290526, guid: 9f01eef77b55769449379de43c5889bf, type: 3}
       propertyPath: Player
       value: 
       objectReference: {fileID: 1996545276}

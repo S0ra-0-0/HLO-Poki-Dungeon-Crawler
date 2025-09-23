@@ -262,7 +262,6 @@ public class GoblinEnemy : MonoBehaviour
         {
 
             Instantiate(Key, transform.position, Quaternion.identity);
-            Destroy(Key);
             GameManager.instance.monstersKilled = 0;
            
         }
