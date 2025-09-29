@@ -6,7 +6,7 @@ using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class SwordAttack : MonoBehaviour, IAttackType
 {
-    private const float ParryWindow = 0.6f;
+    private const float ParryWindow = 1.1f;
     private const float ParryCooldown = 1.0f;
     private const float ParryRadius = 1.2f;
     private const float ParryIframes = 0.6f;

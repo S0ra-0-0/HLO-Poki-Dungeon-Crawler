@@ -6,12 +6,20 @@ public class Projectile : MonoBehaviour
     private Vector2 direction;
     [SerializeField] private float speed = 10f; // Adjust speed as needed
     private GameObject shooter; // Reference to the enemy that shot the projectile
+    [SerializeField] private PlayerHealth PlayerHealth;
+    [SerializeField] private Player player;
 
     public void Initialize(Vector2 direction, int damage, GameObject shooter)
     {
         this.direction = direction;
         this.damage = damage;
         this.shooter = shooter; // Store the shooter reference
+    }
+
+    private void Start()
+    {
+        PlayerHealth = FindAnyObjectByType<PlayerHealth>(); 
+        player = FindAnyObjectByType<Player>();
     }
 
     private void Update()
@@ -29,6 +37,12 @@ public class Projectile : MonoBehaviour
         if (collision.gameObject == shooter && !gameObject.CompareTag("DeflectedProjectile"))
         {
             return; // Ignore collision with the shooter
+        }
+
+        if(collision.CompareTag("Player") && PlayerHealth.isInvincibility == true)
+        {
+            Deflect(player.facingDirection);
+            return; 
         }
 
         if (collision.CompareTag("Player") && !gameObject.CompareTag("DeflectedProjectile"))

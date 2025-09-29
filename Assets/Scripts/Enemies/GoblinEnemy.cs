@@ -40,8 +40,7 @@ public class GoblinEnemy : MonoBehaviour
 
     [Header("Sprite Direction")]
     [SerializeField] private Sprite[] idleDirectionSprites = new Sprite[8]; // Assign in Inspector: Right, UpRight, Up, UpLeft, Left, DownLeft, Down, DownRight
-    public Vector2 facingDirection = Vector2.right; // Default facing right
-
+    public Vector2 facingDirection = Vector2.up; 
     private Coroutine attackRoutine;
     private Coroutine stunRoutine;
 

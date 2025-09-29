@@ -366,7 +366,7 @@ MonoBehaviour:
   Player: {fileID: 0}
   playerInventory: {fileID: 0}
   Damage: 1
-  maxHealth: 3
+  maxHealth: 2
   currentHealth: 0
   AttackRange: 7
   attackTimer: 0
