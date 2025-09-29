@@ -6,6 +6,6 @@ namespace HLO.Item
     {
         public string Name { get; set; }
         public string Description { get; set; }
-        public void Use(GameObject player);
+        public void Get(GameObject player);
     }
 }

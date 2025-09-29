@@ -12,7 +12,7 @@ namespace HLO.Item
     {
         [SerializeField] private int healAmount = 1;
 
-        public override void Use(GameObject player)
+        public override void Get(GameObject player)
         {
             player.GetComponent<PlayerHealth>().HealHP(healAmount);
         }
