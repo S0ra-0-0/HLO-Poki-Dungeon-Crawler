@@ -9,11 +9,11 @@ using UnityEngine;
 
 namespace HLO.Enemy.Spawn
 {
-    public class GoblinSpawner : EnemySpawner
+    public class RandomEnemySpawner : EnemySpawner
     {
         public override List<GameObject> Spawn()
         {
-            List<Transform> spawnpointList = enemySpawnpointGroup.GetComponentsInChildren<Transform>().ToList();
+            List<Transform> spawnpointList = GetSpawnpointList();
             List<GameObject> enemyList = new List<GameObject>();
             int enemyAmount;
 
