@@ -158,7 +158,7 @@ SpriteRenderer:
   m_SortingLayerID: -1430232109
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 3c137e4fdd63fa14d9d3f2e5cb3e4445, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f601e141ee770ca4789e17a372f140b0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -380,13 +380,13 @@ MonoBehaviour:
   flashMaterial: {fileID: 2100000, guid: c12bc7a3463026e488c02be998c54a45, type: 2}
   AttackIndicator: {fileID: 8485125466935941487, guid: 476cf636d4383a54b975e9264e5306ac, type: 3}
   idleDirectionSprites:
-  - {fileID: 21300000, guid: 3c137e4fdd63fa14d9d3f2e5cb3e4445, type: 3}
-  - {fileID: 21300000, guid: b96266742681c6544a986c550e6fc842, type: 3}
-  - {fileID: 21300000, guid: a186ccf34ecf9814d9e1a94f0b0eef3e, type: 3}
-  - {fileID: 21300000, guid: 1579a7de59821254d9f4c9343f996ded, type: 3}
-  - {fileID: 21300000, guid: 290e55c877ec21f488bc9263e7577d07, type: 3}
-  - {fileID: 21300000, guid: 290451e6240725b448e164d7e356f665, type: 3}
-  - {fileID: 21300000, guid: 69680c6c1bf80e245ad11efe087afdca, type: 3}
+  - {fileID: 21300000, guid: f601e141ee770ca4789e17a372f140b0, type: 3}
+  - {fileID: 21300000, guid: 5f6e1d428588a5341aee4425062db5bc, type: 3}
+  - {fileID: 21300000, guid: 340cf38a9903c244d82ff7459ec99d13, type: 3}
+  - {fileID: 21300000, guid: 7eb03a140ac3efc469d746bbe2a76fe7, type: 3}
+  - {fileID: 21300000, guid: 5aa70f0579f55a841aec84a4222fc5be, type: 3}
+  - {fileID: 21300000, guid: 53896e4945fe82949a48e110bf607085, type: 3}
+  - {fileID: 21300000, guid: ab88e4ee5eac0a349bb91ad57fa66162, type: 3}
   - {fileID: 21300000, guid: 98f231f7ef7ae494eb180d132b35ff14, type: 3}
   facingDirection: {x: 1, y: 0}
   currentState: 0
