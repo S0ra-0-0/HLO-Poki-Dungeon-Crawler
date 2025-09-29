@@ -35,6 +35,7 @@ public class GoblinRangeEnemy : MonoBehaviour
 
     public GameObject AttackIndicator;
     private GameObject attackIndicatorInstance;
+    private Coroutine knockbackRoutine;
 
 
 
@@ -88,7 +89,7 @@ public class GoblinRangeEnemy : MonoBehaviour
         {
             if (attackIndicatorInstance == null)
             {
-                Vector3 spawnPosition = transform.position + new Vector3(0, .75f, 0);
+                Vector3 spawnPosition = transform.position + new Vector3(0, 1f, 0);
                 attackIndicatorInstance = Instantiate(AttackIndicator, spawnPosition, Quaternion.identity, transform);
             }
             attackIndicatorInstance.SetActive(true);
@@ -104,7 +105,7 @@ public class GoblinRangeEnemy : MonoBehaviour
 
     private void HandleState()
     {
-        if (stunRoutine != null)
+        if (stunRoutine != null || knockbackRoutine != null)
         {
             rb.linearVelocity = Vector2.zero;
             return;
@@ -288,6 +289,43 @@ public class GoblinRangeEnemy : MonoBehaviour
         Destroy(gameObject);
     }
 
+    public void Knockback(Vector2 knockVec)
+    {
+        if (knockbackRoutine != null)
+            StopCoroutine(knockbackRoutine);
+
+        Stun(0.15f);
+
+        float distance = knockVec.magnitude;
+        Vector2 dir = knockVec.sqrMagnitude > 0.0001f ? knockVec.normalized : Vector2.right;
+
+        knockbackRoutine = StartCoroutine(KnockbackRoutine(dir, distance, 0.12f));
+    }
+
+    private IEnumerator KnockbackRoutine(Vector2 dir, float distance, float duration)
+    {
+        if (rb == null) yield break;
+
+        currentState = State.Idle;
+        rb.linearVelocity = Vector2.zero;
+
+        Vector2 start = rb.position;
+        Vector2 end = start + dir * distance;
+
+        float t = 0f;
+        while (t < duration)
+        {
+            t += Time.deltaTime;
+            float alpha = Mathf.Clamp01(t / duration);
+            Vector2 p = Vector2.Lerp(start, end, alpha);
+
+            rb.MovePosition(p);
+
+            yield return null;
+        }
+
+        knockbackRoutine = null;
+    }
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;

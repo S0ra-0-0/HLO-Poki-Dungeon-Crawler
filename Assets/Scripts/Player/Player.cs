@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
 
     [Header("Attack Settings")]
     [SerializeField] private float attackRange = 1.5f;
+    public float attackDamage = 1f;
     [SerializeField] private float normalAttackCooldown = 0.3f;
     public float heavyAttackCooldown = 1.0f;
     private float lastNormalAttackTime = -100f;
@@ -40,7 +41,8 @@ public class Player : MonoBehaviour
     private Coroutine flashRoutine;
 
     [Header("Weapons")]
-    public GameObject swordPrefab;
+    public GameObject swordPrefabAttack;
+    public GameObject swordPrefabParry;
     public Color parryColor;
 
     [Header("Sound Effects")]

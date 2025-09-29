@@ -1,16 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using static UnityEngine.RuleTile.TilingRuleOutput;
+using UnityEngine.UIElements;
 
 public class SwordAttack : MonoBehaviour, IAttackType
 {
-    private const float ParryWindow = 1.1f;
+    private enum CardinalDirection { Right, Left, Up, Down }
+
+    private const float ParryWindow = .9f;
     private const float ParryCooldown = 1.0f;
     private const float ParryRadius = 1.2f;
     private const float ParryIframes = 0.6f;
 
+    // Only parry attacks that come from within this cone in front of the player
+    private const float ParryFrontCone = 60f;
     public float Cooldown => 0.5f;
 
     public void Attack(Player player)
@@ -20,14 +23,13 @@ public class SwordAttack : MonoBehaviour, IAttackType
         Vector3 spawnPosition = player.transform.position + (Vector3)player.facingDirection * .5f;
 
         GameObject swordHolder = Instantiate(
-            player.swordPrefab, 
+            player.swordPrefabAttack,
             spawnPosition,
-            Quaternion.identity 
+            Quaternion.identity
         );
 
         float angle = Mathf.Atan2(player.facingDirection.y, player.facingDirection.x) * Mathf.Rad2Deg;
         swordHolder.transform.rotation = Quaternion.Euler(0, 0, angle);
-
         swordHolder.transform.parent = player.transform;
 
         Destroy(swordHolder, 0.3f);
@@ -45,14 +47,13 @@ public class SwordAttack : MonoBehaviour, IAttackType
         );
         Debug.Log($"[SwordAttack] Found {projectiles.Length} projectiles in range");
 
-
         foreach (var proj in projectiles)
         {
             Debug.Log($"[SwordAttack] Deflecting projectile {proj.name}");
-            proj.SendMessage("Deflect", player.facingDirection, SendMessageOptions.DontRequireReceiver);
+            Destroy(proj.gameObject);
         }
-        Debug.Log($"[SwordAttack] Found {enemies.Length} enemies in range");
 
+        Debug.Log($"[SwordAttack] Found {enemies.Length} enemies in range");
         if (enemies.Length == 0) player.audioSource.PlayOneShot(player.swordSwingNothingSound);
         else player.audioSource.PlayOneShot(player.swordSwingEnemySound);
 
@@ -60,18 +61,16 @@ public class SwordAttack : MonoBehaviour, IAttackType
         {
             Vector2 toEnemy = (Vector2)enemy.transform.position - (Vector2)player.transform.position;
             float enemyAngle = Vector2.SignedAngle(player.facingDirection, toEnemy.normalized);
-            Debug.Log($"[SwordAttack] Enemy {enemy.name} at angle {enemyAngle}° (facing: {player.facingDirection})");
+            Debug.Log($"[SwordAttack] Enemy {enemy.name} at angle {enemyAngle} (facing: {player.facingDirection})");
 
-            if (enemyAngle >= -60f && enemyAngle <= 60f)
+            if (enemyAngle >= -67.5f && enemyAngle <= 67.5f)
             {
                 Debug.Log($"[SwordAttack] Attacking {enemy.name} with 1 damage");
-                enemy.SendMessage("TakeDamage", 1, SendMessageOptions.DontRequireReceiver);
+                enemy.SendMessage("TakeDamage", player.attackDamage, SendMessageOptions.DontRequireReceiver);
+                enemy.SendMessage("Knockback", toEnemy.normalized * 2f, SendMessageOptions.DontRequireReceiver);
             }
         }
     }
-
-
-
 
     public void heavyAttack(Player player)
     {
@@ -93,14 +92,66 @@ public class SwordAttack : MonoBehaviour, IAttackType
         player.isHeavyAttacking = true;
         player.lastHeavyAttackTime = Time.time;
         player.SetParryVisual(true);
-        player.SetInvulnerable(true); // Make player invulnerable during parry attempt
-
-        List<GameObject> attackingEnemies = new List<GameObject>();
-        float parryTimer = 0f;
+        player.SetInvulnerable(true);
         bool parrySuccess = false;
 
-        // Track if any enemy was in attack state during the window
-        bool enemyWasAttacking = false;
+
+        if (player.swordPrefabParry != null)
+        {
+            Vector2 dir = player.facingDirection.normalized;
+            CardinalDirection direction;
+
+            if (Mathf.Abs(dir.x) >= Mathf.Abs(dir.y))
+            {
+                direction = dir.x >= 0 ? CardinalDirection.Right : CardinalDirection.Left;
+            }
+            else
+            {
+                direction = dir.y >= 0 ? CardinalDirection.Up : CardinalDirection.Down;
+            }
+
+            Vector3 localOffset;
+            float zRotation;
+            int sortingOrder = 1;
+
+            switch (direction)
+            {
+                case CardinalDirection.Right:
+                    localOffset = new Vector3(0.2f, 0.5f, 0f);
+                    zRotation = -90f;
+                    break;
+                case CardinalDirection.Left:
+                    localOffset = new Vector3(-0.2f, 0.5f, 0f);
+                    zRotation = 180f;
+                    break;
+                case CardinalDirection.Up:
+                    localOffset = new Vector3(-0.5f, 0.75f, 0f);
+                    zRotation = -90f;
+                    sortingOrder = -1;
+                    break;
+                case CardinalDirection.Down:
+                default:
+                    localOffset = new Vector3(-0.5f, 0.1f, 0f);
+                    zRotation = -90f;
+                    break;
+            }
+
+            Vector3 spawnWorld = player.transform.TransformPoint(localOffset);
+            Quaternion rotation = Quaternion.Euler(0f, 0f, zRotation);
+
+            GameObject sword = Instantiate(player.swordPrefabParry, spawnWorld, rotation);
+            sword.transform.SetParent(player.transform, worldPositionStays: true);
+            var swordRenderer = sword.GetComponentInChildren<SpriteRenderer>();
+            if (swordRenderer != null)
+            {
+                swordRenderer.sortingOrder = sortingOrder;
+            }
+
+            Destroy(sword, ParryWindow + 0.1f);
+        }
+
+        float parryTimer = 0f;
+        bool frontEnemyWasAttacking = false;
 
         while (parryTimer < ParryWindow)
         {
@@ -115,21 +166,23 @@ public class SwordAttack : MonoBehaviour, IAttackType
             foreach (var enemy in enemies)
             {
                 GoblinEnemy goblin = enemy.GetComponent<GoblinEnemy>();
-                if (goblin != null && goblin.currentState == GoblinEnemy.State.Attacking)
+                if (goblin == null) continue;
+
+                // Only consider enemies roughly in front of the player
+                Vector2 toEnemy = (Vector2)enemy.transform.position - (Vector2)player.transform.position;
+                float angle = Vector2.SignedAngle(player.facingDirection, toEnemy.normalized);
+                bool isInFront = Mathf.Abs(angle) <= ParryFrontCone;
+
+                if (isInFront && goblin.currentState == GoblinEnemy.State.Attacking)
                 {
-                    if (!attackingEnemies.Contains(enemy.gameObject))
-                    {
-                        attackingEnemies.Add(enemy.gameObject);
-                        enemyWasAttacking = true;
-                    }
+                    frontEnemyWasAttacking = true;
                 }
             }
 
-            // If an enemy was attacking AND the player was hit, it's a successful parry
-            if (player.WasAttackedThisFrame() && enemyWasAttacking)
+            if (player.WasAttackedThisFrame() && frontEnemyWasAttacking)
             {
                 parrySuccess = true;
-                Debug.Log("[ParryCoroutine] PARRY SUCCESS! Enemy was attacking and player was hit.");
+                Debug.Log("[ParryCoroutine] PARRY SUCCESS! Enemy in front was attacking and player was hit.");
                 break;
             }
 
@@ -138,30 +191,24 @@ public class SwordAttack : MonoBehaviour, IAttackType
 
         if (parrySuccess)
         {
-            Debug.Log("[ParryCoroutine] Executing counterattack on " + attackingEnemies.Count + " enemies");
+            Debug.Log("[ParryCoroutine] Parry success: performing directed counter (normal attack)");
 
-            foreach (var enemy in attackingEnemies)
-            {
-                if (enemy != null)
-                {
-                    enemy.SendMessage("TakeDamage", 2, SendMessageOptions.DontRequireReceiver);
-                    enemy.SendMessage("Stun", 0.5f, SendMessageOptions.DontRequireReceiver);
-                }
-            }
+            yield return player.StartCoroutine(CounterFreezeFrames(.2f));
+            player.attackDamage *= 2; 
+            Attack(player);
+            player.attackDamage /= 2;
 
-            yield return player.StartCoroutine(CounterFreezeFrames(0.1f));
             yield return new WaitForSeconds(ParryIframes);
         }
         else
         {
-            Debug.Log("[ParryCoroutine] PARRY FAILED - Either no enemies were attacking or player wasn't hit.");
+            Debug.Log("[ParryCoroutine] PARRY FAILED - Either no enemy in front was attacking or player wasn't hit.");
         }
 
         player.SetParryVisual(false);
         player.SetInvulnerable(false);
         player.isHeavyAttacking = false;
     }
-
 
     private IEnumerator CounterFreezeFrames(float duration)
     {
@@ -170,5 +217,14 @@ public class SwordAttack : MonoBehaviour, IAttackType
         yield return new WaitForSecondsRealtime(duration);
         Time.timeScale = 1f;
         Debug.Log("[CounterFreezeFrames] Freeze frame effect ended");
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        if (Application.isPlaying)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, ParryRadius);
+        }
     }
 }

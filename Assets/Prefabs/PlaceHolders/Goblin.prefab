@@ -263,7 +263,7 @@ MonoBehaviour:
   idleDirectionSprites:
   - {fileID: 21300000, guid: 40404cfa4989a184383ed21485934d6a, type: 3}
   - {fileID: 21300000, guid: b00387690031e954d9f65087203e2170, type: 3}
-  - {fileID: 21300000, guid: f849cfd69f930d949b517e7bf322b11a, type: 3}
+  - {fileID: 21300000, guid: cc2b45dba2c9f5d4587295db4bc550c2, type: 3}
   - {fileID: 21300000, guid: 7ed9854fa4bd1614ba18787d9fdd8f0e, type: 3}
   - {fileID: 21300000, guid: ef34cb0d10f14b04fa20009aba2912f2, type: 3}
   - {fileID: 21300000, guid: 71129048cb76df34fb25a18483e667a5, type: 3}

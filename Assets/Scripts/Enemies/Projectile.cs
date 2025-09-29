@@ -41,7 +41,7 @@ public class Projectile : MonoBehaviour
 
         if(collision.CompareTag("Player") && PlayerHealth.isInvincibility == true)
         {
-            Deflect(player.facingDirection);
+            Deflect(-direction);
             return; 
         }
 
