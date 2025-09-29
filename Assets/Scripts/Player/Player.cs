@@ -63,6 +63,7 @@ public class Player : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     public bool hasDefeatedTutorialGoblin = false;
 
+    private bool gameHasStarted = false;
     private List<IAttackType> attackTypes;
     private int currentAttackIndex = 0;
     private IAttackType currentAttackType;
@@ -152,6 +153,7 @@ public class Player : MonoBehaviour
         }
         UpdateSpriteDirection();
         //HandleDashInput();
+        HandleMovementInput();
         HandleAttackInput();
         HandleAttackSwapInput();
     }
@@ -243,6 +245,23 @@ public class Player : MonoBehaviour
                 rb.linearVelocity = Vector2.Lerp(rb.linearVelocity, Vector2.zero, deceleration * Time.fixedDeltaTime);
             }
         }
+    }
+
+    private void HandleMovementInput()
+    {
+        if (IsMovementKeyPressed() && !gameHasStarted)
+        {
+            PokiUnitySDK.Instance.gameplayStart();
+            gameHasStarted = true;
+        }
+    }
+
+    private bool IsMovementKeyPressed()
+    {
+        return Input.GetKeyDown(KeyCode.W) ||
+               Input.GetKeyDown(KeyCode.A) ||
+               Input.GetKeyDown(KeyCode.S) ||
+               Input.GetKeyDown(KeyCode.D);
     }
 
     // Helper to snap to 8 directions
