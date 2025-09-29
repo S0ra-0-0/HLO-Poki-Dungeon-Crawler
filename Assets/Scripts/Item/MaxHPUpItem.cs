@@ -12,7 +12,7 @@ namespace HLO.Item
     {
         [SerializeField] private GameObject heart;
 
-        public override void Use(GameObject player)
+        public override void Get(GameObject player)
         {
             player.GetComponent<PlayerHealth>().AddHeart(heart);
         }

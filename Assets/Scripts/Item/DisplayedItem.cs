@@ -20,7 +20,7 @@ namespace HLO.Item
         
         [Space(1)] [SerializeField] protected Vector2 tooltipPositionOffset;
 
-        public abstract void Use(GameObject player);
+        public abstract void Get(GameObject player);
 
         public void SetItem(string name, string description, int price)
         {
@@ -35,7 +35,7 @@ namespace HLO.Item
         {
             if (other.gameObject.layer == LayerDatas.PLAYER_LAYER && other.GetComponent<Inventory>().UseCoins(price))
             {
-                Use(other.gameObject);
+                Get(other.gameObject);
 
                 GetComponent<Collider2D>().enabled = false;
                 GetComponent<SpriteRenderer>().enabled = false;
