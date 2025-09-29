@@ -28,7 +28,7 @@ namespace HLO.Item
             Description = description;
             this.price = price;
 
-            priceText.text = price.ToString("D2") + "Coins";
+            priceText.text = price.ToString("D2");
         }
 
         protected virtual void OnTriggerEnter2D(Collider2D other)
