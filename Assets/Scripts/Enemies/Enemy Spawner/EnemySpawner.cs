@@ -13,6 +13,18 @@ namespace HLO.Enemy.Spawn
         [SerializeField] protected Transform enemySpawnpointGroup;
         [SerializeField] protected GameObject[] enemyPrefabs;
 
-        public abstract  List<GameObject> Spawn();
+        public abstract List<GameObject> Spawn();
+
+        protected virtual List<Transform> GetSpawnpointList()
+        {
+            List<Transform> spawnpointList = new List<Transform>();
+
+            for (int i = 0; i < enemySpawnpointGroup.childCount; i++)
+            {
+                spawnpointList.Add(enemySpawnpointGroup.GetChild(i));
+            }
+
+            return spawnpointList;
+        }
     }
 }
