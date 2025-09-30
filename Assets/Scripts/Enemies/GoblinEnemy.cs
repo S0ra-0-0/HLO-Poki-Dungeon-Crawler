@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 
 using HLO.Item;
-using UnityEditor.Search;
 
 public class GoblinEnemy : MonoBehaviour
 {
