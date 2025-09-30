@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 290e55c877ec21f488bc9263e7577d07
+guid: ffb1e6f70eac80944ad0d6656678b42a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7627372564570027074
-    second: Goblin R_0
+      213: -7025956550481184590
+    second: arrow dowm_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -96,30 +96,17 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Goblin R_0
+      name: arrow dowm_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 13
-        height: 16
+        width: 32
+        height: 33
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ebb4e376011262690800000000000000
-      internalID: -7627372564570027074
+      spriteID: 2b87d311eb9ce7e90800000000000000
+      internalID: -7025956550481184590
       vertices: []
       indices: 
       edges: []
@@ -148,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Goblin R_0: -7627372564570027074
+      arrow dowm_0: -7025956550481184590
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
