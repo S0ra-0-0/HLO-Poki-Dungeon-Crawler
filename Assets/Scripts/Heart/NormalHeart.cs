@@ -1,26 +1,22 @@
 // Unity
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(Image))]
-public class NormalHeart : Heart
+namespace HLO.Heart
 {
-    [SerializeField] private Image image = null;
-
-    [SerializeField] private Sprite spriteFillHeart;
-    [SerializeField] private Sprite spriteEmptyHeart;
-
-    public override void Fill()
+    [RequireComponent(typeof(Image))]
+    public class NormalHeart : HeartBase
     {
-        if (image == null) image = GetComponent<Image>();
+        [SerializeField] private Image image = null;
 
-        image.sprite = spriteFillHeart;
-    }
+        [SerializeField] private Sprite[] heartSprites;
 
-    public override void Empty()
-    {
-        if (image == null) image = GetComponent<Image>();
-        
-        image.sprite = spriteEmptyHeart;
+        public override void ChangeHeartShape(int index)
+        {
+            if (!image) image = GetComponent<Image>();
+
+            image.sprite = heartSprites[index];
+        }
     }
 }

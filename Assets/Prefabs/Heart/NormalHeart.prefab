@@ -89,5 +89,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 0}
-  spriteFillHeart: {fileID: 21300000, guid: a7303efdeebb8784b9d7d8a753c51b78, type: 3}
-  spriteEmptyHeart: {fileID: 21300000, guid: 1504d589a67ad574d9ff4b0dd1d1601d, type: 3}
+  heartSprites:
+  - {fileID: 21300000, guid: 1504d589a67ad574d9ff4b0dd1d1601d, type: 3}
+  - {fileID: 21300000, guid: 4b1c44573661cc64d85880e4db6989f2, type: 3}
+  - {fileID: 21300000, guid: a7303efdeebb8784b9d7d8a753c51b78, type: 3}

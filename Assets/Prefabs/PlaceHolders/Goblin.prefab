@@ -259,7 +259,12 @@ MonoBehaviour:
   isTutorial: 0
   flashMaterial: {fileID: 2100000, guid: c12bc7a3463026e488c02be998c54a45, type: 2}
   AttackIndicator: {fileID: 8485125466935941487, guid: 476cf636d4383a54b975e9264e5306ac, type: 3}
-  Key: {fileID: 8730183321954095066, guid: afc0b3bbed4456d44b8073b75ce49647, type: 3}
+  dropItems:
+  - {fileID: 8357000182908964598, guid: ef1d8fee7acc5744c8141dfb3cf455c2, type: 3}
+  - {fileID: 8357000182908964598, guid: c662adc819f6dd94da99bc5d118e105a, type: 3}
+  dropChances:
+  - 1
+  - 0.3
   idleDirectionSprites:
   - {fileID: 21300000, guid: 40404cfa4989a184383ed21485934d6a, type: 3}
   - {fileID: 21300000, guid: b00387690031e954d9f65087203e2170, type: 3}
@@ -273,6 +278,7 @@ MonoBehaviour:
   currentState: 0
   attackEffect: {fileID: 1017420970193715327, guid: 2fa792c991aa7304db8a7e27006773a9, type: 3}
   attackEffectPosOffset: 0.2
+  attackEffectRotOffset: -90
 --- !u!95 &875942205697625614
 Animator:
   serializedVersion: 7

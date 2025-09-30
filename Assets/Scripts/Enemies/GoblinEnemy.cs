@@ -1,6 +1,11 @@
 using System.Collections;
+
 using UnityEngine;
 using UnityEngine.UI;
+
+using HLO.Item;
+using UnityEditor.Search;
+
 public class GoblinEnemy : MonoBehaviour
 {
     public Player Player;
@@ -19,10 +24,10 @@ public class GoblinEnemy : MonoBehaviour
     public Image HpFill;
     private float lastAttackTime = -Mathf.Infinity;
     private int speed = 2;
-    [SerializeField] bool isTutorial;   
+    [SerializeField] bool isTutorial;
 
     [Header("Hit Flash")]
-    [SerializeField] private Material flashMaterial; 
+    [SerializeField] private Material flashMaterial;
     private Material originalMaterial;
     private Coroutine flashRoutine;
 
@@ -34,13 +39,13 @@ public class GoblinEnemy : MonoBehaviour
     public GameObject AttackIndicator;
     private GameObject attackIndicatorInstance;
 
-    [SerializeField] private GameObject Key;
-
-
+    [Header("Drop Item")]
+    [SerializeField] private DroppedItem[] dropItems;
+    [SerializeField] private float[] dropChances;
 
     [Header("Sprite Direction")]
     [SerializeField] private Sprite[] idleDirectionSprites = new Sprite[8]; // Assign in Inspector: Right, UpRight, Up, UpLeft, Left, DownLeft, Down, DownRight
-    public Vector2 facingDirection = Vector2.up; 
+    public Vector2 facingDirection = Vector2.up;
     private Coroutine attackRoutine;
     private Coroutine stunRoutine;
     private Coroutine knockbackRoutine;
@@ -94,7 +99,7 @@ public class GoblinEnemy : MonoBehaviour
         {
             if (attackIndicatorInstance == null)
             {
-                Vector3 spawnPosition = transform.position + new Vector3(0, 1f, 0); 
+                Vector3 spawnPosition = transform.position + new Vector3(0, 1f, 0);
                 attackIndicatorInstance = Instantiate(AttackIndicator, spawnPosition, Quaternion.identity, transform);
             }
             attackIndicatorInstance.SetActive(true);
@@ -154,7 +159,7 @@ public class GoblinEnemy : MonoBehaviour
         {
             attackTimer += Time.deltaTime;
 
-            if (attackTimer >= attackDelay) 
+            if (attackTimer >= attackDelay)
             {
                 Instantiate(attackEffect, (Vector2)transform.position + facingDirection.normalized * attackEffectPosOffset,
                     Quaternion.Euler(0f, 0f, Mathf.Atan2(facingDirection.y, facingDirection.x) * Mathf.Rad2Deg + attackEffectRotOffset));
@@ -263,23 +268,23 @@ public class GoblinEnemy : MonoBehaviour
         {
             Player.hasDefeatedTutorialGoblin = true;
         }
-
-        playerInventory.UpdateCoins(1);
-
-        if (GameManager.instance.AttemptKeyDrop())
-        {
-
-            Instantiate(Key, transform.position, Quaternion.identity);
-            GameManager.instance.monstersKilled = 0;
-
-        }
         else
         {
-            GameManager.instance.monstersKilled++;
+            for (int i = 0; i < dropItems.Length; i++)
+            {
+                if (dropChances[i] >= Random.Range(0f, 1f))
+                {
+                    DropItem(dropItems[i]);
+                }
+            }
         }
 
-
         Destroy(gameObject);
+    }
+
+    private void DropItem(DroppedItem item)
+    {
+        Instantiate(item.gameObject, (Vector2)transform.position + facingDirection.normalized * Random.Range(0f, 1f), Quaternion.identity);
     }
 
     public void Knockback(Vector2 knockVec)
@@ -299,7 +304,7 @@ public class GoblinEnemy : MonoBehaviour
     {
         if (rb == null) yield break;
 
-        currentState = State.Idle;                
+        currentState = State.Idle;
         rb.linearVelocity = Vector2.zero;
 
         Vector2 start = rb.position;

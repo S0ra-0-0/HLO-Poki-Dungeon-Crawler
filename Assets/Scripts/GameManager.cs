@@ -1,18 +1,17 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public int monstersKilled = 0;
+    [SerializeField] private int roomAmount = int.MaxValue; public int RoomAmount => roomAmount;
+    [SerializeField] private int clearedRoomCount = 0; public int ClearedRoomCount => clearedRoomCount;
     public static GameManager instance;
-
-    private const int baseDropRate = 20;
 
     private void Awake()
     {
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -24,19 +23,15 @@ public class GameManager : MonoBehaviour
     {
         PokiUnitySDK.Instance.init();
     }
-
-    public bool AttemptKeyDrop()
+    
+    public void SetRoomAmount(int amount) => roomAmount = amount;
+    public void RoomClear()
     {
-        if (monstersKilled <= 0) return false;
-        if (monstersKilled >= baseDropRate)
+        clearedRoomCount++;
+        if (clearedRoomCount >= roomAmount)
         {
-          return true;
+            PokiUnitySDK.Instance.gameplayStop();
+            SceneManager.LoadScene("Clear Scene");
         }
-        else { return false; }
-    }
-
-    public void KeyDrop(int keyDropRate)
-    {
-        monstersKilled += keyDropRate;
     }
 }

@@ -44,6 +44,7 @@ public class Player : MonoBehaviour
     public GameObject swordPrefabAttack;
     public GameObject swordPrefabParry;
     public Color parryColor;
+    [SerializeField] private GameObject blockBubble;
 
     [Header("Sound Effects")]
     public AudioSource audioSource;
@@ -405,6 +406,8 @@ public class Player : MonoBehaviour
 
     public void SetParryVisual(bool isActive)
     {
+        if (blockBubble) blockBubble.SetActive(isActive);
+        
         if (isActive)
         {
             spriteRenderer.color = parryColor;

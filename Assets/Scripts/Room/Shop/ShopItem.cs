@@ -1,11 +1,10 @@
 using System;
 using UnityEngine;
+using HLO.Item;
 
 [Serializable]
 public struct ShopItem 
 {
-    public string name;
-    [TextArea] public string description;
     public int price;
 
     public GameObject prefab;

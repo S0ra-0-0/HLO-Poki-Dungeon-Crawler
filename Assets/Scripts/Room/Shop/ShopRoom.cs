@@ -16,8 +16,10 @@ namespace HLO.Room
         [SerializeField] private ShopItemScriptableObjectScript shopItemScriptableObject;
         [SerializeField] private Transform[] displayingPlaces;
 
-        protected void Start()
+        protected override void Start()
         {
+            base.Start();
+            
             SetRoomType(RoomType.Shop);
             RegisterOnEnterRoom(ClearRoom);
             RegisterOnEnterRoom(Display);
@@ -37,8 +39,9 @@ namespace HLO.Room
                 if (shopItemList.Count == 0) break;
 
                 ShopItem item = shopItemList[UnityEngine.Random.Range(0, shopItemList.Count)];
-                Instantiate(item.prefab, displayingPlaces[i].position, Quaternion.identity).
-                    GetComponent<DisplayedItem>().SetItem(item.name, item.description, item.price);
+                DisplayedItem displayedItem = Instantiate(item.prefab, displayingPlaces[i].position, Quaternion.identity).GetComponent<DisplayedItem>();
+                
+                displayedItem.SetPrice(item.price);
 
                 shopItemList.Remove(item);
             }

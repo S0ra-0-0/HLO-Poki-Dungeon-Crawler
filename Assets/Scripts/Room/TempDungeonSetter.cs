@@ -61,8 +61,13 @@ public class TempDungeonSetter : MonoBehaviour
 
         foreach (var room in rooms)
         {
-            if(!room.IsDiscovered)
+            if (!room.IsDiscovered)
                 room.gameObject.SetActive(false);
         }
+    }
+
+    private void Start()
+    {
+        GameManager.instance.SetRoomAmount(dungeon.childCount);
     }
 }

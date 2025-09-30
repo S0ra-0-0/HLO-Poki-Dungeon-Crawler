@@ -1,6 +1,9 @@
 using System.Collections;
+
 using UnityEngine;
 using UnityEngine.UI;
+
+using HLO.Item;
 public class GoblinRangeEnemy : MonoBehaviour
 {
     public Player Player;
@@ -37,7 +40,9 @@ public class GoblinRangeEnemy : MonoBehaviour
     private GameObject attackIndicatorInstance;
     private Coroutine knockbackRoutine;
 
-
+    [Header("Drop Item")]
+    [SerializeField] private DroppedItem[] dropItems;
+    [SerializeField] private float[] dropChances;
 
     [Header("Sprite Direction")]
     [SerializeField] private Sprite[] idleDirectionSprites = new Sprite[8]; // Assign in Inspector: Right, UpRight, Up, UpLeft, Left, DownLeft, Down, DownRight
@@ -270,23 +275,20 @@ public class GoblinRangeEnemy : MonoBehaviour
 
     private void Die()
     {
-        if (Player != null)
+        for (int i = 0; i < dropItems.Length; i++)
         {
-            Player.hasDefeatedTutorialGoblin = true;
+            if (dropChances[i] >= Random.Range(0f, 1f))
+            {
+                DropItem(dropItems[i]);
+            }
         }
 
-        playerInventory.UpdateCoins(1);
-
-        if (GameManager.instance.AttemptKeyDrop())
-        {
-            Instantiate(Key, transform.position, Quaternion.identity);
-            GameManager.instance.monstersKilled = 0;
-        }
-        else
-        {
-            GameManager.instance.monstersKilled++;
-        }
         Destroy(gameObject);
+    }
+
+    private void DropItem(DroppedItem item)
+    {
+        Instantiate(item.gameObject, (Vector2)transform.position + facingDirection.normalized * Random.Range(0f, 1f), Quaternion.identity);
     }
 
     public void Knockback(Vector2 knockVec)

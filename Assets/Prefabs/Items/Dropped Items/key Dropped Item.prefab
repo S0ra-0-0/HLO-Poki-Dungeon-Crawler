@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 4643897605767862822}
   - component: {fileID: 6543469644841596325}
   - component: {fileID: 8103684215176585305}
-  - component: {fileID: 7741964062833414941}
-  m_Layer: 3
-  m_Name: key
+  - component: {fileID: 8461482663449008818}
+  - component: {fileID: -4739281245264615173}
+  m_Layer: 11
+  m_Name: key Dropped Item
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -133,9 +134,9 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.6333333, y: 0.36666667}
+  m_Size: {x: 0.64, y: 0.37}
   m_EdgeRadius: 0
---- !u!114 &7741964062833414941
+--- !u!114 &8461482663449008818
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -144,6 +145,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 8730183321954095066}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 594aa6247325b914e8e60ffc98275808, type: 3}
+  m_Script: {fileID: 11500000, guid: 685f48b0ceeb1c948a71acc962fc62b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-4739281245264615173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8730183321954095066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b69e5fe4508ac1e40aed125dac39b3d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 0}
+  tooltipPositionOffset: {x: 0, y: 1}

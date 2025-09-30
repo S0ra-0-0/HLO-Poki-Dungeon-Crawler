@@ -10,8 +10,10 @@ namespace HLO.Room
 {
     public class StartingRoom : RoomBase
     {
-        protected void Start()
+        protected override void Start()
         {
+            base.Start();
+            
             Discover();
             onEnterRoom?.Invoke();
             SetRoomType(RoomType.Starting);

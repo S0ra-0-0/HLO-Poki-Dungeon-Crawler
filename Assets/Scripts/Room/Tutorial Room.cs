@@ -12,8 +12,10 @@ namespace HLO.Room
     {
         [SerializeField] List<GameObject> tutorialEnemies = new List<GameObject>();
 
-        protected void Start()
+        protected override void Start()
         {
+            base.Start();
+            
             Discover();
             onEnterRoom?.Invoke();
             SetRoomType(RoomType.Tutorial);

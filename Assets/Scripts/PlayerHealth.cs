@@ -5,21 +5,24 @@ using System.Collections.Generic;
 using System.ComponentModel.Design.Serialization;
 using System.Linq;
 
-
-
 // Unity
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+// HLO
+using HLO.Heart;
+
 public class PlayerHealth : MonoBehaviour
 {
     [Header("HP")]
-    [SerializeField] private List<Heart> heartList;
+    [SerializeField] private List<HeartBase> heartList;
     [SerializeField] private Transform transformHPUI;
     [SerializeField] private GameObject prefabNormalHeart;
     [SerializeField] private int maxHP;
     [SerializeField] private int currentHP;
+    private const int HP_PER_HEART = 2;
+    private int NextHeartIndex => currentHP / HP_PER_HEART;
 
     [Header("Invincibility")]
     [SerializeField] private float invincibilityTime;
@@ -33,9 +36,9 @@ public class PlayerHealth : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
 
-        heartList = transformHPUI.GetComponentsInChildren<Heart>().ToList();
+        heartList = transformHPUI.GetComponentsInChildren<HeartBase>().ToList();
 
-        currentHP = maxHP = heartList.Count;
+        currentHP = maxHP = heartList.Count * HP_PER_HEART;
     }
 
     public void SetInvincibility(bool value) => isInvincibility = value;
@@ -81,9 +84,11 @@ public class PlayerHealth : MonoBehaviour
         Transform transformNewHeart = Instantiate(objHeart, objHeart.transform.position, Quaternion.identity).transform;
 
         transformNewHeart.SetParent(transformHPUI);
-        heartList.Add(transformNewHeart.GetComponent<Heart>());
+        heartList.Add(transformNewHeart.GetComponent<HeartBase>());
 
-        HealHP(++maxHP - currentHP);
+        maxHP += HP_PER_HEART;
+
+        HealHP(maxHP - currentHP);
     }
 
     [ContextMenu("AddHeart")]
@@ -92,41 +97,55 @@ public class PlayerHealth : MonoBehaviour
         AddHeart(prefabNormalHeart);
     }
 
+    [Header("Test Heal")] public int healTest;
     [ContextMenu("Heal")]
     public void TestHeal()
     {
-        HealHP(1);
+        HealHP(healTest);
     }
 
-    public void HealHP(int healedAmount)
+    public void HealHP(int healAmount)
     {
-        while (healedAmount-- > 0)
-        {
-            if (currentHP >= maxHP)
-            {
-                break;
-            }
+        if (currentHP + healAmount > maxHP) healAmount = maxHP - currentHP;
 
-            heartList[currentHP++].Fill();
+        for (int i = NextHeartIndex; i < (currentHP + healAmount) / HP_PER_HEART; i++)
+        {
+            heartList[i].ChangeHeartShape(HP_PER_HEART);
+        }
+
+        currentHP += healAmount;
+
+        if (currentHP % HP_PER_HEART != 0)
+        {
+            heartList[NextHeartIndex].ChangeHeartShape(1);
         }
     }
 
     private void DecreaseHP(int damage)
     {
-        while (damage-- > 0)
-        {
-            if (--currentHP <= 0)
-            {
-                Die();
-                break;
-            }
+        if (currentHP - damage < 0) damage = currentHP;
 
-            heartList[currentHP].Empty();
+        for (int i = NextHeartIndex; i >= (currentHP - damage) / HP_PER_HEART; i--)
+        {
+            if (i >= heartList.Count) continue;
+            heartList[i].ChangeHeartShape(0);
+        }
+
+        currentHP -= damage;
+
+        if (currentHP % HP_PER_HEART != 0)
+        {
+            heartList[NextHeartIndex].ChangeHeartShape(1);
+        }
+
+        if (currentHP <= 0)
+        {
+            Die();
         }
     }
+
     private void Die()
     {
-        GameManager.FindAnyObjectByType<GameManager>().monstersKilled = 0;
         PokiUnitySDK.Instance.gameplayStop();
         SceneManager.LoadScene("DeathScene");
     }

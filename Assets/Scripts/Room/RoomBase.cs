@@ -30,6 +30,11 @@ namespace HLO.Room
         protected Action onEnterRoom;
         protected Action onClearRoom;
 
+        protected virtual void Start()
+        {
+            RegisterOnClearRoom(() => GameManager.instance.RoomClear());
+        }
+
         public virtual void SetRoomType(RoomType roomType) => this.roomType = roomType;
 
         public virtual void RegisterOnEnterRoom(Action action) => onEnterRoom += action;
