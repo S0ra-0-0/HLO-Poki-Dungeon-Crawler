@@ -114,7 +114,7 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 30
+        width: 16
         height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -134,9 +134,9 @@ TextureImporter:
       name: slow projectile 1-4_1
       rect:
         serializedVersion: 2
-        x: 30
+        x: 16
         y: 0
-        width: 30
+        width: 16
         height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -148,6 +148,50 @@ TextureImporter:
       bones: []
       spriteID: c57ca8d98a0f19ee0800000000000000
       internalID: -1255958214071367844
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slow projectile 1-4_2
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e401669f8c08c9944b41b4a0c8f0b565
+      internalID: -140262938
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slow projectile 1-4_3
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 721953b702033864bb5c3f585fea4977
+      internalID: -437676127
       vertices: []
       indices: 
       edges: []
@@ -168,6 +212,8 @@ TextureImporter:
     nameFileIdTable:
       slow projectile 1-4_0: -4079952923744936273
       slow projectile 1-4_1: -1255958214071367844
+      slow projectile 1-4_2: -140262938
+      slow projectile 1-4_3: -437676127
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
