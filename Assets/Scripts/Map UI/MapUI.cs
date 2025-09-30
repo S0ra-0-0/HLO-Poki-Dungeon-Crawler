@@ -8,12 +8,25 @@ public class MapUI : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (otherMap) otherMap.TurnOnOrOff(true);
-        TurnOnOrOff(false);
+        ChangeMap(false);
+    }
+
+    public void ChangeMap(bool thisMapEnabled)
+    {
+        TurnOnOrOff(thisMapEnabled);
+        if (otherMap) otherMap.TurnOnOrOff(!thisMapEnabled);
     }
 
     public void TurnOnOrOff(bool turning)
     {
         gameObject.SetActive(turning);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            ChangeMap(false);
+        }
     }
 }

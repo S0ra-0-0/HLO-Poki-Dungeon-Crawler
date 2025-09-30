@@ -166,13 +166,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1623e9cda0c5cf49b62b342e63b27f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 8
+  moveSpeed: 4
   acceleration: 10
   deceleration: 15
   dashSpeed: 15
   dashDuration: 0.15
   dashCooldown: 1
   attackRange: 1.5
+  attackDamage: 1
   normalAttackCooldown: 0.9
   heavyAttackCooldown: 1
   lastHeavyAttackTime: -100
