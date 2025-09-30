@@ -194,7 +194,7 @@ MonoBehaviour:
   flashMaterial: {fileID: 2100000, guid: 4cdb45d0098659f44adc75182464e527, type: 2}
   swordPrefabAttack: {fileID: 0}
   swordPrefabParry: {fileID: 0}
-  parryColor: {r: 0.45098042, g: 0.5037126, b: 1, a: 1}
+  parryColor: {r: 1, g: 1, b: 1, a: 1}
   audioSource: {fileID: 6008011499033396497}
   swordSwingNothingSound: {fileID: 8300000, guid: 4c1bac9cf11755141b1a306bbda56191, type: 3}
   swordSwingEnemySound: {fileID: 8300000, guid: 4562b909c32057c4096aff32a5d842ef, type: 3}
