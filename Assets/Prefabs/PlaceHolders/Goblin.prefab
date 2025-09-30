@@ -271,6 +271,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 5c4c627b640dc884f84c758594051d24, type: 3}
   facingDirection: {x: 1, y: 0}
   currentState: 0
+  attackEffect: {fileID: 1017420970193715327, guid: 2fa792c991aa7304db8a7e27006773a9, type: 3}
+  attackEffectPosOffset: 0.2
 --- !u!95 &875942205697625614
 Animator:
   serializedVersion: 7

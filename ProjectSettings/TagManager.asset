@@ -55,8 +55,11 @@ TagManager:
   - name: Player
     uniqueID: 1903412323
     locked: 0
-  - name: MapIcon
+  - name: Effect
     uniqueID: 1051666013
+    locked: 0
+  - name: MapIcon
+    uniqueID: 3619701385
     locked: 0
   m_RenderingLayers:
   - Default

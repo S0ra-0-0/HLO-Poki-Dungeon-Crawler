@@ -49,6 +49,12 @@ public class GoblinEnemy : MonoBehaviour
     public State currentState = State.Idle;
     public enum State { Idle, Chasing, Attacking }
 
+
+    [Header("Effects")]
+    [SerializeField] private GameObject attackEffect;
+    [SerializeField] private float attackEffectPosOffset = 1f;
+    [SerializeField] private float attackEffectRotOffset = -90f;
+
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -148,8 +154,10 @@ public class GoblinEnemy : MonoBehaviour
         {
             attackTimer += Time.deltaTime;
 
-            if (attackTimer >= attackDelay)
+            if (attackTimer >= attackDelay) 
             {
+                Instantiate(attackEffect, (Vector2)transform.position + facingDirection.normalized * attackEffectPosOffset,
+                    Quaternion.Euler(0f, 0f, Mathf.Atan2(facingDirection.y, facingDirection.x) * Mathf.Rad2Deg + attackEffectRotOffset));
                 DealDamage();
                 attackTimer = 0f;
             }
