@@ -1,19 +1,10 @@
 fileFormatVersion: 2
-guid: 154c8dc42822c9f4e99659e22014c85e
+guid: 8e532f2ac90ce23449f500dc0abda081
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4079952923744936273
-    second: slow projectile 1-4_0
-  - first:
-      213: -1255958214071367844
-    second: slow projectile 1-4_1
-  - first:
-      213: -1782625471431060626
-    second: slow projectile 1-4_2
-  - first:
-      213: -3483009439577652634
-    second: slow projectile 1-4_3
+      213: -4784455502260113971
+    second: shield down L_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -55,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -109,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: slow projectile 1-4_0
+      name: shield down L_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 1
-        width: 16
-        height: 15
+        y: 0
+        width: 17
+        height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,74 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: faedddfae681167c0800000000000000
-      internalID: -4079952923744936273
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: slow projectile 1-4_1
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 1
-        width: 16
-        height: 15
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: c57ca8d98a0f19ee0800000000000000
-      internalID: -1255958214071367844
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: slow projectile 1-4_2
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 1
-        width: 16
-        height: 15
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e401669f8c08c9944b41b4a0c8f0b565
-      internalID: -140262938
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: slow projectile 1-4_3
-      rect:
-        serializedVersion: 2
-        x: 48
-        y: 1
-        width: 16
-        height: 15
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 721953b702033864bb5c3f585fea4977
-      internalID: -437676127
+      spriteID: dcd6f10e1133a9db0800000000000000
+      internalID: -4784455502260113971
       vertices: []
       indices: 
       edges: []
@@ -200,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: e0d4e9937bde84f479c88aca68b06221
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -210,10 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      slow projectile 1-4_0: -4079952923744936273
-      slow projectile 1-4_1: -1255958214071367844
-      slow projectile 1-4_2: -140262938
-      slow projectile 1-4_3: -437676127
+      shield down L_0: -4784455502260113971
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
