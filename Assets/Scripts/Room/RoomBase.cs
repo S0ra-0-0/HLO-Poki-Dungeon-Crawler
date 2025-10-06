@@ -19,6 +19,7 @@ namespace HLO.Room
         Tutorial,
         Shop,
         Boss,
+        Empty,
     }
 
     public class RoomBase : MonoBehaviour
@@ -32,7 +33,7 @@ namespace HLO.Room
 
         protected virtual void Start()
         {
-            RegisterOnClearRoom(() => GameManager.instance.RoomClear());
+            
         }
 
         public virtual void SetRoomType(RoomType roomType) => this.roomType = roomType;

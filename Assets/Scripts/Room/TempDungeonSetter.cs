@@ -65,9 +65,4 @@ public class TempDungeonSetter : MonoBehaviour
                 room.gameObject.SetActive(false);
         }
     }
-
-    private void Start()
-    {
-        GameManager.instance.SetRoomAmount(dungeon.childCount);
-    }
 }
