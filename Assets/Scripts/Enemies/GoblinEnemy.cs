@@ -204,7 +204,7 @@ public class GoblinEnemy : MonoBehaviour
 
         if (!Player.TryTakeDamage(Damage))
         {
-            Debug.Log("Goblin's attack was blocked by parry or invuln.");
+            Debug.Log("Goblin's attack was blocked.");
             return;
         }
     }

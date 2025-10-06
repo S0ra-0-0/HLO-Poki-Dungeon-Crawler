@@ -34,6 +34,7 @@ public class Player : MonoBehaviour
 
     [Header("Sprite Direction")]
     [SerializeField] private Sprite[] idleDirectionSprites = new Sprite[8]; // Assign in Inspector: Right, UpRight, Up, UpLeft, Left, DownLeft, Down, DownRight
+    public Sprite[] parryDirectionSprites = new Sprite[8]; // Assign in Inspector: Right, UpRight, Up, UpLeft, Left, DownLeft, Down, DownRight
 
     [Header("Hit Flash")]
     [SerializeField] private Material flashMaterial; // Assign FlashMaterial in Inspector
@@ -42,9 +43,7 @@ public class Player : MonoBehaviour
 
     [Header("Weapons")]
     public GameObject swordPrefabAttack;
-    public GameObject swordPrefabParry;
     public Color parryColor;
-    [SerializeField] private GameObject blockBubble;
 
     [Header("Sound Effects")]
     public AudioSource audioSource;
@@ -87,7 +86,7 @@ public class Player : MonoBehaviour
         rb.gravityScale = 0f;
         spriteRenderer = GetComponent<SpriteRenderer>();
         originalMaterial = spriteRenderer.material; // Store original material
-        
+
 
         // Initialize attack types
         attackTypes = new List<IAttackType>
@@ -262,10 +261,13 @@ public class Player : MonoBehaviour
         return Input.GetKeyDown(KeyCode.W) ||
                Input.GetKeyDown(KeyCode.A) ||
                Input.GetKeyDown(KeyCode.S) ||
-               Input.GetKeyDown(KeyCode.D);
+               Input.GetKeyDown(KeyCode.D) ||
+               Input.GetKeyDown(KeyCode.UpArrow) ||
+               Input.GetKeyDown(KeyCode.LeftArrow) ||
+               Input.GetKeyDown(KeyCode.DownArrow) ||
+               Input.GetKeyDown(KeyCode.RightArrow);
     }
 
-    // Helper to snap to 8 directions
     private Vector2 Get8Direction(Vector2 input)
     {
         if (input == Vector2.zero) return facingDirection;
@@ -405,9 +407,7 @@ public class Player : MonoBehaviour
     }
 
     public void SetParryVisual(bool isActive)
-    {
-        if (blockBubble) blockBubble.SetActive(isActive);
-        
+    {     
         if (isActive)
         {
             spriteRenderer.color = parryColor;

@@ -1,9 +1,11 @@
-using UnityEngine;
 using System.Collections;
+using HLO.Item;
+using UnityEngine;
 
 public class OgerMiniBoss : MonoBehaviour
 {
     public Player Player;
+    [Header("Stats")]
     public int Damage = 1;
     public int maxHealth = 10;
     public int currentHealth;
@@ -18,16 +20,33 @@ public class OgerMiniBoss : MonoBehaviour
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
     private Coroutine attackRoutine;
-
-
     private Vector2 movement;
+
+    [Header("Attack Indicator")]
     public GameObject AttackIndicator;
+    [SerializeField] float attackIndicatorOffset = 1.35f;
     private GameObject attackIndicatorInstance;
 
+    [SerializeField] private float attackEffectPosOffset = 1f;
+    [SerializeField] private float attackEffectRotOffset = -90f;
 
-    [Header("Sprite Direction")]
+    private Coroutine stunRoutine;
+    private Coroutine knockbackRoutine;
+
+
+    [Header("Hit Flash")]
+    [SerializeField] private Material flashMaterial;
+    private Material originalMaterial;
+    private Coroutine flashRoutine;
+
+    [Header("Drop Item")]
+    [SerializeField] private DroppedItem[] dropItems;
+    [SerializeField] private float[] dropChances;
+
+    [Header("Sprites")]
     [SerializeField] private Sprite[] idleDirectionSprites = new Sprite[8]; // Assign in Inspector: Right, UpRight, Up, UpLeft, Left, DownLeft, Down, DownRight
     public Vector2 facingDirection = Vector2.right; // Default facing right
+    public GameObject clubWeapon;
 
     public State currentState = State.Idle;
     public enum State { Idle, Chasing, Attacking }
@@ -39,6 +58,7 @@ public class OgerMiniBoss : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         Player = FindAnyObjectByType<Player>();
         currentHealth = maxHealth;
+        originalMaterial = spriteRenderer.material;
     }
 
 
@@ -70,7 +90,7 @@ public class OgerMiniBoss : MonoBehaviour
         {
             if (attackIndicatorInstance == null)
             {
-                Vector3 spawnPosition = transform.position + new Vector3(0, .75f, 0);
+                Vector3 spawnPosition = transform.position + new Vector3(0, attackIndicatorOffset, 0);
                 attackIndicatorInstance = Instantiate(AttackIndicator, spawnPosition, Quaternion.identity, transform);
             }
             attackIndicatorInstance.SetActive(true);
@@ -97,13 +117,11 @@ public class OgerMiniBoss : MonoBehaviour
             case State.Chasing:
                 movement = directionToPlayer * speed;
                 rb.linearVelocity = movement;
-                // Update facing direction to match movement
                 facingDirection = directionToPlayer;
                 break;
 
             case State.Attacking:
                 rb.linearVelocity = Vector2.zero;
-                // Update facing direction to always face the player during attack
                 facingDirection = directionToPlayer;
                 if (attackRoutine == null && Time.time >= lastAttackTime + AttackCooldown)
                 {
@@ -153,10 +171,8 @@ public class OgerMiniBoss : MonoBehaviour
         return facingDirection;
     }
 
-
     IEnumerator Attack()
     {
-        //animator.SetTrigger("attack");
         attackTimer = 0f;
 
         while (Vector2.Distance(transform.position, Player.transform.position) <= AttackRange)
@@ -165,7 +181,14 @@ public class OgerMiniBoss : MonoBehaviour
 
             if (attackTimer >= attackDelay)
             {
-                //attack();
+                GameObject weaponInstance = Instantiate(
+                    clubWeapon,
+                    (Vector2)transform.position + facingDirection.normalized * attackEffectPosOffset,
+                    Quaternion.Euler(0f, 0f, Mathf.Atan2(facingDirection.y, facingDirection.x) * Mathf.Rad2Deg + attackEffectRotOffset)
+                );
+
+                Destroy(weaponInstance, 0.3f);
+                DealDamage();
                 attackTimer = 0f;
             }
 
@@ -176,11 +199,94 @@ public class OgerMiniBoss : MonoBehaviour
         attackRoutine = null;
     }
 
+
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, AttackRange);
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, DetectionRange);
+    }
+
+    private void DealDamage()
+    {
+        if (Player == null) return;
+
+        Player.RegisterAttack();
+
+        if (!Player.TryTakeDamage(Damage))
+        {
+            Debug.Log("Ogre boss's attack was blocked.");
+            return;
+        }
+    }
+
+    public void Stun(float duration)
+    {
+        if (stunRoutine != null)
+        {
+            StopCoroutine(stunRoutine);
+        }
+        stunRoutine = StartCoroutine(StunCoroutine(duration));
+    }
+
+
+    private IEnumerator StunCoroutine(float duration)
+    {
+        currentState = State.Idle;
+        //animator.SetBool("isStunned", true);
+        rb.linearVelocity = Vector2.zero;
+
+        yield return new WaitForSeconds(duration);
+
+        //animator.SetBool("isStunned", false);
+        stunRoutine = null;
+    }
+
+    public void TakeDamage(int amount)
+    {
+        currentHealth -= amount;
+        HitFlash();
+        //HpFill.fillAmount = (float)currentHealth / maxHealth;
+        if (currentHealth <= 0) Die();
+        else Stun(0.5f);
+    }
+
+    public void HitFlash(float duration = 0.1f)
+    {
+        if (flashRoutine != null)
+            StopCoroutine(flashRoutine);
+
+        flashRoutine = StartCoroutine(FlashRoutine(duration));
+    }
+
+    private IEnumerator FlashRoutine(float duration)
+    {
+        // Switch to flash material
+        spriteRenderer.material = flashMaterial;
+        flashMaterial.SetFloat("_FlashAmount", 1f); // Full flash
+
+        yield return new WaitForSeconds(duration);
+
+        // Revert to original material
+        spriteRenderer.material = originalMaterial;
+        flashRoutine = null;
+    }
+
+    private void Die()
+    {
+        for (int i = 0; i < dropItems.Length; i++)
+        {
+            if (dropChances[i] >= Random.Range(0f, 1f))
+            {
+                DropItem(dropItems[i]);
+            }
+        }
+        Destroy(gameObject);
+    }
+
+    private void DropItem(DroppedItem item)
+    {
+        Instantiate(item.gameObject, (Vector2)transform.position + facingDirection.normalized * Random.Range(0f, 1f), Quaternion.identity);
     }
 }
