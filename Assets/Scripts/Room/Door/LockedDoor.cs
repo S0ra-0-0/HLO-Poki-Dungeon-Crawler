@@ -8,6 +8,7 @@ using UnityEngine;
 
 // HLO
 using HLO.Layer;
+using HLO.Room;
 
 namespace HLO.Door
 {
@@ -15,6 +16,7 @@ namespace HLO.Door
     {
         [SerializeField] private int necessaryKeyAmount = 1;
         [SerializeField] private Lock _lock;
+        [SerializeField] private bool isRoomCleared;
 
         protected override void Awake()
         {
@@ -23,9 +25,19 @@ namespace HLO.Door
             Close();
         }
 
+        protected override void RegisterRoomAction(RoomBase thisRoom)
+        {
+            thisRoom.RegisterOnClearRoom(() =>
+            {
+                isRoomCleared = true;
+            });
+
+            base.RegisterRoomAction(thisRoom);
+        }
+
         protected override void OnCollisionEnter2D(Collision2D other)
         {
-            if (other.gameObject.layer == LayerDatas.PLAYER_LAYER)
+            if (other.gameObject.layer == LayerDatas.PLAYER_LAYER && isRoomCleared)
             {
                 if (IsOpen)
                 {
