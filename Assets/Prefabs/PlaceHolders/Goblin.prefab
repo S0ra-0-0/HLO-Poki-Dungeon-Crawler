@@ -88,7 +88,6 @@ GameObject:
   - component: {fileID: 2040125458234731755}
   - component: {fileID: 2637725888919085938}
   - component: {fileID: 2065351647414785451}
-  - component: {fileID: 875942205697625614}
   - component: {fileID: 5084177389558193777}
   m_Layer: 6
   m_Name: Goblin
@@ -274,33 +273,12 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 71129048cb76df34fb25a18483e667a5, type: 3}
   - {fileID: 21300000, guid: f20ae01d50789ad47aa4707a4d8e67b1, type: 3}
   - {fileID: 21300000, guid: 5c4c627b640dc884f84c758594051d24, type: 3}
+  AttackVisual: {fileID: 2586167426758759756, guid: 796f7a8ad8225584c9107ee04b71eee9, type: 3}
   facingDirection: {x: 1, y: 0}
   currentState: 0
   attackEffect: {fileID: 1017420970193715327, guid: 2fa792c991aa7304db8a7e27006773a9, type: 3}
   attackEffectPosOffset: 0.2
   attackEffectRotOffset: -90
---- !u!95 &875942205697625614
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6775749300026828733}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!82 &5084177389558193777
 AudioSource:
   m_ObjectHideFlags: 0
