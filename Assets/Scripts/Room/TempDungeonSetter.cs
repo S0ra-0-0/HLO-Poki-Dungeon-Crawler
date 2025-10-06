@@ -1,12 +1,4 @@
-// System
-using System;
-using System.Collections;
-using System.Collections.Generic;
-
-// Unity
 using UnityEngine;
-
-// HLO
 using HLO.Room;
 using HLO.Door;
 using HLO.Layer;
@@ -14,10 +6,23 @@ using HLO.Layer;
 public class TempDungeonSetter : MonoBehaviour
 {
     [SerializeField] private Transform dungeon;
+    private Progress progress;
 
     private void Awake()
     {
+        // Find the Progress script
+        progress = FindFirstObjectByType<Progress>();
+
+        // Get all rooms in the dungeon
         RoomBase[] rooms = dungeon.GetComponentsInChildren<RoomBase>();
+
+        // Set the total room count in the Progress script
+        if (progress != null)
+        {
+            progress.InitializeTotalRoomCount(rooms.Length);
+        }
+
+        // Process doors and rooms
         foreach (var room in rooms)
         {
             foreach (var door in room.DoorList)
@@ -45,7 +50,6 @@ public class TempDungeonSetter : MonoBehaviour
                 foreach (var col in Physics2D.OverlapBoxAll(door.transform.position, new Vector2(1f, 8f), angle, 1 << LayerDatas.ROOM_LAYER))
                 {
                     if (col.transform == door.transform.parent) continue;
-
                     RoomBase connectedRoom = col.GetComponent<RoomBase>();
                     if (connectedRoom)
                     {
@@ -53,16 +57,26 @@ public class TempDungeonSetter : MonoBehaviour
                     }
                     else
                     {
-                        Debug.LogError($"{col.gameObject.name} don't have RoomBase component.");
+                        Debug.LogError($"{col.gameObject.name} doesn't have RoomBase component.");
                     }
                 }
             }
         }
 
+        // Deactivate undiscovered rooms
         foreach (var room in rooms)
         {
             if (!room.IsDiscovered)
+            {
                 room.gameObject.SetActive(false);
+            }
+            else
+            {
+                if (progress != null)
+                {
+                    progress.OnRoomDiscovered();
+                }
+            }
         }
     }
 }
