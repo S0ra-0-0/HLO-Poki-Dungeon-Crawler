@@ -11,7 +11,7 @@ using UnityEngine.SceneManagement;
 // HLO
 using HLO.Layer;
 
-public class Stair : MonoBehaviour
+public class ToNextLevelPortal : MonoBehaviour
 {
     [SerializeField] private SceneAsset nextScene;
 
