@@ -279,11 +279,18 @@ MonoBehaviour:
   - {fileID: 21300000, guid: a205973959f6c3746ae614e698d67966, type: 3}
   - {fileID: 21300000, guid: 2ddbca08a7f52954bb26a3a5bf69b184, type: 3}
   - {fileID: 21300000, guid: 343f270c24d7c3e448501c2100986924, type: 3}
+  parryDirectionSprites:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   flashMaterial: {fileID: 2100000, guid: 4cdb45d0098659f44adc75182464e527, type: 2}
   swordPrefabAttack: {fileID: 0}
-  swordPrefabParry: {fileID: 0}
   parryColor: {r: 1, g: 1, b: 1, a: 1}
-  blockBubble: {fileID: 769117070639345708}
   audioSource: {fileID: 6008011499033396497}
   swordSwingNothingSound: {fileID: 8300000, guid: 4c1bac9cf11755141b1a306bbda56191, type: 3}
   swordSwingEnemySound: {fileID: 8300000, guid: 4562b909c32057c4096aff32a5d842ef, type: 3}
@@ -317,6 +324,7 @@ MonoBehaviour:
   isInvincibility: 0
   spriteRenderer: {fileID: 0}
   flickerNumber: 3
+  deathScene: {fileID: 102900000, guid: 6d23484de2cbf994f93111761d2bc6a0, type: 3}
   healTest: 0
 --- !u!61 &535401906660523576
 BoxCollider2D:
