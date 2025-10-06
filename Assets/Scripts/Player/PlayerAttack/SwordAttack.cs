@@ -1,7 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class SwordAttack : MonoBehaviour, IAttackType
 {
@@ -95,59 +93,31 @@ public class SwordAttack : MonoBehaviour, IAttackType
         player.SetInvulnerable(true);
         bool parrySuccess = false;
 
-
-        if (player.swordPrefabParry != null)
+        // Create parry visual
+        if (player.parryDirectionSprites != null && player.parryDirectionSprites.Length == 8)
         {
             Vector2 dir = player.facingDirection.normalized;
-            CardinalDirection direction;
+            int dirIndex = 0;
+            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            angle = (angle + 360) % 360;
+            if (angle >= 337.5f || angle < 22.5f) dirIndex = 0; // Right
+            else if (angle >= 22.5f && angle < 67.5f) dirIndex = 1; // UpRight
+            else if (angle >= 67.5f && angle < 112.5f) dirIndex = 2; // Up
+            else if (angle >= 112.5f && angle < 157.5f) dirIndex = 3; // UpLeft
+            else if (angle >= 157.5f && angle < 202.5f) dirIndex = 4; // Left
+            else if (angle >= 202.5f && angle < 247.5f) dirIndex = 5; // DownLeft
+            else if (angle >= 247.5f && angle < 292.5f) dirIndex = 6; // Down
+            else if (angle >= 292.5f && angle < 337.5f) dirIndex = 7; // DownRight
 
-            if (Mathf.Abs(dir.x) >= Mathf.Abs(dir.y))
-            {
-                direction = dir.x >= 0 ? CardinalDirection.Right : CardinalDirection.Left;
-            }
-            else
-            {
-                direction = dir.y >= 0 ? CardinalDirection.Up : CardinalDirection.Down;
-            }
-
-            Vector3 localOffset;
-            float zRotation;
-            int sortingOrder = 1;
-
-            switch (direction)
-            {
-                case CardinalDirection.Right:
-                    localOffset = new Vector3(0.2f, 0.5f, 0f);
-                    zRotation = -90f;
-                    break;
-                case CardinalDirection.Left:
-                    localOffset = new Vector3(-0.2f, 0.5f, 0f);
-                    zRotation = 180f;
-                    break;
-                case CardinalDirection.Up:
-                    localOffset = new Vector3(-0.5f, 0.75f, 0f);
-                    zRotation = -90f;
-                    sortingOrder = -1;
-                    break;
-                case CardinalDirection.Down:
-                default:
-                    localOffset = new Vector3(-0.5f, 0.1f, 0f);
-                    zRotation = -90f;
-                    break;
-            }
-
-            Vector3 spawnWorld = player.transform.TransformPoint(localOffset);
-            Quaternion rotation = Quaternion.Euler(0f, 0f, zRotation);
-
-            GameObject sword = Instantiate(player.swordPrefabParry, spawnWorld, rotation);
-            sword.transform.SetParent(player.transform, worldPositionStays: true);
-            var swordRenderer = sword.GetComponentInChildren<SpriteRenderer>();
-            if (swordRenderer != null)
-            {
-                swordRenderer.sortingOrder = sortingOrder;
-            }
-
-            Destroy(sword, ParryWindow + 0.1f);
+            Vector3 spawnPosition = player.transform.position + (Vector3)player.facingDirection * 0.5f;
+            GameObject parrySprite = new GameObject("ParrySprite");
+            parrySprite.transform.position = spawnPosition;
+            parrySprite.transform.parent = player.transform;
+            SpriteRenderer spriteRenderer = parrySprite.AddComponent<SpriteRenderer>();
+            spriteRenderer.sprite = player.parryDirectionSprites[dirIndex];
+            spriteRenderer.sortingLayerName = "Player";
+            spriteRenderer.sortingOrder = (dirIndex == 1 || dirIndex == 2 || dirIndex == 3) ? -1 : 1;
+            Destroy(parrySprite, ParryWindow + 0.1f);
         }
 
         float parryTimer = 0f;
@@ -156,7 +126,6 @@ public class SwordAttack : MonoBehaviour, IAttackType
         while (parryTimer < ParryWindow)
         {
             parryTimer += Time.deltaTime;
-
             var enemies = Physics2D.OverlapCircleAll(
                 player.transform.position,
                 ParryRadius,
@@ -166,16 +135,31 @@ public class SwordAttack : MonoBehaviour, IAttackType
             foreach (var enemy in enemies)
             {
                 GoblinEnemy goblin = enemy.GetComponent<GoblinEnemy>();
-                if (goblin == null) continue;
+                OgerMiniBoss ogre = enemy.GetComponent<OgerMiniBoss>();
 
-                // Only consider enemies roughly in front of the player
+                if (goblin == null && ogre == null) continue;
+
                 Vector2 toEnemy = (Vector2)enemy.transform.position - (Vector2)player.transform.position;
                 float angle = Vector2.SignedAngle(player.facingDirection, toEnemy.normalized);
                 bool isInFront = Mathf.Abs(angle) <= ParryFrontCone;
 
-                if (isInFront && goblin.currentState == GoblinEnemy.State.Attacking)
+                Debug.Log($"Enemy: {enemy.name}, Angle: {angle}, Is in front: {isInFront}");
+
+                // Check if the enemy is attacking
+                bool isAttacking = false;
+                if (goblin != null && goblin.currentState == GoblinEnemy.State.Attacking)
+                {
+                    isAttacking = true;
+                }
+                else if (ogre != null && ogre.currentState == OgerMiniBoss.State.Attacking)
+                {
+                    isAttacking = true;
+                }
+
+                if (isInFront && isAttacking)
                 {
                     frontEnemyWasAttacking = true;
+                    Debug.Log($"Enemy {enemy.name} is attacking and in front!");
                 }
             }
 
@@ -192,12 +176,10 @@ public class SwordAttack : MonoBehaviour, IAttackType
         if (parrySuccess)
         {
             Debug.Log("[ParryCoroutine] Parry success: performing directed counter (normal attack)");
-
-            yield return player.StartCoroutine(CounterFreezeFrames(.2f));
-            player.attackDamage *= 2; 
+            yield return player.StartCoroutine(CounterFreezeFrames(0.2f));
+            player.attackDamage *= 2;
             Attack(player);
             player.attackDamage /= 2;
-
             yield return new WaitForSeconds(ParryIframes);
         }
         else
@@ -209,6 +191,7 @@ public class SwordAttack : MonoBehaviour, IAttackType
         player.SetInvulnerable(false);
         player.isHeavyAttacking = false;
     }
+
 
     private IEnumerator CounterFreezeFrames(float duration)
     {

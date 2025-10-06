@@ -5385,6 +5385,38 @@ PrefabInstance:
       propertyPath: swordPrefabAttack
       value: 
       objectReference: {fileID: 5925944416369875127, guid: 85482a373b96a6549b2db9064c8e4075, type: 3}
+    - target: {fileID: 6505740048901179101, guid: 1ca26a0be0415b045a8e3c64477e7151, type: 3}
+      propertyPath: 'parryDirectionSprites.Array.data[0]'
+      value: 
+      objectReference: {fileID: 21300000, guid: b5a7ed6a396566b4a856855bf6355a5e, type: 3}
+    - target: {fileID: 6505740048901179101, guid: 1ca26a0be0415b045a8e3c64477e7151, type: 3}
+      propertyPath: 'parryDirectionSprites.Array.data[1]'
+      value: 
+      objectReference: {fileID: 21300000, guid: b771dec69affbfb4fb6bc84dbf65f9e7, type: 3}
+    - target: {fileID: 6505740048901179101, guid: 1ca26a0be0415b045a8e3c64477e7151, type: 3}
+      propertyPath: 'parryDirectionSprites.Array.data[2]'
+      value: 
+      objectReference: {fileID: 21300000, guid: 9877f5732f519fc4c84e0bac6e720cfc, type: 3}
+    - target: {fileID: 6505740048901179101, guid: 1ca26a0be0415b045a8e3c64477e7151, type: 3}
+      propertyPath: 'parryDirectionSprites.Array.data[3]'
+      value: 
+      objectReference: {fileID: 21300000, guid: 5b055e8fbe3f89a458f4202ea46dc524, type: 3}
+    - target: {fileID: 6505740048901179101, guid: 1ca26a0be0415b045a8e3c64477e7151, type: 3}
+      propertyPath: 'parryDirectionSprites.Array.data[4]'
+      value: 
+      objectReference: {fileID: 21300000, guid: 21b556c2597cacc4b88c96fa8af2fd8d, type: 3}
+    - target: {fileID: 6505740048901179101, guid: 1ca26a0be0415b045a8e3c64477e7151, type: 3}
+      propertyPath: 'parryDirectionSprites.Array.data[5]'
+      value: 
+      objectReference: {fileID: 21300000, guid: 8e532f2ac90ce23449f500dc0abda081, type: 3}
+    - target: {fileID: 6505740048901179101, guid: 1ca26a0be0415b045a8e3c64477e7151, type: 3}
+      propertyPath: 'parryDirectionSprites.Array.data[6]'
+      value: 
+      objectReference: {fileID: 21300000, guid: e17316b7bf11f9e40ab4301fd267c589, type: 3}
+    - target: {fileID: 6505740048901179101, guid: 1ca26a0be0415b045a8e3c64477e7151, type: 3}
+      propertyPath: 'parryDirectionSprites.Array.data[7]'
+      value: 
+      objectReference: {fileID: 21300000, guid: cea144dc1e7da0d4ab997eca34c4e961, type: 3}
     - target: {fileID: 6999247802568337802, guid: 1ca26a0be0415b045a8e3c64477e7151, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -17820,7 +17852,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08000d63eaf3c9c4fab0b8c335abbc40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monstersKilled: 0
 --- !u!4 &2070288392
 Transform:
   m_ObjectHideFlags: 0
