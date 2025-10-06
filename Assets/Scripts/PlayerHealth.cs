@@ -2,13 +2,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel.Design.Serialization;
 using System.Linq;
 
 // Unity
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEditor;
 
 // HLO
 using HLO.Heart;
@@ -31,6 +30,9 @@ public class PlayerHealth : MonoBehaviour
     [Header("Sprite")]
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private float flickerNumber;
+
+    [Header("Death")]
+    [SerializeField] private SceneAsset deathScene;
 
     private void Start()
     {
@@ -147,6 +149,6 @@ public class PlayerHealth : MonoBehaviour
     private void Die()
     {
         PokiUnitySDK.Instance.gameplayStop();
-        SceneManager.LoadScene("DeathScene");
+        SceneManager.LoadScene(deathScene.name);
     }
 }

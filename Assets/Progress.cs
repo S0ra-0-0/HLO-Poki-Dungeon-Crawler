@@ -16,12 +16,21 @@ public class Progress : MonoBehaviour
         DiscoveredRoomCount = 0;
         Debug.Log($"Total rooms initialized: {TotalRoomCount}");
     }
-
-    // Call this method whenever a room is discovered
     public void OnRoomDiscovered()
     {
         DiscoveredRoomCount++;
         Debug.Log($"Room discovered! Total discovered rooms: {DiscoveredRoomCount}/{TotalRoomCount}");
         ProgressBar.fillAmount = (float)DiscoveredRoomCount / (TotalRoomCount/2);
+
+        if (ProgressBar.fillAmount == 100f)
+        {
+            ProgressReward();
+        }
+    }
+
+    private void ProgressReward()
+    {
+        Debug.Log("Progress bar is full! Rewarding player...");
+        // Implement reward logic here
     }
 }
