@@ -96,137 +96,62 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: empty progress start
+      name: progress bar segments_0
       rect:
         serializedVersion: 2
         x: 0
         y: 12
-        width: 10
+        width: 30
         height: 12
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 235d8d91aeda0af40800000000000000
-      internalID: 5737777146237605170
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: empty progress middle
-      rect:
-        serializedVersion: 2
-        x: 10
-        y: 12
-        width: 10
-        height: 12
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2494c95d04ed92443b4c0b8d11ce1331
-      internalID: 1691486716
+      spriteID: 226d5a1579a7b5c4a8905ec7c3d96373
+      internalID: -2117499173
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: empty progress end
-      rect:
-        serializedVersion: 2
-        x: 20
-        y: 12
-        width: 10
-        height: 12
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 38be2600da9b0d0498a7c06b6de48689
-      internalID: 46955609
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: full progress start
+      name: progress bar segments_1
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 10
+        width: 30
         height: 12
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bc98cd65ffc7055499183a3b5641cb55
-      internalID: 60849456
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: full progress middle
-      rect:
-        serializedVersion: 2
-        x: 10
-        y: 0
-        width: 10
-        height: 12
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 263af739747c9d54689e882e7328cf2b
-      internalID: -567828572
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: full progress end
-      rect:
-        serializedVersion: 2
-        x: 20
-        y: 0
-        width: 10
-        height: 12
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: bc47964df89803c4c8cb4784e0514427
-      internalID: -2079141038
+      spriteID: 3a004604eaa05974993e49e6bd437e5c
+      internalID: 363259911
       vertices: []
       indices: 
       edges: []
@@ -245,12 +170,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      empty progress end: 46955609
-      empty progress middle: 1691486716
-      empty progress start: 5737777146237605170
-      full progress end: -2079141038
-      full progress middle: -567828572
-      full progress start: 60849456
+      progress bar segments_0: -2117499173
+      progress bar segments_1: 363259911
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
