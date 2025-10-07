@@ -6,21 +6,13 @@ using HLO.Layer;
 public class TempDungeonSetter : MonoBehaviour
 {
     [SerializeField] private Transform dungeon;
-    private Progress progress;
+    [SerializeField] private int roomCount;
 
     private void Awake()
     {
-        // Find the Progress script
-        progress = FindFirstObjectByType<Progress>();
-
         // Get all rooms in the dungeon
         RoomBase[] rooms = dungeon.GetComponentsInChildren<RoomBase>();
-
-        // Set the total room count in the Progress script
-        if (progress != null)
-        {
-            progress.InitializeTotalRoomCount(rooms.Length);
-        }
+        roomCount = rooms.Length;
 
         // Process doors and rooms
         foreach (var room in rooms)
@@ -70,13 +62,11 @@ public class TempDungeonSetter : MonoBehaviour
             {
                 room.gameObject.SetActive(false);
             }
-            else
-            {
-                if (progress != null)
-                {
-                    progress.OnRoomDiscovered();
-                }
-            }
         }
+    }
+
+    private void Start()
+    {
+        Progress.Instance.InitializeTotalRoomCount(roomCount);
     }
 }

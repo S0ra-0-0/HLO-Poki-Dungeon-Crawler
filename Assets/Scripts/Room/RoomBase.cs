@@ -33,8 +33,11 @@ namespace HLO.Room
 
         protected virtual void Start()
         {
-            
+            RegisterOnEnterRoom(UpdateProgress);
+            RegisterOnClearRoom(() => UnregisterOnEnterRoom(UpdateProgress));
         }
+
+        protected virtual void UpdateProgress() => Progress.Instance.OnProgressUpdated();
 
         public virtual void SetRoomType(RoomType roomType) => this.roomType = roomType;
 
@@ -53,11 +56,6 @@ namespace HLO.Room
         public virtual void EnterRoom(DoorDirectionType prevDoorDirection, Transform visitor)
         {
             SetVisitorPosition(prevDoorDirection, visitor);
-            Progress progress = FindFirstObjectByType<Progress>();
-            if (progress != null)
-            {
-                progress.OnRoomDiscovered();
-            }
         }
 
         [ContextMenu("ClearRoom")]

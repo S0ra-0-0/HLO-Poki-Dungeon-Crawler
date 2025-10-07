@@ -3,26 +3,40 @@ using UnityEngine.UI;
 
 public class Progress : MonoBehaviour
 {
+    public static Progress Instance { get; private set; }
 
     public Image ProgressBar;
     public int TotalRoomCount { get; private set; }
-    public int DiscoveredRoomCount { get; private set; }
+    public int EnteredRoomCount { get; private set; }
 
-  
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            TotalRoomCount = int.MaxValue;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     public void InitializeTotalRoomCount(int totalRoomCount)
     {
         ProgressBar.fillAmount = 0f;
         TotalRoomCount = totalRoomCount;
-        DiscoveredRoomCount = 0;
+        EnteredRoomCount = 0;
         Debug.Log($"Total rooms initialized: {TotalRoomCount}");
     }
-    public void OnRoomDiscovered()
-    {
-        DiscoveredRoomCount++;
-        Debug.Log($"Room discovered! Total discovered rooms: {DiscoveredRoomCount}/{TotalRoomCount}");
-        ProgressBar.fillAmount = (float)DiscoveredRoomCount / (TotalRoomCount/2);
 
-        if (ProgressBar.fillAmount == 100f)
+    public void OnProgressUpdated()
+    {
+        EnteredRoomCount++;
+        Debug.Log($"Room discovered! Total discovered rooms: {EnteredRoomCount}/{TotalRoomCount}");
+        ProgressBar.fillAmount = (float)EnteredRoomCount / TotalRoomCount;
+
+        if (ProgressBar.fillAmount == 1f)
         {
             ProgressReward();
         }
