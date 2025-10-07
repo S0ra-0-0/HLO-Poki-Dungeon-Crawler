@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 43297f49e2435374a835d7a75b56aa24
+guid: ff9d73b3383025640a9d8875316cca83
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6801177958211444773
-    second: Ogre mini boss L_0
+      213: -4522700849624002887
+    second: Ogre mini boss up _0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Ogre mini boss L_0
+      name: Ogre mini boss up _0
       rect:
         serializedVersion: 2
-        x: 15
-        y: 1
-        width: 33
-        height: 62
+        x: 0
+        y: 2
+        width: 64
+        height: 61
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 520e86d9153a26e50800000000000000
-      internalID: 6801177958211444773
+      spriteID: 9becdc02a832c31c0800000000000000
+      internalID: -4522700849624002887
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Ogre mini boss L_0: 6801177958211444773
+      Ogre mini boss up _0: -4522700849624002887
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
