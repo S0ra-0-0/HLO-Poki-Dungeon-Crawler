@@ -33,7 +33,8 @@ namespace HLO.Room
 
         protected virtual void Start()
         {
-            RegisterOnClearRoom(UpdateProgress);
+            if(Progress.Instance != null)
+                RegisterOnClearRoom(UpdateProgress);
         }
 
         protected virtual void UpdateProgress() => Progress.Instance.OnProgressUpdated();

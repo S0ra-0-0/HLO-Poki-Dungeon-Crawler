@@ -67,6 +67,7 @@ public class TempDungeonSetter : MonoBehaviour
 
     private void Start()
     {
-        Progress.Instance.InitializeTotalRoomCount(roomCount);
+        if(Progress.Instance != null)
+            Progress.Instance.InitializeTotalRoomCount(roomCount);
     }
 }
