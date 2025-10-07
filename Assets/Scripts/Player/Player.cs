@@ -66,7 +66,8 @@ public class Player : MonoBehaviour
     public float volume = .5f;
 
     public bool bossKeyFound;
-    [SerializeField] private Sprite[] ArrowDirections =  new Sprite[4];// Assign in Inspector: Right, Up, Left, Down
+    [SerializeField] private Sprite ArrowDirection;
+    [SerializeField] private float bossArrowHideDistance = 9f; // Hide arrow when within this distance to the boss
 
     private Rigidbody2D rb;
     private Vector2 moveInput;
@@ -170,7 +171,7 @@ public class Player : MonoBehaviour
         HandleAttackInput();
         HandleAttackSwapInput();
 
-        if(bossKeyFound)
+        if (bossKeyFound)
         {
             DisplayBossArrow();
         }
@@ -441,7 +442,7 @@ public class Player : MonoBehaviour
     }
 
     public void SetParryVisual(bool isActive)
-    {     
+    {
         if (isActive)
         {
             spriteRenderer.color = parryColor;
@@ -452,43 +453,36 @@ public class Player : MonoBehaviour
         }
     }
 
+    private GameObject bossArrow;
+
     private void DisplayBossArrow()
     {
-        if (ArrowDirections == null || ArrowDirections.Length < 4) return;
-        Vector3 bossPosition = Vector3.zero;
-        GameObject boss = GameObject.FindWithTag("Boss");
+        GameObject boss = GameObject.FindGameObjectWithTag("Boss");
+
         if (boss != null)
         {
-            bossPosition = boss.transform.position;
-        }
-        else
-        {
-            Debug.LogWarning("Boss not found in scene.");
-            return;
-        }
-        Vector3 directionToBoss = (bossPosition - transform.position).normalized;
-        float angle = Mathf.Atan2(directionToBoss.y, directionToBoss.x) * Mathf.Rad2Deg;
-        angle = (angle + 360) % 360;
-        int dirIndex = 0; // Default to Right
-        if (angle >= 315f || angle < 45f) dirIndex = 0; // Right
-        else if (angle >= 45f && angle < 135f) dirIndex = 1; // Up
-        else if (angle >= 135f && angle < 225f) dirIndex = 2; // Left
-        else if (angle >= 225f && angle < 315f) dirIndex = 3; // Down
-        // Display arrow above player
-        Vector3 arrowPosition = transform.position + Vector3.up * 1.0f;
-        // Assuming you have a child GameObject with SpriteRenderer for the arrow
-        Transform arrowTransform = transform.Find("BossArrow");
-        if (arrowTransform != null)
-        {
-            SpriteRenderer arrowRenderer = arrowTransform.GetComponent<SpriteRenderer>();
-            if (arrowRenderer != null)
+            float distanceToBoss = Vector2.Distance(boss.transform.position, transform.position);
+
+            if (distanceToBoss <= bossArrowHideDistance)
             {
-                arrowRenderer.sprite = ArrowDirections[dirIndex];
-                arrowTransform.position = arrowPosition;
-                arrowRenderer.enabled = true;
+                if (bossArrow != null && bossArrow.activeSelf)
+                    bossArrow.SetActive(false);
+                return;
             }
+            if (bossArrow == null)
+            {
+                bossArrow = new GameObject("BossArrow");
+                SpriteRenderer arrowRenderer = bossArrow.AddComponent<SpriteRenderer>();
+                arrowRenderer.sprite = ArrowDirection;
+                arrowRenderer.sortingLayerName = "UI";
+            }
+            Vector2 directionToBoss = (boss.transform.position - transform.position).normalized;
+
+            Vector3 arrowPosition = transform.position + (Vector3)directionToBoss * 1.5f;
+            bossArrow.transform.position = arrowPosition;
+
+            float angle = Mathf.Atan2(directionToBoss.y, directionToBoss.x) * Mathf.Rad2Deg;
+            bossArrow.transform.rotation = Quaternion.Euler(0, 0, angle - 90f);
         }
     }
-
-
 }
