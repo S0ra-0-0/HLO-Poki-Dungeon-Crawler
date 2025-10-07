@@ -33,8 +33,11 @@ namespace HLO.Room
 
         protected virtual void Start()
         {
-            
+            RegisterOnEnterRoom(UpdateProgress);
+            RegisterOnClearRoom(() => UnregisterOnEnterRoom(UpdateProgress));
         }
+
+        protected virtual void UpdateProgress() => Progress.Instance.OnProgressUpdated();
 
         public virtual void SetRoomType(RoomType roomType) => this.roomType = roomType;
 
