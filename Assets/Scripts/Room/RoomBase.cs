@@ -33,8 +33,7 @@ namespace HLO.Room
 
         protected virtual void Start()
         {
-            RegisterOnEnterRoom(UpdateProgress);
-            RegisterOnClearRoom(() => UnregisterOnEnterRoom(UpdateProgress));
+            RegisterOnClearRoom(UpdateProgress);
         }
 
         protected virtual void UpdateProgress() => Progress.Instance.OnProgressUpdated();
@@ -61,11 +60,6 @@ namespace HLO.Room
         [ContextMenu("ClearRoom")]
         public virtual void ClearRoom()
         {
-            Progress progress = FindFirstObjectByType<Progress>();
-            if (progress != null)
-            {
-                progress.OnRoomDiscovered();
-            }
             onClearRoom?.Invoke();
             onClearRoom = null;
         }

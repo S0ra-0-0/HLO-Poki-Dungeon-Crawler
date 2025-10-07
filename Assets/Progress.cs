@@ -5,12 +5,25 @@ using UnityEngine.UI;
 
 public class Progress : MonoBehaviour
 {
+    public static Progress Instance { get; private set; }
 
     public Image ProgressBar;
     [SerializeField] private TMP_Text progressText;
     public int TotalRoomCount { get; private set; }
-    public int DiscoveredRoomCount { get; private set; }
+    public int EnteredRoomCount { get; private set; }
 
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            TotalRoomCount = int.MaxValue;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     public void InitializeTotalRoomCount(int totalRoomCount)
     {
@@ -18,14 +31,15 @@ public class Progress : MonoBehaviour
         progressText.gameObject.SetActive(false);
 
         TotalRoomCount = totalRoomCount;
-        DiscoveredRoomCount = 0;
+        EnteredRoomCount = 0;
         Debug.Log($"Total rooms initialized: {TotalRoomCount}");
     }
-    public void OnRoomDiscovered()
+
+    public void OnProgressUpdated()
     {
-        DiscoveredRoomCount++;
-        Debug.Log($"Room discovered! Total discovered rooms: {DiscoveredRoomCount}/{TotalRoomCount}");
-        ProgressBar.fillAmount = (float)DiscoveredRoomCount / (TotalRoomCount / 2);
+        EnteredRoomCount++;
+        Debug.Log($"Room discovered! Total discovered rooms: {EnteredRoomCount}/{TotalRoomCount}");
+        ProgressBar.fillAmount = (float)EnteredRoomCount / (TotalRoomCount / 2); // Why are you dividing by 2?
 
         if (ProgressBar.fillAmount >= .1f)
         {
