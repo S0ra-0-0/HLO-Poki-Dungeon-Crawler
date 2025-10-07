@@ -120,6 +120,12 @@ public class Player : MonoBehaviour
         PlayerHealth playerHealth = GetComponent<PlayerHealth>();
         playerHealth.isInvincibility = false;
         SetParryVisual(false);
+
+        if (animator)
+        {
+            animator.SetInteger(directionHash, directionIndex);
+            animator.SetBool(isWalkingHash, isWalking);
+        }
     }
 
 
