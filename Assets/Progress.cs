@@ -1,45 +1,46 @@
+using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Progress : MonoBehaviour
 {
-    public static Progress Instance { get; private set; }
 
     public Image ProgressBar;
+    [SerializeField] private TMP_Text progressText;
     public int TotalRoomCount { get; private set; }
-    public int EnteredRoomCount { get; private set; }
+    public int DiscoveredRoomCount { get; private set; }
 
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-            TotalRoomCount = int.MaxValue;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
 
     public void InitializeTotalRoomCount(int totalRoomCount)
     {
         ProgressBar.fillAmount = 0f;
+        progressText.gameObject.SetActive(false);
+
         TotalRoomCount = totalRoomCount;
-        EnteredRoomCount = 0;
+        DiscoveredRoomCount = 0;
         Debug.Log($"Total rooms initialized: {TotalRoomCount}");
     }
-
-    public void OnProgressUpdated()
+    public void OnRoomDiscovered()
     {
-        EnteredRoomCount++;
-        Debug.Log($"Room discovered! Total discovered rooms: {EnteredRoomCount}/{TotalRoomCount}");
-        ProgressBar.fillAmount = (float)EnteredRoomCount / TotalRoomCount;
+        DiscoveredRoomCount++;
+        Debug.Log($"Room discovered! Total discovered rooms: {DiscoveredRoomCount}/{TotalRoomCount}");
+        ProgressBar.fillAmount = (float)DiscoveredRoomCount / (TotalRoomCount / 2);
 
-        if (ProgressBar.fillAmount == 1f)
+        if (ProgressBar.fillAmount >= .1f)
         {
+            Debug.Log("Progress bar is full!");
+            StartCoroutine(SpawnText());
             ProgressReward();
+
         }
+    }
+
+    IEnumerator SpawnText()
+    {
+        progressText.gameObject.SetActive(true);
+        yield return new WaitForSeconds(2f);
+        progressText.gameObject.SetActive(false);
     }
 
     private void ProgressReward()
