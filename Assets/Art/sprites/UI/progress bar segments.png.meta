@@ -118,10 +118,10 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 12
-        width: 30
+        width: 10
         height: 12
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -138,12 +138,12 @@ TextureImporter:
       name: progress bar segments_1
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 30
+        x: 10
+        y: 12
+        width: 10
         height: 12
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -152,6 +152,50 @@ TextureImporter:
       bones: []
       spriteID: 3a004604eaa05974993e49e6bd437e5c
       internalID: 363259911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: progress bar segments_2
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 12
+        width: 10
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 32f17f831b372b648bc23b67ac0fdb3f
+      internalID: 1196288708
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: progress bar segments_4
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 3
+        width: 26
+        height: 6
+      alignment: 9
+      pivot: {x: 0.5112753, y: 0.53993404}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1d3b4ccdf56600741a3e347bd1f99b3f
+      internalID: 1077866018
       vertices: []
       indices: 
       edges: []
@@ -172,6 +216,10 @@ TextureImporter:
     nameFileIdTable:
       progress bar segments_0: -2117499173
       progress bar segments_1: 363259911
+      progress bar segments_2: 1196288708
+      progress bar segments_3: 2068500655
+      progress bar segments_4: 1077866018
+      progress bar segments_5: -268493705
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

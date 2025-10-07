@@ -9,6 +9,7 @@ TagManager:
   - DeflectedProjectile
   - PlayerProjectile
   - Wall
+  - Boss
   layers:
   - Default
   - TransparentFX

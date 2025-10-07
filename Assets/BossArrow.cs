@@ -37,15 +37,9 @@ public class BossArrowUI : MonoBehaviour
             Debug.LogWarning("Missing references in BossArrowUI.");
             return;
         }
-
-        // Log the world position of the destination
         Debug.Log("Destination World Position: " + destination.position);
-
-        // Convert the world position of the destination to screen space
         Vector3 destinationScreenPosition = mainCamera.WorldToScreenPoint(destination.position);
         Debug.Log("Destination Screen Position: " + destinationScreenPosition);
-
-        // Convert the screen position to local position in the Canvas
         Vector2 localPoint;
         bool success = RectTransformUtility.ScreenPointToLocalPointInRectangle(
             canvasRectTransform,
