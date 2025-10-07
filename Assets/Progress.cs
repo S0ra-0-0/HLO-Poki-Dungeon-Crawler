@@ -14,6 +14,8 @@ public class Progress : MonoBehaviour
     public int EnteredRoomCount { get; private set; }
 
     private Action onProgressReward;
+
+    private bool bossRoomHasBeenFound = false;
     public void RegisterOnProgressReward(Action action) => onProgressReward += action;
     public void UnregisterOnProgressReward(Action action) => onProgressReward -= action;
 
@@ -57,8 +59,9 @@ public class Progress : MonoBehaviour
 
     IEnumerator SpawnText()
     {
+        if (bossRoomHasBeenFound) yield break;
         progressText.gameObject.SetActive(true);
-
+        bossRoomHasBeenFound = true;
         yield return new WaitForSeconds(2f);
         progressText.gameObject.SetActive(false);
     }

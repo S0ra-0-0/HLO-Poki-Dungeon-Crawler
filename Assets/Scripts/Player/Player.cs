@@ -59,6 +59,7 @@ public class Player : MonoBehaviour
 
     public bool bossKeyFound;
     [SerializeField] private Sprite ArrowDirection;
+    [SerializeField] private float bossArrowHideDistance = 9f; // Hide arrow when within this distance to the boss
 
     private Rigidbody2D rb;
     private Vector2 moveInput;
@@ -424,7 +425,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    private GameObject bossArrow; // Declare a field to store the arrow GameObject
+    private GameObject bossArrow;
 
     private void DisplayBossArrow()
     {
@@ -432,25 +433,31 @@ public class Player : MonoBehaviour
 
         if (boss != null)
         {
-            Vector2 directionToBoss = (boss.transform.position - transform.position).normalized;
+            float distanceToBoss = Vector2.Distance(boss.transform.position, transform.position);
 
+            if (distanceToBoss <= bossArrowHideDistance)
+            {
+                if (bossArrow != null && bossArrow.activeSelf)
+                    bossArrow.SetActive(false);
+                return;
+            }
             if (bossArrow == null)
             {
                 bossArrow = new GameObject("BossArrow");
                 SpriteRenderer arrowRenderer = bossArrow.AddComponent<SpriteRenderer>();
                 arrowRenderer.sprite = ArrowDirection;
-                arrowRenderer.sortingLayerName = "UI"; 
+                arrowRenderer.sortingLayerName = "UI";
             }
 
-            Vector3 arrowPosition = transform.position + (Vector3)directionToBoss * 1.5f; 
+            
+
+            Vector2 directionToBoss = (boss.transform.position - transform.position).normalized;
+
+            Vector3 arrowPosition = transform.position + (Vector3)directionToBoss * 1.5f;
             bossArrow.transform.position = arrowPosition;
 
             float angle = Mathf.Atan2(directionToBoss.y, directionToBoss.x) * Mathf.Rad2Deg;
-            bossArrow.transform.rotation = Quaternion.Euler(0, 0, angle - 90f); 
+            bossArrow.transform.rotation = Quaternion.Euler(0, 0, angle - 90f);
         }
     }
-
-
-
-
 }
