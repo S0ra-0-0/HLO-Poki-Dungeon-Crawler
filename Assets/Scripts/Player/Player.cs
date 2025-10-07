@@ -32,8 +32,16 @@ public class Player : MonoBehaviour
     public GameObject projectilePrefab;
     public Transform firePoint;
 
+    [Header("Animation")]
+    [SerializeField] private Animator animator;
+    [SerializeField] private int directionHash;
+    [SerializeField] private int isWalkingHash;
+
+    [Space(5)]
+    [SerializeField] private int directionIndex;
+    [SerializeField] private bool isWalking;
+
     [Header("Sprite Direction")]
-    [SerializeField] private Sprite[] idleDirectionSprites = new Sprite[8]; // Assign in Inspector: Right, UpRight, Up, UpLeft, Left, DownLeft, Down, DownRight
     public Sprite[] parryDirectionSprites = new Sprite[8]; // Assign in Inspector: Right, UpRight, Up, UpLeft, Left, DownLeft, Down, DownRight
 
     [Header("Hit Flash")]
@@ -89,6 +97,10 @@ public class Player : MonoBehaviour
         rb.gravityScale = 0f;
         spriteRenderer = GetComponent<SpriteRenderer>();
         originalMaterial = spriteRenderer.material; // Store original material
+
+        animator = GetComponent<Animator>();
+        directionHash = Animator.StringToHash("Direction");
+        isWalkingHash = Animator.StringToHash("IsWalking");
 
         attackTypes = new List<IAttackType>
         {
@@ -249,6 +261,19 @@ public class Player : MonoBehaviour
             if (moveInput.magnitude < 0.1f)
             {
                 rb.linearVelocity = Vector2.Lerp(rb.linearVelocity, Vector2.zero, deceleration * Time.fixedDeltaTime);
+
+                if (isWalking)
+                {
+                    isWalking = false;
+                    animator.SetBool(isWalkingHash, false);
+                }
+            }
+            else if (!isWalking)
+            {
+                isWalking = true;
+                animator.SetBool(isWalkingHash, true);
+
+                Debug.Log("Walk!");
             }
         }
     }
@@ -327,8 +352,11 @@ public class Player : MonoBehaviour
         else if (angle >= 247.5f && angle < 292.5f) dirIndex = 6; // Down
         else if (angle >= 292.5f && angle < 337.5f) dirIndex = 7; // DownRight
 
-        if (idleDirectionSprites != null && idleDirectionSprites.Length == 8)
-            spriteRenderer.sprite = idleDirectionSprites[dirIndex];
+        if (directionIndex != dirIndex)
+        {
+            directionIndex = dirIndex;
+            animator.SetInteger(directionHash, dirIndex);
+        }
     }
 
     public void SetInvulnerable(bool value)

@@ -300,6 +300,12 @@ MonoBehaviour:
   walkingSound: {fileID: 0}
   walkingClipLength: 1
   volume: 1
+  bossKeyFound: 0
+  ArrowDirections:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   hasDefeatedTutorialGoblin: 0
   facingDirection: {x: 1, y: 0}
   parrySuccess: 0
@@ -479,7 +485,7 @@ Animator:
   m_GameObject: {fileID: 5327870854238468306}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: dde781d38a30f2d4db3761eec8faa92a, type: 2}
+  m_Controller: {fileID: 9100000, guid: 2f3f4dec0b310c54abd41bd8e937e3ef, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
