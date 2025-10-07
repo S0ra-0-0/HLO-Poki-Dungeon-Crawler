@@ -57,6 +57,9 @@ public class Player : MonoBehaviour
     float timer;
     public float volume = .5f;
 
+    public bool bossKeyFound;
+    [SerializeField] private Sprite[] ArrowDirections =  new Sprite[4];// Assign in Inspector: Right, Up, Left, Down
+
     private Rigidbody2D rb;
     private Vector2 moveInput;
     private Vector2 smoothVelocity;
@@ -87,8 +90,6 @@ public class Player : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         originalMaterial = spriteRenderer.material; // Store original material
 
-
-        // Initialize attack types
         attackTypes = new List<IAttackType>
         {
             new SwordAttack(),
@@ -156,6 +157,11 @@ public class Player : MonoBehaviour
         HandleMovementInput();
         HandleAttackInput();
         HandleAttackSwapInput();
+
+        if(bossKeyFound)
+        {
+            DisplayBossArrow();
+        }
     }
 
     private void HandleMovement()
@@ -415,6 +421,44 @@ public class Player : MonoBehaviour
         else
         {
             spriteRenderer.color = Color.white;
+        }
+    }
+
+    private void DisplayBossArrow()
+    {
+        if (ArrowDirections == null || ArrowDirections.Length < 4) return;
+        Vector3 bossPosition = Vector3.zero;
+        GameObject boss = GameObject.FindWithTag("Boss");
+        if (boss != null)
+        {
+            bossPosition = boss.transform.position;
+        }
+        else
+        {
+            Debug.LogWarning("Boss not found in scene.");
+            return;
+        }
+        Vector3 directionToBoss = (bossPosition - transform.position).normalized;
+        float angle = Mathf.Atan2(directionToBoss.y, directionToBoss.x) * Mathf.Rad2Deg;
+        angle = (angle + 360) % 360;
+        int dirIndex = 0; // Default to Right
+        if (angle >= 315f || angle < 45f) dirIndex = 0; // Right
+        else if (angle >= 45f && angle < 135f) dirIndex = 1; // Up
+        else if (angle >= 135f && angle < 225f) dirIndex = 2; // Left
+        else if (angle >= 225f && angle < 315f) dirIndex = 3; // Down
+        // Display arrow above player
+        Vector3 arrowPosition = transform.position + Vector3.up * 1.0f;
+        // Assuming you have a child GameObject with SpriteRenderer for the arrow
+        Transform arrowTransform = transform.Find("BossArrow");
+        if (arrowTransform != null)
+        {
+            SpriteRenderer arrowRenderer = arrowTransform.GetComponent<SpriteRenderer>();
+            if (arrowRenderer != null)
+            {
+                arrowRenderer.sprite = ArrowDirections[dirIndex];
+                arrowTransform.position = arrowPosition;
+                arrowRenderer.enabled = true;
+            }
         }
     }
 
