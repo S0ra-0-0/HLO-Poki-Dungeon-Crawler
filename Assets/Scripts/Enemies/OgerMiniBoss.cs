@@ -282,7 +282,12 @@ public class OgerMiniBoss : MonoBehaviour
                 DropItem(dropItems[i]);
             }
         }
-        Destroy(gameObject);
+
+        // Temp Code
+        // TODO: Fix that Pleeeeeeeeeeeeeeeeeeeeeeeease.
+        UnityEngine.SceneManagement.SceneManager.LoadScene("win screen");
+
+        // Destroy(gameObject);
     }
 
     private void DropItem(DroppedItem item)

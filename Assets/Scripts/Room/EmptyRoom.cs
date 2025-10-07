@@ -13,9 +13,14 @@ namespace HLO.Room
         protected override void Start()
         {
             base.Start();
-            
+
             SetRoomType(RoomType.Empty);
-            ClearRoom();
+
+            RegisterOnEnterRoom(ClearRoom);
+            RegisterOnClearRoom(() =>
+            {
+                UnregisterOnEnterRoom(ClearRoom);
+            });
         }
     }
 }
