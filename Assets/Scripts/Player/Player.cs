@@ -448,9 +448,6 @@ public class Player : MonoBehaviour
                 arrowRenderer.sprite = ArrowDirection;
                 arrowRenderer.sortingLayerName = "UI";
             }
-
-            
-
             Vector2 directionToBoss = (boss.transform.position - transform.position).normalized;
 
             Vector3 arrowPosition = transform.position + (Vector3)directionToBoss * 1.5f;
