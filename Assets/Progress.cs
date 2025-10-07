@@ -46,7 +46,7 @@ public class Progress : MonoBehaviour
         Debug.Log($"Room discovered! Total discovered rooms: {EnteredRoomCount}/{TotalRoomCount}");
         ProgressBar.fillAmount = (float)EnteredRoomCount / (TotalRoomCount / 2); // Why are you dividing by 2?
 
-        if (ProgressBar.fillAmount >= .1f)
+        if (ProgressBar.fillAmount >= 1f)
         {
             Debug.Log("Progress bar is full!");
             StartCoroutine(SpawnText());
@@ -58,6 +58,7 @@ public class Progress : MonoBehaviour
     IEnumerator SpawnText()
     {
         progressText.gameObject.SetActive(true);
+
         yield return new WaitForSeconds(2f);
         progressText.gameObject.SetActive(false);
     }
@@ -66,7 +67,7 @@ public class Progress : MonoBehaviour
     {
         Debug.Log("Progress bar is full! Rewarding player...");
         // Implement reward logic here
-
+        Player.FindFirstObjectByType<Player>().bossKeyFound = true;
         onProgressReward?.Invoke();
         onProgressReward = null;
     }

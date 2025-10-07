@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 5843493996986415556}
   - component: {fileID: 6505740048901179101}
   - component: {fileID: 1464912404623044549}
+  - component: {fileID: 2350193798477251471}
   - component: {fileID: 535401906660523576}
   - component: {fileID: 6008011499033396497}
   - component: {fileID: 3715738707509408962}
@@ -204,7 +205,7 @@ SpriteRenderer:
   m_SortingLayerID: 1903412323
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 3aa6d635b8fc2b445a3d9b1119c55e08, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f7398dbcf34786c48bdd16af615b40e6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -256,7 +257,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 4
   acceleration: 10
-  deceleration: 15
+  deceleration: 14
   dashSpeed: 15
   dashDuration: 0.15
   dashCooldown: 1
@@ -280,16 +281,16 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 2ddbca08a7f52954bb26a3a5bf69b184, type: 3}
   - {fileID: 21300000, guid: 343f270c24d7c3e448501c2100986924, type: 3}
   parryDirectionSprites:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 21300000, guid: b5a7ed6a396566b4a856855bf6355a5e, type: 3}
+  - {fileID: 21300000, guid: b771dec69affbfb4fb6bc84dbf65f9e7, type: 3}
+  - {fileID: 21300000, guid: 9877f5732f519fc4c84e0bac6e720cfc, type: 3}
+  - {fileID: 21300000, guid: 5b055e8fbe3f89a458f4202ea46dc524, type: 3}
+  - {fileID: 21300000, guid: 21b556c2597cacc4b88c96fa8af2fd8d, type: 3}
+  - {fileID: 21300000, guid: 8e532f2ac90ce23449f500dc0abda081, type: 3}
+  - {fileID: 21300000, guid: e17316b7bf11f9e40ab4301fd267c589, type: 3}
+  - {fileID: 21300000, guid: cea144dc1e7da0d4ab997eca34c4e961, type: 3}
   flashMaterial: {fileID: 2100000, guid: 4cdb45d0098659f44adc75182464e527, type: 2}
-  swordPrefabAttack: {fileID: 0}
+  swordPrefabAttack: {fileID: 5925944416369875127, guid: 85482a373b96a6549b2db9064c8e4075, type: 3}
   parryColor: {r: 1, g: 1, b: 1, a: 1}
   audioSource: {fileID: 6008011499033396497}
   swordSwingNothingSound: {fileID: 8300000, guid: 4c1bac9cf11755141b1a306bbda56191, type: 3}
@@ -300,6 +301,8 @@ MonoBehaviour:
   walkingSound: {fileID: 0}
   walkingClipLength: 1
   volume: 1
+  bossKeyFound: 0
+  ArrowDirection: {fileID: 21300000, guid: 73c881570bc51e34583b40036f0c7231, type: 3}
   hasDefeatedTutorialGoblin: 0
   facingDirection: {x: 1, y: 0}
   parrySuccess: 0
@@ -326,6 +329,22 @@ MonoBehaviour:
   flickerNumber: 3
   deathScene: {fileID: 102900000, guid: 6d23484de2cbf994f93111761d2bc6a0, type: 3}
   healTest: 0
+--- !u!114 &2350193798477251471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5327870854238468306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64e550a3adf6d3140addddb58457cdf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textKeyAmount: {fileID: 0}
+  keyAmount: 0
+  textCoins: {fileID: 0}
+  coins: 0
 --- !u!61 &535401906660523576
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -566,7 +585,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -20
   m_Sprite: {fileID: 21300000, guid: 4d73858713a7ccc42adf44a255b22468, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
