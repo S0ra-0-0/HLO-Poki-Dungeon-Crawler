@@ -241,6 +241,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   introTime: 3
+  sceneAsset: {fileID: 102900000, guid: 838ece7dc8455274e8e611a739b35ab8, type: 3}
 --- !u!4 &1610658545
 Transform:
   m_ObjectHideFlags: 0

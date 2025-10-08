@@ -1,17 +1,17 @@
 // System
 using System;
 using System.Collections;
-using System.Collections.Generic;
 
 // Unity
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
+using UnityEditor;
 
 public class Intro : MonoBehaviour
 {
-    [Header("Intro")]
     [SerializeField] private float introTime = 3f;
+
+    [SerializeField] private SceneAsset sceneAsset;
 
     private void Start()
     {
@@ -32,6 +32,6 @@ public class Intro : MonoBehaviour
             yield return null;
         }
 
-        SceneManager.LoadScene("Title");
+        SceneManager.LoadScene(sceneAsset.name);
     }
 }
