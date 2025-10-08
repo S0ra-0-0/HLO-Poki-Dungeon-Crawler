@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7213319784960156559}
   - component: {fileID: 1400812093462441013}
   - component: {fileID: 1700898855867449265}
+  - component: {fileID: 4567608308592404206}
   m_Layer: 6
   m_Name: Ogre mini boss R
   m_TagString: Enemy
@@ -196,6 +197,28 @@ CapsuleCollider2D:
   m_Offset: {x: 0.015731096, y: 0}
   m_Size: {x: 1.4306722, y: 2.1333334}
   m_Direction: 0
+--- !u!95 &4567608308592404206
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3114298659431587978}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 82f2306a5d750ea43820e1fcfdc2f9f3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &7832961246460933118
 GameObject:
   m_ObjectHideFlags: 0

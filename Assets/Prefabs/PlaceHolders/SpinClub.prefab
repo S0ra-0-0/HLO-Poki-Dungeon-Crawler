@@ -44,6 +44,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: boss club
       objectReference: {fileID: 0}
+    - target: {fileID: 4003133336151371364, guid: 3ef6ed39634a72d4abb4978648cf296b, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4062659324682502420, guid: 3ef6ed39634a72d4abb4978648cf296b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
