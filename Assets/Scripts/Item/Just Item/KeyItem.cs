@@ -12,10 +12,18 @@ namespace HLO.Item
     {
         public override string Name => "Key";
         public override string Description => "Can open locked things.";
-        
+
         public override void Get(GameObject player)
         {
-            player.GetComponent<Inventory>().UpdateKeyAmount(1);
+            FollowItem followItem = gameObject.AddComponent<FollowItem>();
+            player.GetComponent<Inventory>().AddFollowItem(followItem);
+
+            GetComponent<DroppedItem>().KillMe();
+        }
+        
+        public override void Use(GameObject player)
+        {
+            Destroy(gameObject);
         }
     }
 }

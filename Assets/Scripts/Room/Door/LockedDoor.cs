@@ -9,6 +9,7 @@ using UnityEngine;
 // HLO
 using HLO.Layer;
 using HLO.Room;
+using HLO.Item;
 
 namespace HLO.Door
 {
@@ -43,8 +44,16 @@ namespace HLO.Door
                 {
                     connectedRoom.EnterRoom(DoorDirectionType, other.transform);
                 }
-                else if (other.gameObject.GetComponent<Inventory>().UseKeys(necessaryKeyAmount))
+                else
                 {
+                    while (necessaryKeyAmount-- > 0)
+                    {
+                        if (!other.gameObject.GetComponent<Inventory>().UseItem(typeof(KeyItem)))
+                        {
+                            return;
+                        }
+                    }
+
                     _lock.Unlock();
                     StartCoroutine(EnterWaitCoroutine(other.transform));
                 }

@@ -39,7 +39,6 @@ public class GoblinRangeEnemy : MonoBehaviour
     public GameObject AttackIndicator;
     private GameObject attackIndicatorInstance;
     private Coroutine knockbackRoutine;
-
     [Header("Drop Item")]
     [SerializeField] private DroppedItem[] dropItems;
     [SerializeField] private float[] dropChances;
@@ -47,10 +46,10 @@ public class GoblinRangeEnemy : MonoBehaviour
     [Header("Sprite Direction")]
     [SerializeField] private Sprite[] idleDirectionSprites = new Sprite[8]; // Assign in Inspector: Right, UpRight, Up, UpLeft, Left, DownLeft, Down, DownRight
     public Vector2 facingDirection = Vector2.right; // Default facing right
+    public Vector2 lastAttackDirection = Vector2.right; // Store the direction of the last attack
 
     private Coroutine attackRoutine;
     private Coroutine stunRoutine;
-
     [Header("State")]
     public State currentState = State.Idle;
     public enum State { Idle, Chasing, Attacking }
@@ -88,7 +87,11 @@ public class GoblinRangeEnemy : MonoBehaviour
 
     private void Update()
     {
-        UpdateSpriteDirection();
+        // Update direction when not attacking for idle blend tree
+        if (!animator.GetBool("IsAttacking"))
+        {
+            UpdateSpriteDirection();
+        }
 
         if (attackTimer >= attackDelay - 0.5f)
         {
@@ -122,19 +125,21 @@ public class GoblinRangeEnemy : MonoBehaviour
         {
             case State.Idle:
                 rb.linearVelocity = Vector2.zero;
+                // Update idle direction for blend tree
+                SetIdleDirection();
                 break;
 
             case State.Chasing:
                 movement = directionToPlayer * speed;
                 rb.linearVelocity = movement;
-                // Update facing direction to match movement
-                facingDirection = directionToPlayer;
+                // Update idle direction to match movement
+                SetIdleDirection();
                 break;
 
             case State.Attacking:
                 rb.linearVelocity = Vector2.zero;
-                // Update facing direction to always face the player during attack
-                facingDirection = directionToPlayer;
+                // Update idle direction to always face the player during attack preparation
+                SetIdleDirection();
                 if (attackRoutine == null && Time.time >= lastAttackTime + AttackCooldown)
                 {
                     attackRoutine = StartCoroutine(Attack());
@@ -147,22 +152,37 @@ public class GoblinRangeEnemy : MonoBehaviour
 
     IEnumerator Attack()
     {
-        //animator.SetTrigger("attack");
+        // Set initial direction and trigger attack animation once
+        Vector2 attackDirection = (Player.transform.position - transform.position).normalized;
+        SetAttackDirection(attackDirection);
+        animator.SetBool("IsAttacking", true);
+        animator.SetTrigger("Attack");
         attackTimer = 0f;
 
         while (Vector2.Distance(transform.position, Player.transform.position) <= AttackRange)
         {
+            // Don't continuously update direction during attack - only when shooting
             attackTimer += Time.deltaTime;
 
             if (attackTimer >= attackDelay)
             {
                 ShootProjectile();
+
                 attackTimer = 0f;
             }
 
             yield return null;
         }
 
+        // Check if attack direction is different from current facing direction after attack
+        if (Vector2.Distance(lastAttackDirection, facingDirection) > 0.1f)
+        {
+            // Update facing direction to match attack direction
+            facingDirection = lastAttackDirection;
+            SetIdleDirection();
+        }
+
+        animator.SetBool("IsAttacking", false);
         attackTimer = 0f;
         attackRoutine = null;
     }
@@ -172,6 +192,10 @@ public class GoblinRangeEnemy : MonoBehaviour
         if (projectilePrefab != null)
         {
             Vector2 directionToPlayer = (Player.transform.position - transform.position).normalized;
+
+            // Update attack direction for blend tree
+            SetAttackDirection(directionToPlayer);
+
             GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
 
             // Set the projectile's direction
@@ -180,6 +204,9 @@ public class GoblinRangeEnemy : MonoBehaviour
             {
                 projectileComponent.Initialize(directionToPlayer, Damage, gameObject);
             }
+
+            // Store the attack direction for comparison after attack finishes
+            lastAttackDirection = directionToPlayer;
         }
         else
         {
@@ -200,6 +227,23 @@ public class GoblinRangeEnemy : MonoBehaviour
             return;
         }
     }
+    private void SetIdleDirection()
+    {
+        // Set LastMoveX and LastMoveY for idle blend tree
+        animator.SetFloat("LastMoveX", facingDirection.x);
+        animator.SetFloat("LastMoveY", facingDirection.y);
+
+        // Also update the sprite for visual consistency
+        UpdateSpriteDirection();
+    }
+
+    private void SetAttackDirection(Vector2 direction)
+    {
+        // Set FacingX and FacingY for attack blend tree
+        animator.SetFloat("FacingX", direction.x);
+        animator.SetFloat("FacingY", direction.y);
+    }
+
     private void UpdateSpriteDirection()
     {
         // 0: Right, 1: UpRight, 2: Up, 3: UpLeft, 4: Left, 5: DownLeft, 6: Down, 7: DownRight
@@ -219,6 +263,26 @@ public class GoblinRangeEnemy : MonoBehaviour
 
         if (idleDirectionSprites != null && idleDirectionSprites.Length == 8)
             spriteRenderer.sprite = idleDirectionSprites[dirIndex];
+    }
+
+    private void SetAttackDirection()
+    {
+        // 0: Right, 1: UpRight, 2: Up, 3: UpLeft, 4: Left, 5: DownLeft, 6: Down, 7: DownRight
+        int dirIndex = 0;
+        Vector2 dir = facingDirection.normalized;
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        angle = (angle + 360) % 360;
+
+        if (angle >= 337.5f || angle < 22.5f) dirIndex = 0; // Right
+        else if (angle >= 22.5f && angle < 67.5f) dirIndex = 1; // UpRight
+        else if (angle >= 67.5f && angle < 112.5f) dirIndex = 2; // Up
+        else if (angle >= 112.5f && angle < 157.5f) dirIndex = 3; // UpLeft
+        else if (angle >= 157.5f && angle < 202.5f) dirIndex = 4; // Left
+        else if (angle >= 202.5f && angle < 247.5f) dirIndex = 5; // DownLeft
+        else if (angle >= 247.5f && angle < 292.5f) dirIndex = 6; // Down
+        else if (angle >= 292.5f && angle < 337.5f) dirIndex = 7; // DownRight
+
+        animator.SetInteger("Direction", dirIndex);
     }
 
     public void Stun(float duration)

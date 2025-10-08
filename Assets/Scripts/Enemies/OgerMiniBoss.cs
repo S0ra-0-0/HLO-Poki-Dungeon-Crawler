@@ -19,6 +19,7 @@ public class OgerMiniBoss : MonoBehaviour
     public int speed = 1;
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
+    private Animator animator;
     private Coroutine attackRoutine;
     private Vector2 movement;
 
@@ -56,6 +57,7 @@ public class OgerMiniBoss : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
         Player = FindAnyObjectByType<Player>();
         currentHealth = maxHealth;
         originalMaterial = spriteRenderer.material;
@@ -84,7 +86,11 @@ public class OgerMiniBoss : MonoBehaviour
 
     private void Update()
     {
-        UpdateSpriteDirection();
+        // Update direction when not attacking or walking for idle blend tree
+        if (!animator.GetBool("IsAttacking") && !animator.GetBool("IsWalking"))
+        {
+            UpdateSpriteDirection();
+        }
 
         if (attackTimer >= attackDelay - 0.5f)
         {
@@ -112,17 +118,26 @@ public class OgerMiniBoss : MonoBehaviour
         {
             case State.Idle:
                 rb.linearVelocity = Vector2.zero;
+                // Update idle direction for blend tree
+                SetIdleDirection();
                 break;
 
             case State.Chasing:
                 movement = directionToPlayer * speed;
                 rb.linearVelocity = movement;
-                facingDirection = directionToPlayer;
+                animator.SetBool("IsWalking", true);
+                animator.SetBool("IsAttacking", false);
+                // Update walking direction for blend tree and set IsWalking to true
+                SetWalkingDirection(directionToPlayer);
                 break;
 
             case State.Attacking:
                 rb.linearVelocity = Vector2.zero;
-                facingDirection = directionToPlayer;
+                animator.SetBool("IsWalking", false);
+                animator.SetBool("IsAttacking", true);
+
+                // Update idle direction to always face the player during attack preparation
+                SetIdleDirection();
                 if (attackRoutine == null && Time.time >= lastAttackTime + AttackCooldown)
                 {
                     attackRoutine = StartCoroutine(Attack());
@@ -148,28 +163,35 @@ public class OgerMiniBoss : MonoBehaviour
         else if (angle >= 202.5f && angle < 247.5f) dirIndex = 5; // DownLeft
         else if (angle >= 247.5f && angle < 292.5f) dirIndex = 6; // Down
         else if (angle >= 292.5f && angle < 337.5f) dirIndex = 7; // DownRight
-
-        if (idleDirectionSprites != null && idleDirectionSprites.Length == 8)
-            spriteRenderer.sprite = idleDirectionSprites[dirIndex];
     }
 
-
-    private Vector2 Get8Direction(Vector2 input)
+    private void SetIdleDirection()
     {
-        if (input == Vector2.zero) return facingDirection;
-        float angle = Mathf.Atan2(input.y, input.x) * Mathf.Rad2Deg;
-        angle = (angle + 360) % 360;
+        // Set LastMoveX and LastMoveY for idle blend tree
+        animator.SetFloat("LastMoveX", facingDirection.x);
+        animator.SetFloat("LastMoveY", facingDirection.y);
 
-        if (angle >= 337.5f || angle < 22.5f) return Vector2.right;
-        if (angle >= 22.5f && angle < 67.5f) return (Vector2.right + Vector2.up).normalized;
-        if (angle >= 67.5f && angle < 112.5f) return Vector2.up;
-        if (angle >= 112.5f && angle < 157.5f) return (Vector2.left + Vector2.up).normalized;
-        if (angle >= 157.5f && angle < 202.5f) return Vector2.left;
-        if (angle >= 202.5f && angle < 247.5f) return (Vector2.left + Vector2.down).normalized;
-        if (angle >= 247.5f && angle < 292.5f) return Vector2.down;
-        if (angle >= 292.5f && angle < 337.5f) return (Vector2.right + Vector2.down).normalized;
-        return facingDirection;
+        // Also update the sprite for visual consistency
+        UpdateSpriteDirection();
     }
+
+    private void SetWalkingDirection(Vector2 direction)
+    {
+        // Set IsWalking to true and update FacingX/FacingY for walking blend tree
+        animator.SetBool("IsWalking", true);
+        animator.SetFloat("FacingX", direction.x);
+        animator.SetFloat("FacingY", direction.y);
+    }
+
+    private void SetAttackDirection(Vector2 direction)
+    {
+        // Set IsAttacking to true and update FacingX/FacingY for attack blend tree
+        animator.SetBool("IsAttacking", true);
+        animator.SetFloat("FacingX", direction.x);
+        animator.SetFloat("FacingY", direction.y);
+    }
+
+  
 
     IEnumerator Attack()
     {
@@ -181,10 +203,14 @@ public class OgerMiniBoss : MonoBehaviour
 
             if (attackTimer >= attackDelay)
             {
+                // Attack with club weapon
+                Vector2 attackDirection = (Player.transform.position - transform.position).normalized;
+                SetAttackDirection(attackDirection);
+
                 GameObject weaponInstance = Instantiate(
                     clubWeapon,
-                    (Vector2)transform.position + facingDirection.normalized * attackEffectPosOffset,
-                    Quaternion.Euler(0f, 0f, Mathf.Atan2(facingDirection.y, facingDirection.x) * Mathf.Rad2Deg + attackEffectRotOffset)
+                    (Vector2)transform.position + attackDirection.normalized * attackEffectPosOffset,
+                    Quaternion.Euler(0f, 0f, Mathf.Atan2(attackDirection.y, attackDirection.x) * Mathf.Rad2Deg + attackEffectRotOffset)
                 );
 
                 Destroy(weaponInstance, 0.3f);
@@ -195,6 +221,8 @@ public class OgerMiniBoss : MonoBehaviour
             yield return null;
         }
 
+        // Reset to idle state after attack
+        animator.SetBool("IsAttacking", false);
         attackTimer = 0f;
         attackRoutine = null;
     }

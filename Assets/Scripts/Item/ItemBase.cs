@@ -7,6 +7,12 @@ namespace HLO.Item
         public abstract string Name { get; }
         public abstract string Description { get; }
 
-        public abstract void Get(GameObject player);
+        public virtual void Get(GameObject player)
+        {
+            Use(player);
+            Destroy(gameObject);
+        }
+
+        public abstract void Use(GameObject player);
     }
 }
