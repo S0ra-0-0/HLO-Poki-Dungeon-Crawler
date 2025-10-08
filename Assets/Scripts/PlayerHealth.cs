@@ -83,9 +83,8 @@ public class PlayerHealth : MonoBehaviour
 
     public void AddHeart(GameObject objHeart)
     {
-        Transform transformNewHeart = Instantiate(objHeart, objHeart.transform.position, Quaternion.identity).transform;
+        Transform transformNewHeart = Instantiate(objHeart, transformHPUI, false).transform;
 
-        transformNewHeart.SetParent(transformHPUI);
         heartList.Add(transformNewHeart.GetComponent<HeartBase>());
 
         maxHP += HP_PER_HEART;
