@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 9afb09aca788cab42a7360cd60ced949
+guid: 1e8ad1b5917839b4691d631430eb4031
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3286467415432932117
-    second: iron treasure chest open_0
+      213: -1163504838602118676
+    second: crate_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: iron treasure chest open_0
+      name: crate_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 47
-        height: 44
+        width: 40
+        height: 47
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 51ba6cea3b0eb9d20800000000000000
-      internalID: 3286467415432932117
+      spriteID: ce92ca883866adfe0800000000000000
+      internalID: -1163504838602118676
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      iron treasure chest open_0: 3286467415432932117
+      crate_0: -1163504838602118676
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
