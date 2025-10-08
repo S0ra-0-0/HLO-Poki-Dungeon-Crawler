@@ -20,14 +20,6 @@ namespace HLO.Door
             Open();
         }
 
-        protected override void OnCollisionEnter2D(Collision2D other)
-        {
-            if (other.gameObject.layer == LayerDatas.PLAYER_LAYER)
-            {
-                connectedRoom.EnterRoom(DoorDirectionType, other.transform);
-            }
-        }
-
         protected override void Open()
         {
             base.Open();

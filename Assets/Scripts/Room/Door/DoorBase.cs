@@ -8,6 +8,7 @@ using UnityEngine;
 
 // HLO
 using HLO.Room;
+using HLO.Layer;
 
 namespace HLO.Door
 {
@@ -20,7 +21,7 @@ namespace HLO.Door
         Right= 8
     }
 
-    public abstract class DoorBase : MonoBehaviour
+    public class DoorBase : MonoBehaviour
     {
         [SerializeField] protected RoomBase connectedRoom; public RoomBase ConnectedRoom => connectedRoom;
         [SerializeField] protected DoorDirectionType doorDirectionType; public DoorDirectionType DoorDirectionType => doorDirectionType;
@@ -40,7 +41,13 @@ namespace HLO.Door
             });
         }
 
-        protected abstract void OnCollisionEnter2D(Collision2D other);
+        protected virtual void OnCollisionEnter2D(Collision2D other)
+        {
+            if (IsOpen && other.gameObject.layer == LayerDatas.PLAYER_LAYER)
+            {
+                connectedRoom.EnterRoom(DoorDirectionType, other.transform);
+            }
+        }
 
         public virtual void SetConnectedRoom(RoomBase room) => connectedRoom = room;
         protected virtual void Open() => isOpen = true;
