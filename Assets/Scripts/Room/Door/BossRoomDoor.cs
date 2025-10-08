@@ -7,12 +7,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // HLO
-using HLO.Layer;
+using HLO.Room;
 
 namespace HLO.Door
 {
     public class BossRoomDoor : DoorBase
     {
+        [SerializeField] private bool progressComplete;
+        [SerializeField] private bool thisRoomCleared;
+
         protected override void Awake()
         {
             base.Awake();
@@ -22,22 +25,37 @@ namespace HLO.Door
 
         private void Start()
         {
-            Progress.Instance.RegisterOnProgressReward(Open);
-        }
-
-        protected override void OnCollisionEnter2D(Collision2D other)
-        {
-            if (IsOpen && other.gameObject.layer == LayerDatas.PLAYER_LAYER)
+            Progress.Instance.RegisterOnProgressReward(() =>
             {
-                connectedRoom.EnterRoom(DoorDirectionType, other.transform);
-            }
+                thisRoomCleared = true;
+                CheckOpenQualification();
+            });
         }
 
         protected override void Open()
         {
             base.Open();
-            
+
             GetComponent<SpriteRenderer>().enabled = false;
+        }
+
+        protected override void RegisterRoomAction(RoomBase thisRoom)
+        {
+            base.RegisterRoomAction(thisRoom);
+
+            thisRoom.RegisterOnClearRoom(() =>
+            {
+                progressComplete = true;
+                CheckOpenQualification();
+            });
+        }
+
+        private void CheckOpenQualification()
+        {
+            if (progressComplete && thisRoomCleared)
+            {
+                Open();
+            }
         }
     }
 }
