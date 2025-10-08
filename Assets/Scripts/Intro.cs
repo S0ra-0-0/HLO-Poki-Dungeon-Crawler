@@ -11,8 +11,6 @@ public class Intro : MonoBehaviour
 {
     [SerializeField] private float introTime = 3f;
 
-    [SerializeField] private SceneAsset sceneAsset;
-
     private void Start()
     {
         StartCoroutine(IntroCoroutine());
@@ -32,6 +30,6 @@ public class Intro : MonoBehaviour
             yield return null;
         }
 
-        SceneManager.LoadScene(sceneAsset.name);
+        SceneManager.LoadScene("Title (placeholder)");
     }
 }

@@ -32,7 +32,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private float flickerNumber;
 
     [Header("Death")]
-    [SerializeField] private SceneAsset deathScene;
+    [SerializeField] private string deathSceneName;
 
     private void Start()
     {
@@ -149,6 +149,6 @@ public class PlayerHealth : MonoBehaviour
     private void Die()
     {
         PokiUnitySDK.Instance.gameplayStop();
-        SceneManager.LoadScene(deathScene.name);
+        SceneManager.LoadScene(deathSceneName);
     }
 }

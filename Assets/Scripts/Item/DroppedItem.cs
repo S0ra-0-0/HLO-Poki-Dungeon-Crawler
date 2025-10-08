@@ -11,6 +11,7 @@ namespace HLO.Item
     {
         [SerializeField] protected ItemBase item;
         [SerializeField] protected Vector2 tooltipPositionOffset;
+        [SerializeField] protected bool usingTooltip;
 
         protected virtual void Awake()
         {
@@ -30,11 +31,26 @@ namespace HLO.Item
         public virtual void OnPointerDown(PointerEventData eventData)
         {
             Tooltip.Instance.Rent((Vector2)transform.position + tooltipPositionOffset, item.Name, item.Description);
+            usingTooltip = true;
         }
 
         public virtual void OnPointerUp(PointerEventData eventData)
         {
-            Tooltip.Instance.Return();
+            ReturnTooltip();
+        }
+
+        protected virtual void OnDisable()
+        {
+            ReturnTooltip();
+        }
+        
+        protected virtual void ReturnTooltip()
+        {
+            if (usingTooltip)
+            {
+                Tooltip.Instance.Return();
+                usingTooltip = false;
+            }
         }
 
         public void KillMe()
