@@ -271,7 +271,7 @@ public class GoblinEnemy : MonoBehaviour
         {
             for (int i = 0; i < dropItems.Length; i++)
             {
-                if (dropChances[i] >= Random.Range(0f, 1f))
+                if (dropChances[i] >= Random.value)
                 {
                     DropItem(dropItems[i]);
                 }
@@ -283,7 +283,7 @@ public class GoblinEnemy : MonoBehaviour
 
     private void DropItem(DroppedItem item)
     {
-        Instantiate(item.gameObject, (Vector2)transform.position + facingDirection.normalized * Random.Range(0f, 1f), Quaternion.identity);
+        Instantiate(item.gameObject, (Vector2)transform.position + facingDirection.normalized * Random.value, Quaternion.identity);
     }
 
     public void Knockback(Vector2 knockVec)

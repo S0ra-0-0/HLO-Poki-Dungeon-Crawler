@@ -324,7 +324,7 @@ MonoBehaviour:
   isInvincibility: 0
   spriteRenderer: {fileID: 0}
   flickerNumber: 3
-  deathScene: {fileID: 102900000, guid: 6d23484de2cbf994f93111761d2bc6a0, type: 3}
+  deathSceneName: Game over screen
   healTest: 0
 --- !u!114 &2350193798477251471
 MonoBehaviour:
@@ -338,8 +338,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64e550a3adf6d3140addddb58457cdf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textKeyAmount: {fileID: 0}
-  keyAmount: 0
+  followItemList: []
   textCoins: {fileID: 0}
   coins: 0
 --- !u!61 &535401906660523576
