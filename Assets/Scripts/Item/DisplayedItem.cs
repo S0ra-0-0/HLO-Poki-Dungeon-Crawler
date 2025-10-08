@@ -25,7 +25,7 @@ namespace HLO.Item
         {
             if (other.gameObject.layer == LayerDatas.PLAYER_LAYER && other.GetComponent<Inventory>().UseCoins(price))
             {
-                item.Get(other.gameObject);
+                item.Use(other.gameObject);
 
                 GetComponent<Collider2D>().enabled = false;
                 GetComponent<SpriteRenderer>().enabled = false;

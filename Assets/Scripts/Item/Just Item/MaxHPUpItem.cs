@@ -14,7 +14,7 @@ namespace HLO.Item
         public override string Description => "Increases the heart by one space.";
 
         [SerializeField] private GameObject heart;
-        public override void Get(GameObject player)
+        public override void Use(GameObject player)
         {
             player.GetComponent<PlayerHealth>().AddHeart(heart);
         }

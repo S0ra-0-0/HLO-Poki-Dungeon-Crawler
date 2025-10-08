@@ -4027,7 +4027,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5471878055165408936, guid: ca93be9ba1e200f4ab59bfca100f0ee1, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1623738817}
+      addedObject: {fileID: 1623738824}
   m_SourcePrefab: {fileID: 100100000, guid: ca93be9ba1e200f4ab59bfca100f0ee1, type: 3}
 --- !u!4 &1623738815 stripped
 Transform:
@@ -4039,7 +4039,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5471878055165408936, guid: ca93be9ba1e200f4ab59bfca100f0ee1, type: 3}
   m_PrefabInstance: {fileID: 1623738814}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1623738817
+--- !u!114 &1623738824
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4048,13 +4048,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1623738816}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 687faf3923223f44f81c806e55aebdc8, type: 3}
+  m_Script: {fileID: 11500000, guid: f1a9fc573d71547469b2dce5bbb99b09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   enemySpawnpointGroup: {fileID: 1816634932}
   enemyPrefabs:
   - {fileID: 6775749300026828733, guid: 626a7fe73253dfa4ea534aa42c7b4c6c, type: 3}
-  - {fileID: 6775749300026828733, guid: 46d11c497109b4242b41b39ce5856a7f, type: 3}
 --- !u!1 &1631075621
 GameObject:
   m_ObjectHideFlags: 0
@@ -4911,7 +4910,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3073073278932916397, guid: f566fe0984f89bd4c9c4e74527732eb9, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1681803099}
+      addedObject: {fileID: 1681803106}
   m_SourcePrefab: {fileID: 100100000, guid: f566fe0984f89bd4c9c4e74527732eb9, type: 3}
 --- !u!4 &1681803096 stripped
 Transform:
@@ -4923,7 +4922,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3073073278932916397, guid: f566fe0984f89bd4c9c4e74527732eb9, type: 3}
   m_PrefabInstance: {fileID: 1681803095}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1681803099
+--- !u!114 &1681803106
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4932,13 +4931,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1681803097}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 687faf3923223f44f81c806e55aebdc8, type: 3}
+  m_Script: {fileID: 11500000, guid: f1a9fc573d71547469b2dce5bbb99b09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   enemySpawnpointGroup: {fileID: 1832333943}
   enemyPrefabs:
   - {fileID: 6775749300026828733, guid: 626a7fe73253dfa4ea534aa42c7b4c6c, type: 3}
-  - {fileID: 6775749300026828733, guid: 46d11c497109b4242b41b39ce5856a7f, type: 3}
 --- !u!1 &1720322130
 GameObject:
   m_ObjectHideFlags: 0

@@ -24,8 +24,6 @@ namespace HLO.Item
             if (other.gameObject.layer == LayerDatas.PLAYER_LAYER)
             {
                 item.Get(other.gameObject);
-
-                Destroy(gameObject);
             }
         }
 
@@ -37,6 +35,11 @@ namespace HLO.Item
         public virtual void OnPointerUp(PointerEventData eventData)
         {
             Tooltip.Instance.Return();
+        }
+
+        public void KillMe()
+        {
+            Destroy(this);
         }
     }
 }
