@@ -9,45 +9,19 @@ using UnityEngine;
 // TMP
 using TMPro;
 using NUnit.Framework.Constraints;
+using HLO.Item;
 
 public class Inventory : MonoBehaviour
 {
     private const int MAX_AMOUNT = 99;
     private const int MIN_AMOUNT = 0;
 
-    [Header("Keys")]
-    [SerializeField] private TMP_Text textKeyAmount;
-    [SerializeField] private int keyAmount = 0; public int KeyAmount => keyAmount;
+    [Header("Follow Items")]
+    [SerializeField] private List<FollowItem> followItemList = new List<FollowItem>();
 
     [Header("Coins")]
     [SerializeField] private TMP_Text textCoins;
     [SerializeField] private int coins = 0; public int Coins => coins;
-
-    #region Keys
-    public bool UseKeys(int necessaryKeyAmount)
-    {
-        if (KeyAmount >= necessaryKeyAmount)
-        {
-            UpdateKeyAmount(-necessaryKeyAmount);
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-
-    public void UpdateKeyAmount(int getKeyAmount)
-    {
-        keyAmount = Mathf.Clamp(KeyAmount + getKeyAmount, MIN_AMOUNT, MAX_AMOUNT);
-        textKeyAmount.text = keyAmount.ToString("D2");
-    }
-
-#if UNITY_EDITOR
-    [ContextMenu("Give A Key")]
-    public void GiveAKey() => UpdateKeyAmount(1);
-#endif
-    #endregion
 
     #region Coins
     public bool UseCoins(int necessaryCoins)
@@ -73,5 +47,48 @@ public class Inventory : MonoBehaviour
     [ContextMenu("Give Coins")]
     public void GiveCoins() => UpdateCoins(10);
 #endif
+    #endregion
+
+    #region Follow Items
+    public void AddFollowItem(FollowItem followItem)
+    {
+        followItem.SetTarget(GetTarget());
+        followItemList.Add(followItem);
+    }
+
+    private Transform GetTarget()
+    {
+        if (followItemList.Count == 0)
+        {
+            return transform;
+        }
+        else
+        {
+            return followItemList[followItemList.Count - 1].transform;
+        }
+    }
+
+    public bool UseItem(Type itemType)
+    {
+        for (int i = 0; i < followItemList.Count; i++)
+        {
+            ItemBase item = followItemList[i].Item;
+
+            if (item.GetType() == itemType)
+            {
+                if (i + 1 < followItemList.Count)
+                {
+                    followItemList[i + 1].SetTarget(followItemList[i].Target);
+                }
+
+                followItemList.RemoveAt(i);
+
+                item.Use(gameObject);
+                return true;
+            }
+        }
+
+        return false;
+    }
     #endregion
 }

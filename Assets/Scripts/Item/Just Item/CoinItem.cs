@@ -29,7 +29,7 @@ namespace HLO.Item
 
         [SerializeField] private int coinAmount = 1;
 
-        public override void Get(GameObject player)
+        public override void Use(GameObject player)
         {
             player.GetComponent<Inventory>().UpdateCoins(coinAmount);
         }
