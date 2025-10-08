@@ -385,7 +385,7 @@ MonoBehaviour:
   dropChances:
   - 1
   - 0.5
-  - 0.1
+  - 0.25
   idleDirectionSprites:
   - {fileID: 21300000, guid: f601e141ee770ca4789e17a372f140b0, type: 3}
   - {fileID: 21300000, guid: 5f6e1d428588a5341aee4425062db5bc, type: 3}
