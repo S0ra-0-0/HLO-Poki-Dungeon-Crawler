@@ -1373,6 +1373,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextSceneName: Main
+  animator: {fileID: 0}
+  animationDelay: 1
 --- !u!212 &901540753
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5028,6 +5030,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08000d63eaf3c9c4fab0b8c335abbc40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bossWeaponText: {fileID: 0}
 --- !u!4 &2070288392
 Transform:
   m_ObjectHideFlags: 0

@@ -1,9 +1,3 @@
-// System
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
-
 // Unity
 using UnityEngine;
 using UnityEngine.SceneManagement;

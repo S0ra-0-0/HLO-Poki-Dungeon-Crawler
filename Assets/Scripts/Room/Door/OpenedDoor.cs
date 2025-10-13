@@ -1,13 +1,6 @@
-// System
-using System;
-using System.Collections;
-using System.Collections.Generic;
 
 // Unity
 using UnityEngine;
-
-// HLO
-using HLO.Layer;
 
 namespace HLO.Door
 {

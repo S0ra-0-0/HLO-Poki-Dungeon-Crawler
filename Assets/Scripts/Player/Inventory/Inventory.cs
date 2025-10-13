@@ -1,6 +1,5 @@
 // System
 using System;
-using System.Collections;
 using System.Collections.Generic;
 
 // Unity
@@ -8,7 +7,6 @@ using UnityEngine;
 
 // TMP
 using TMPro;
-using NUnit.Framework.Constraints;
 using HLO.Item;
 
 public class Inventory : MonoBehaviour
