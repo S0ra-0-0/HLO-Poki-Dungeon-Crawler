@@ -5812,6 +5812,10 @@ PrefabInstance:
       value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 6505740048901179101, guid: 1ca26a0be0415b045a8e3c64477e7151, type: 3}
+      propertyPath: bossWeaponText
+      value: 
+      objectReference: {fileID: 1693219212}
+    - target: {fileID: 6505740048901179101, guid: 1ca26a0be0415b045a8e3c64477e7151, type: 3}
       propertyPath: swordPrefabParry
       value: 
       objectReference: {fileID: 5925944416369875127, guid: f52ccc68019900c4ea6a3099a1f8fe4f, type: 3}
