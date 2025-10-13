@@ -8,19 +8,19 @@ using UnityEngine;
 
 public class FollowingUI : MonoBehaviour
 {
-    [SerializeField] protected Vector2 posOffset;
-    [SerializeField] protected Vector2 originalPos;
-    [SerializeField] protected RectTransform rectTransform;
+    [SerializeField] private Vector2 posOffset;
+    [SerializeField] private Vector2 originalPos;
+    [SerializeField] private RectTransform rectTransform;
 
-    protected Coroutine currentFollowCoroutine; 
+    private Coroutine currentFollowCoroutine; 
 
-    protected virtual void Start()
+    private void Start()
     {
         rectTransform = GetComponent<RectTransform>();
         originalPos = rectTransform.anchoredPosition;
     }
 
-    public virtual void Follow(Transform target, float waitTime)
+    public void Follow(Transform target, float waitTime)
     {
         if (currentFollowCoroutine != null)
         {
@@ -31,7 +31,7 @@ public class FollowingUI : MonoBehaviour
         
     }
 
-    protected virtual IEnumerator FollowCoroutine(Transform target, float waitTime)
+    private IEnumerator FollowCoroutine(Transform target, float waitTime)
     {
         if (target)
         {
