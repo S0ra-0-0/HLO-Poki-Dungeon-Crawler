@@ -1714,7 +1714,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1056291933}
   - component: {fileID: 1056291935}
-  - component: {fileID: 1056291934}
+  - component: {fileID: 1056291936}
   m_Layer: 5
   m_Name: HP UI
   m_TagString: Untagged
@@ -1741,23 +1741,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 71.5, y: -32.5}
+  m_AnchoredPosition: {x: 117.5, y: -32.5}
   m_SizeDelta: {x: 200, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1056291934
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1056291932}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67b44528fdc967e45972beb3983b74b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  posOffset: {x: 0, y: -35}
-  rectTransform: {fileID: 0}
 --- !u!114 &1056291935
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1775,7 +1761,7 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 4
+  m_ChildAlignment: 3
   m_Spacing: 3
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
@@ -1784,6 +1770,24 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &1056291936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1056291932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a9cd3f2bde1a914583d2bb0e51044e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  posOffset: {x: 0, y: -40}
+  originalPos: {x: 0, y: 0}
+  rectTransform: {fileID: 0}
+  layoutGroup: {fileID: 0}
+  originalAlignment: 0
+  followingAlignment: 4
 --- !u!1001 &1140322847
 PrefabInstance:
   m_ObjectHideFlags: 0
