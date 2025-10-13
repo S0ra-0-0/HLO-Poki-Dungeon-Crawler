@@ -10,6 +10,9 @@ TagManager:
   - PlayerProjectile
   - Wall
   - Boss
+  - CrackedWall
+  - OpenWall
+  - bossWeapon
   layers:
   - Default
   - TransparentFX
@@ -23,7 +26,7 @@ TagManager:
   - MapIcon
   - Projectile
   - Item
-  - 
+  - CrackedWall
   - 
   - 
   - 
@@ -61,6 +64,9 @@ TagManager:
     locked: 0
   - name: MapIcon
     uniqueID: 3619701385
+    locked: 0
+  - name: CrackedWall
+    uniqueID: 1778522383
     locked: 0
   m_RenderingLayers:
   - Default

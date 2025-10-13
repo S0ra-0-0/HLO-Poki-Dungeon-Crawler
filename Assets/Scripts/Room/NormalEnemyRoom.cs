@@ -2,12 +2,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
-// Unity
-using UnityEngine;
-
 // HLO
 using HLO.Enemy.Spawn;
+// Unity
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace HLO.Room
 {
@@ -33,6 +32,11 @@ namespace HLO.Room
             {
                 Debug.LogWarning($"{gameObject.name} doesn't have {nameof(EnemySpawner)}.");
             }
+
+            RegisterOnClearRoom(() =>
+            {
+                if (SceneManager.GetActiveScene().name == "Level 01") { PlayerHealth.FindAnyObjectByType<PlayerHealth>().HealHP(5); }
+            });
         }
 
         private void SpawnEnemy()

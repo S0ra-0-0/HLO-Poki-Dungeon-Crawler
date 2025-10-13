@@ -16,6 +16,8 @@ public class SwordAttack : MonoBehaviour, IAttackType
 
     public void Attack(Player player)
     {
+
+
         Debug.Log("[SwordAttack] Normal attack executed");
 
         Vector3 spawnPosition = player.transform.position + (Vector3)player.facingDirection * .5f;
@@ -31,6 +33,19 @@ public class SwordAttack : MonoBehaviour, IAttackType
         swordHolder.transform.parent = player.transform;
 
         Destroy(swordHolder, 0.3f);
+
+        var crackedWalls = Physics2D.OverlapCircleAll(
+            player.transform.position,
+            1.5f,
+            LayerMask.GetMask("CrackedWall")
+        );
+
+        foreach (var wall in crackedWalls)
+        {
+            Debug.Log($"[SwordAttack] Cracking wall {wall.name}");
+            wall.SendMessage("crackWall", SendMessageOptions.DontRequireReceiver);
+        }
+
 
         var enemies = Physics2D.OverlapCircleAll(
             player.transform.position,

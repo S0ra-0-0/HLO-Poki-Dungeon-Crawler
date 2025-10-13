@@ -218,7 +218,6 @@ public class GoblinRangeEnemy : MonoBehaviour
     {
         if (Player == null) return;
 
-        // Explicitly tell the player it was attacked
         Player.RegisterAttack();
 
         if (!Player.TryTakeDamage(Damage))
@@ -229,17 +228,14 @@ public class GoblinRangeEnemy : MonoBehaviour
     }
     private void SetIdleDirection()
     {
-        // Set LastMoveX and LastMoveY for idle blend tree
         animator.SetFloat("LastMoveX", facingDirection.x);
         animator.SetFloat("LastMoveY", facingDirection.y);
 
-        // Also update the sprite for visual consistency
         UpdateSpriteDirection();
     }
 
     private void SetAttackDirection(Vector2 direction)
     {
-        // Set FacingX and FacingY for attack blend tree
         animator.SetFloat("FacingX", direction.x);
         animator.SetFloat("FacingY", direction.y);
     }

@@ -11,6 +11,7 @@ using UnityEditor;
 
 // HLO
 using HLO.Heart;
+using static UnityEngine.SceneManagement.SceneManager;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -43,17 +44,30 @@ public class PlayerHealth : MonoBehaviour
         currentHP = maxHP = heartList.Count * HP_PER_HEART;
     }
 
+    public void SetMaxHp()
+    {
+        currentHP = maxHP;
+    }
+
     public void SetInvincibility(bool value) => isInvincibility = value;
 
     public void Hit(int damage)
     {
         if (IsInvincibility) { return; }
 
-        DecreaseHP(damage);
+        if (SceneManager.GetActiveScene().name == "Level 01")
+        {
+            if (currentHP - damage < 1)
+            {
+                damage = currentHP - 1;
+            }
+        }
 
+        DecreaseHP(damage);
         SetInvincibility(true);
         StartCoroutine(CoroutineSignInvincibility());
     }
+
 
 
     private IEnumerator CoroutineSignInvincibility()

@@ -46,7 +46,7 @@ public class Progress : MonoBehaviour
     {
         EnteredRoomCount++;
         Debug.Log($"Room discovered! Total discovered rooms: {EnteredRoomCount}/{TotalRoomCount}");
-        ProgressBar.fillAmount = (float)EnteredRoomCount / (TotalRoomCount / 2);
+        ProgressBar.fillAmount = (float)EnteredRoomCount / (TotalRoomCount / 4);
 
         if (ProgressBar.fillAmount >= 1f)
         {
