@@ -41,6 +41,7 @@ public class Player : MonoBehaviour
 
     [Space(5)]
     [SerializeField] private bool isWalking;
+    [SerializeField] private GameManager gamemanger;
 
     [Header("Sprite Direction")]
     public Sprite[] parryDirectionSprites = new Sprite[8]; // Assign in Inspector: Right, UpRight, Up, UpLeft, Left, DownLeft, Down, DownRight
@@ -489,20 +490,13 @@ public class Player : MonoBehaviour
             attackDamage = 2f;
             swordSwingNothingSound = clubSwingNothingSound;
             swordSwingEnemySound = clubSwingEnemySound;
-            StartCoroutine(SpawnText());
+            gamemanger.StartCoroutine(gamemanger.SpawnText());
             Debug.Log("Picked up Boss Club!");
             collision.gameObject.GetComponent<SpriteRenderer>().enabled = false;
         }
     }
 
 
-    IEnumerator SpawnText()
-    {
-        bossWeaponText.color = Color.yellow;
-        bossWeaponText.text = "Picked up Boss Club!";
-        bossWeaponText.gameObject.SetActive(true);
-        yield return new WaitForSeconds(2f);
-        bossWeaponText.gameObject.SetActive(false);
-    }
+
 }
 

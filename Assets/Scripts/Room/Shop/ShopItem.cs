@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using HLO.Item;
 
 [Serializable]
 public struct ShopItem 

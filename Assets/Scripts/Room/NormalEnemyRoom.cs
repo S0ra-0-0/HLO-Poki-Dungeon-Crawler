@@ -1,6 +1,4 @@
-// System
-using System;
-using System.Collections;
+//System
 using System.Collections.Generic;
 // HLO
 using HLO.Enemy.Spawn;

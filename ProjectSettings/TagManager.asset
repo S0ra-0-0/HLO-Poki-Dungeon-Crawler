@@ -13,6 +13,8 @@ TagManager:
   - CrackedWall
   - OpenWall
   - bossWeapon
+  - Gamemanager
+  - Text
   layers:
   - Default
   - TransparentFX

@@ -5,13 +5,13 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/screens/Title (placeholder).unity
     guid: 838ece7dc8455274e8e611a739b35ab8
   - enabled: 0
     path: Assets/Scenes/screens/Intro cutscene.unity
     guid: 6c7d52fbb3437984f9feedc5f9f476fe
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/screens/level select.unity
     guid: 49d2536dd17bf424280e8472d7999a60
   - enabled: 1

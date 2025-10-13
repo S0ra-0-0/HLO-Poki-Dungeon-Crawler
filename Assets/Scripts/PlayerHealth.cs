@@ -1,5 +1,4 @@
 // System
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,11 +6,8 @@ using System.Linq;
 // Unity
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEditor;
-
 // HLO
 using HLO.Heart;
-using static UnityEngine.SceneManagement.SceneManager;
 
 public class PlayerHealth : MonoBehaviour
 {
