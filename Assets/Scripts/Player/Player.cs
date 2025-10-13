@@ -35,11 +35,11 @@ public class Player : MonoBehaviour
 
     [Header("Animation")]
     [SerializeField] private Animator animator;
-    [SerializeField] private int directionHash;
+    [SerializeField] private int facingXHash;
+    [SerializeField] private int facingYHash;
     [SerializeField] private int isWalkingHash;
 
     [Space(5)]
-    [SerializeField] private int directionIndex;
     [SerializeField] private bool isWalking;
 
     [Header("Sprite Direction")]
@@ -108,7 +108,8 @@ public class Player : MonoBehaviour
         originalMaterial = spriteRenderer.material; // Store original material
 
         animator = GetComponent<Animator>();
-        directionHash = Animator.StringToHash("Direction");
+        facingXHash = Animator.StringToHash("FacingX");
+        facingYHash = Animator.StringToHash("FacingY");
         isWalkingHash = Animator.StringToHash("IsWalking");
 
         attackTypes = new List<IAttackType>
@@ -129,11 +130,9 @@ public class Player : MonoBehaviour
         playerHealth.isInvincibility = false;
         SetParryVisual(false);
 
-        if (animator)
-        {
-            animator.SetInteger(directionHash, directionIndex);
-            animator.SetBool(isWalkingHash, isWalking);
-        }
+        animator.SetFloat(facingXHash, facingDirection.x);
+        animator.SetFloat(facingYHash, facingDirection.y);
+        animator.SetBool(isWalkingHash, isWalking);
     }
 
 
@@ -179,7 +178,6 @@ public class Player : MonoBehaviour
             // Prevent movement while heavy attacking
             rb.linearVelocity = Vector2.Lerp(rb.linearVelocity, Vector2.zero, deceleration * Time.fixedDeltaTime);
         }
-        UpdateSpriteDirection();
         //HandleDashInput();
         HandleMovementInput();
         HandleAttackInput();
@@ -200,7 +198,17 @@ public class Player : MonoBehaviour
 
         // Update facing direction if moving
         if (moveInput.sqrMagnitude > 0.01f)
+        {
+            Vector2 originalFacingDirection = facingDirection;
+
             facingDirection = Get8Direction(moveInput);
+
+            if(originalFacingDirection != facingDirection)
+            {
+                animator.SetFloat(facingXHash, facingDirection.x);
+                animator.SetFloat(facingYHash, facingDirection.y);
+            }
+        }
     }
     private void HandleDashInput()
     {
@@ -346,30 +354,6 @@ public class Player : MonoBehaviour
     private void StopHeavyAttacking()
     {
         isHeavyAttacking = false;
-    }
-
-    private void UpdateSpriteDirection()
-    {
-        // 0: Right, 1: UpRight, 2: Up, 3: UpLeft, 4: Left, 5: DownLeft, 6: Down, 7: DownRight
-        int dirIndex = 0;
-        Vector2 dir = facingDirection.normalized;
-        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        angle = (angle + 360) % 360;
-
-        if (angle >= 337.5f || angle < 22.5f) dirIndex = 0; // Right
-        else if (angle >= 22.5f && angle < 67.5f) dirIndex = 1; // UpRight
-        else if (angle >= 67.5f && angle < 112.5f) dirIndex = 2; // Up
-        else if (angle >= 112.5f && angle < 157.5f) dirIndex = 3; // UpLeft
-        else if (angle >= 157.5f && angle < 202.5f) dirIndex = 4; // Left
-        else if (angle >= 202.5f && angle < 247.5f) dirIndex = 5; // DownLeft
-        else if (angle >= 247.5f && angle < 292.5f) dirIndex = 6; // Down
-        else if (angle >= 292.5f && angle < 337.5f) dirIndex = 7; // DownRight
-
-        if (directionIndex != dirIndex)
-        {
-            directionIndex = dirIndex;
-            animator.SetInteger(directionHash, dirIndex);
-        }
     }
 
     public void SetInvulnerable(bool value)
