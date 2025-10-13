@@ -15,7 +15,7 @@ namespace HLO.Item
 
         public override void Get(GameObject player)
         {
-            FollowItem followItem = gameObject.AddComponent<FollowItem>();
+            FollowingItem followItem = gameObject.AddComponent<FollowingItem>();
             player.GetComponent<Inventory>().AddFollowItem(followItem);
 
             GetComponent<DroppedItem>().KillMe();

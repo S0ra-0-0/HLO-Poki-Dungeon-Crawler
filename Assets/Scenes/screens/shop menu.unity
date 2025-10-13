@@ -1197,7 +1197,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be85f8a0ed6ba9f4b9df8683be2a803e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad: shop menu
+  sceneToLoad: level select
 --- !u!95 &927355379
 Animator:
   serializedVersion: 7
@@ -1263,7 +1263,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 927355381}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 927355378}
+        m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
+        m_MethodName: LoadScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &927355381
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -10,7 +10,7 @@ using UnityEngine;
 
 namespace HLO.Item
 {
-    public class FollowItem : MonoBehaviour
+    public class FollowingItem : MonoBehaviour
     {
         [Header("Item")]
         [SerializeField] private ItemBase item;
