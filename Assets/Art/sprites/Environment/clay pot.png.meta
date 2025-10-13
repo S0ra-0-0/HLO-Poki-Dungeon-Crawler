@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: a5cf35748262e6648a8890575a72ccd0
+guid: b7f1663cee1afbf4f9def67e2c7d3c1c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3645297175823002635
-    second: cobweb1_0
+      213: 4024751049884490209
+    second: clay pot_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: cobweb1_0
+      name: clay pot_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 20
-        height: 27
+        width: 25
+        height: 28
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5f3d55e388d496dc0800000000000000
-      internalID: -3645297175823002635
+      spriteID: 1e9debd71c9cad730800000000000000
+      internalID: 4024751049884490209
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      cobweb1_0: -3645297175823002635
+      clay pot_0: 4024751049884490209
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
