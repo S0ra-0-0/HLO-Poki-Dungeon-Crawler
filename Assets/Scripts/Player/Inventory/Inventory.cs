@@ -17,7 +17,7 @@ public class Inventory : MonoBehaviour
     private const int MIN_AMOUNT = 0;
 
     [Header("Follow Items")]
-    [SerializeField] private List<FollowItem> followItemList = new List<FollowItem>();
+    [SerializeField] private List<FollowingItem> followItemList = new List<FollowingItem>();
 
     [Header("Coins")]
     [SerializeField] private TMP_Text textCoins;
@@ -50,7 +50,7 @@ public class Inventory : MonoBehaviour
     #endregion
 
     #region Follow Items
-    public void AddFollowItem(FollowItem followItem)
+    public void AddFollowItem(FollowingItem followItem)
     {
         followItem.SetTarget(GetTarget());
         followItemList.Add(followItem);
