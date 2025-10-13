@@ -46,7 +46,7 @@ public class Progress : MonoBehaviour
     {
         EnteredRoomCount++;
         Debug.Log($"Room discovered! Total discovered rooms: {EnteredRoomCount}/{TotalRoomCount}");
-        ProgressBar.fillAmount = (float)EnteredRoomCount / (TotalRoomCount / 2);
+        ProgressBar.fillAmount = (float)EnteredRoomCount / (TotalRoomCount / 4);
 
         if (ProgressBar.fillAmount >= 1f)
         {
@@ -70,7 +70,7 @@ public class Progress : MonoBehaviour
     {
         Debug.Log("Progress bar is full! Rewarding player...");
         // Implement reward logic here
-         Player.FindFirstObjectByType<Player>().bossKeyFound = true;
+        Player.FindFirstObjectByType<Player>().bossKeyFound = true;
         onProgressReward?.Invoke();
         onProgressReward = null;
     }

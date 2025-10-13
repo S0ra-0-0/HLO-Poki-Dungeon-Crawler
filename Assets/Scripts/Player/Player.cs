@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -51,12 +52,19 @@ public class Player : MonoBehaviour
 
     [Header("Weapons")]
     public GameObject swordPrefabAttack;
+    public GameObject bossWeaponPrefabAttack;
+    [SerializeField] private TMP_Text bossWeaponText;
     public Color parryColor;
 
     [Header("Sound Effects")]
     public AudioSource audioSource;
+
     public AudioClip swordSwingNothingSound;
     public AudioClip swordSwingEnemySound;
+
+    public AudioClip clubSwingNothingSound;
+    public AudioClip clubSwingEnemySound;
+
     public AudioClip parrySound;
     public AudioClip dashSound;
     public AudioClip hitSound;
@@ -231,7 +239,7 @@ public class Player : MonoBehaviour
 
     private void HandleAttackSwapInput()
     {
-        /*
+
         //Temp Press Q/E to cycle attack types
         if (Input.GetKeyDown(KeyCode.Q))
         {
@@ -245,7 +253,7 @@ public class Player : MonoBehaviour
             currentAttackType = attackTypes[currentAttackIndex];
             Debug.Log($"Switched to {currentAttackType.GetType().Name}");
         }
-        */
+
     }
 
     private void FixedUpdate()
@@ -279,8 +287,6 @@ public class Player : MonoBehaviour
             {
                 isWalking = true;
                 animator.SetBool(isWalkingHash, true);
-
-                Debug.Log("Walk!");
             }
         }
     }
@@ -491,4 +497,28 @@ public class Player : MonoBehaviour
             bossArrow.transform.rotation = Quaternion.Euler(0, 0, angle - 90f);
         }
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("bossWeapon"))
+        {
+            swordPrefabAttack = bossWeaponPrefabAttack;
+            attackDamage = 2f;
+            swordSwingNothingSound = clubSwingNothingSound;
+            swordSwingEnemySound = clubSwingEnemySound;
+            StartCoroutine(SpawnText());
+            Debug.Log("Picked up Boss Club!");
+            collision.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+        }
+    }
+
+
+    IEnumerator SpawnText()
+    {
+        bossWeaponText.color = Color.yellow;
+        bossWeaponText.text = "Picked up Boss Club!";
+        bossWeaponText.gameObject.SetActive(true);
+        yield return new WaitForSeconds(2f);
+        bossWeaponText.gameObject.SetActive(false);
+    }
 }
+

@@ -121,6 +121,7 @@ MonoBehaviour:
   flashMaterial: {fileID: 2100000, guid: c12bc7a3463026e488c02be998c54a45, type: 2}
   dropItems: []
   dropChances: []
+  weaponDrop: {fileID: 5272381824676255033, guid: f504622dff11cca4688cd5226b5b13c2, type: 3}
   idleDirectionSprites:
   - {fileID: 21300000, guid: 1aa0e9be9b39022469af18eb6fceecf4, type: 3}
   - {fileID: 21300000, guid: b94c241cda68fd342ba21d718adfc147, type: 3}

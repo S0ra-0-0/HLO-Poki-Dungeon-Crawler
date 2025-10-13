@@ -43,6 +43,7 @@ public class OgerMiniBoss : MonoBehaviour
     [Header("Drop Item")]
     [SerializeField] private DroppedItem[] dropItems;
     [SerializeField] private float[] dropChances;
+    [SerializeField] private GameObject weaponDrop;
 
     [Header("Sprites")]
     [SerializeField] private Sprite[] idleDirectionSprites = new Sprite[8]; // Assign in Inspector: Right, UpRight, Up, UpLeft, Left, DownLeft, Down, DownRight
@@ -303,23 +304,12 @@ public class OgerMiniBoss : MonoBehaviour
 
     private void Die()
     {
-        for (int i = 0; i < dropItems.Length; i++)
-        {
-            if (dropChances[i] >= Random.Range(0f, 1f))
-            {
-                DropItem(dropItems[i]);
-            }
-        }
-
-        // Temp Code
-        // TODO: Fix that Pleeeeeeeeeeeeeeeeeeeeeeeease.
-        UnityEngine.SceneManagement.SceneManager.LoadScene("win screen");
-
-        // Destroy(gameObject);
+        dropWeapon();
+        Destroy(gameObject);
     }
 
-    private void DropItem(DroppedItem item)
-    {
-        Instantiate(item.gameObject, (Vector2)transform.position + facingDirection.normalized * Random.Range(0f, 1f), Quaternion.identity);
+    private void dropWeapon()
+    { 
+        Instantiate(weaponDrop, transform.position, Quaternion.identity);
     }
 }

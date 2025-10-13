@@ -435,7 +435,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 0}
   playerInventory: {fileID: 0}
-  Damage: 0
+  Damage: 1
   maxHealth: 2
   currentHealth: 0
   AttackRange: 1.5
@@ -448,7 +448,8 @@ MonoBehaviour:
   isTutorial: 0
   flashMaterial: {fileID: 2100000, guid: c12bc7a3463026e488c02be998c54a45, type: 2}
   AttackIndicator: {fileID: 8485125466935941487, guid: 476cf636d4383a54b975e9264e5306ac, type: 3}
-  Key: {fileID: 8730183321954095066, guid: afc0b3bbed4456d44b8073b75ce49647, type: 3}
+  dropItems: []
+  dropChances: []
   idleDirectionSprites:
   - {fileID: 21300000, guid: 40404cfa4989a184383ed21485934d6a, type: 3}
   - {fileID: 21300000, guid: b00387690031e954d9f65087203e2170, type: 3}
@@ -462,6 +463,7 @@ MonoBehaviour:
   currentState: 0
   attackEffect: {fileID: 1017420970193715327, guid: 2fa792c991aa7304db8a7e27006773a9, type: 3}
   attackEffectPosOffset: 0.2
+  attackEffectRotOffset: -90
 --- !u!95 &80580961040251438
 Animator:
   serializedVersion: 7
