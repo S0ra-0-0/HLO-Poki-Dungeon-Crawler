@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -52,6 +53,7 @@ public class Player : MonoBehaviour
     [Header("Weapons")]
     public GameObject swordPrefabAttack;
     public GameObject bossWeaponPrefabAttack;
+    [SerializeField] private TMP_Text bossWeaponText;
     public Color parryColor;
 
     [Header("Sound Effects")]
@@ -503,9 +505,20 @@ public class Player : MonoBehaviour
             attackDamage = 2f;
             swordSwingNothingSound = clubSwingNothingSound;
             swordSwingEnemySound = clubSwingEnemySound;
+            StartCoroutine(SpawnText());
             Debug.Log("Picked up Boss Club!");
-            collision.gameObject.SetActive(false);
+            collision.gameObject.GetComponent<SpriteRenderer>().enabled = false;
         }
+    }
+
+
+    IEnumerator SpawnText()
+    {
+        bossWeaponText.color = Color.yellow;
+        bossWeaponText.text = "Picked up Boss Club!";
+        bossWeaponText.gameObject.SetActive(true);
+        yield return new WaitForSeconds(2f);
+        bossWeaponText.gameObject.SetActive(false);
     }
 }
 

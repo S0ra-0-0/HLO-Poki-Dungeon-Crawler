@@ -70,7 +70,7 @@ public class Progress : MonoBehaviour
     {
         Debug.Log("Progress bar is full! Rewarding player...");
         // Implement reward logic here
-         Player.FindFirstObjectByType<Player>().bossKeyFound = true;
+        Player.FindFirstObjectByType<Player>().bossKeyFound = true;
         onProgressReward?.Invoke();
         onProgressReward = null;
     }
