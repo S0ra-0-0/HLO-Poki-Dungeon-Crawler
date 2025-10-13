@@ -39,6 +39,8 @@ public class Inventory : MonoBehaviour
 
     public void UpdateCoins(int getCoins)
     {
+        if (!textCoins) return;
+        
         coins = Mathf.Clamp(coins + getCoins, MIN_AMOUNT, MAX_AMOUNT);
         textCoins.text = coins.ToString("D2");
     }

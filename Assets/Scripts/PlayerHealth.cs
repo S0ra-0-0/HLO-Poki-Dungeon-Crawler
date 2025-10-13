@@ -17,11 +17,14 @@ public class PlayerHealth : MonoBehaviour
     [Header("HP")]
     [SerializeField] private List<HeartBase> heartList;
     [SerializeField] private Transform transformHPUI;
+    [SerializeField] private FollowingUI followingHPUI;
     [SerializeField] private GameObject prefabNormalHeart;
     [SerializeField] private int maxHP;
     [SerializeField] private int currentHP;
     private const int HP_PER_HEART = 2;
     private int NextHeartIndex => currentHP / HP_PER_HEART;
+
+    private const float HP_UI_FOLLOWING_TIME = 0.5f;
 
     [Header("Invincibility")]
     [SerializeField] private float invincibilityTime;
@@ -37,6 +40,7 @@ public class PlayerHealth : MonoBehaviour
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        followingHPUI = transformHPUI.GetComponent<FollowingUI>();
 
         heartList = transformHPUI.GetComponentsInChildren<HeartBase>().ToList();
 
@@ -120,6 +124,8 @@ public class PlayerHealth : MonoBehaviour
         {
             heartList[NextHeartIndex].ChangeHeartShape(1);
         }
+
+        followingHPUI.Follow(transform, HP_UI_FOLLOWING_TIME);
     }
 
     private void DecreaseHP(int damage)
@@ -143,6 +149,8 @@ public class PlayerHealth : MonoBehaviour
         {
             Die();
         }
+
+        followingHPUI.Follow(transform, HP_UI_FOLLOWING_TIME);
     }
 
     private void Die()
