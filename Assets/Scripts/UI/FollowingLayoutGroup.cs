@@ -31,7 +31,10 @@ public class FollowingLayoutUI : FollowingUI
             float timer = 0f;
             while (enabled && timer < waitTime)
             {
-                rectTransform.position = (Vector2)Camera.main.WorldToScreenPoint(target.position) + posOffset;
+                Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(Camera.main, (Vector2)target.position + posOffset);
+                // RectTransformUtility.ScreenPointToLocalPointInRectangle(rectTransform, screenPoint, null, out Vector2 point);
+                rectTransform.position = screenPoint;
+
                 timer += Time.deltaTime;
 
                 yield return null;

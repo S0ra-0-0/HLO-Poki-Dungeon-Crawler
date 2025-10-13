@@ -1782,7 +1782,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a9cd3f2bde1a914583d2bb0e51044e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  posOffset: {x: 0, y: -40}
+  posOffset: {x: 0, y: -1}
   originalPos: {x: 0, y: 0}
   rectTransform: {fileID: 0}
   layoutGroup: {fileID: 0}
