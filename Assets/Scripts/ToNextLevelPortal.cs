@@ -14,8 +14,7 @@ public class ToNextLevelPortal : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerDatas.PLAYER_LAYER)
         {
-            transistion.StartCoroutine(transistion.rollTheSphere());
-            SceneManager.LoadScene(nextSceneName);
+            transistion.StartCoroutine(transistion.rollTheSphere(nextSceneName));
         }
     }
 }

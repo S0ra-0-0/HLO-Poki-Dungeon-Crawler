@@ -1,13 +1,15 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class Transistion : MonoBehaviour
 {
     [SerializeField] private Animator animator;
 
-    public IEnumerator rollTheSphere()
+    public IEnumerator rollTheSphere(string sceneToLoad)
     {
-        animator.SetTrigger("Transistion");
+        animator.SetTrigger("Start");
         yield return new WaitForSeconds(1f);
+        SceneManager.LoadScene(sceneToLoad);
     }
 }
