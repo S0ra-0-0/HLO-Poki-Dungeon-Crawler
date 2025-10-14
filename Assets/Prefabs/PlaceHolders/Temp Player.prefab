@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 5843493996986415556}
   - component: {fileID: 6505740048901179101}
   - component: {fileID: 1464912404623044549}
+  - component: {fileID: 912685949096851629}
   - component: {fileID: 2350193798477251471}
   - component: {fileID: 535401906660523576}
   - component: {fileID: 6008011499033396497}
@@ -141,7 +142,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6999247802568337802
 Transform:
   m_ObjectHideFlags: 0
@@ -272,10 +273,11 @@ MonoBehaviour:
   projectilePrefab: {fileID: 1835898706951933378, guid: c34904f2f280cd04abe14a2cbb2cea4d, type: 3}
   firePoint: {fileID: 9115868593580894882}
   animator: {fileID: 0}
-  directionHash: 0
+  facingXHash: 0
+  facingYHash: 0
   isWalkingHash: 0
-  directionIndex: 0
   isWalking: 0
+  gamemanger: {fileID: 0}
   parryDirectionSprites:
   - {fileID: 21300000, guid: b5a7ed6a396566b4a856855bf6355a5e, type: 3}
   - {fileID: 21300000, guid: b771dec69affbfb4fb6bc84dbf65f9e7, type: 3}
@@ -287,10 +289,14 @@ MonoBehaviour:
   - {fileID: 21300000, guid: cea144dc1e7da0d4ab997eca34c4e961, type: 3}
   flashMaterial: {fileID: 2100000, guid: 4cdb45d0098659f44adc75182464e527, type: 2}
   swordPrefabAttack: {fileID: 5925944416369875127, guid: 85482a373b96a6549b2db9064c8e4075, type: 3}
+  bossWeaponPrefabAttack: {fileID: 1162745733728871907, guid: e691adf170392e347bebdb9e4e3e290f, type: 3}
+  bossWeaponText: {fileID: 0}
   parryColor: {r: 1, g: 1, b: 1, a: 1}
   audioSource: {fileID: 6008011499033396497}
   swordSwingNothingSound: {fileID: 8300000, guid: 4c1bac9cf11755141b1a306bbda56191, type: 3}
   swordSwingEnemySound: {fileID: 8300000, guid: 4562b909c32057c4096aff32a5d842ef, type: 3}
+  clubSwingNothingSound: {fileID: 8300000, guid: 6561ad4271bfd6f47996331a26902755, type: 3}
+  clubSwingEnemySound: {fileID: 8300000, guid: 6561ad4271bfd6f47996331a26902755, type: 3}
   parrySound: {fileID: 8300000, guid: 0d512d74531f3b94999e2c59b9aefe42, type: 3}
   dashSound: {fileID: 8300000, guid: 6561ad4271bfd6f47996331a26902755, type: 3}
   hitSound: {fileID: 8300000, guid: bb4a5f7be241c104eaff24ce126c33c2, type: 3}
@@ -300,8 +306,8 @@ MonoBehaviour:
   bossKeyFound: 0
   ArrowDirection: {fileID: 21300000, guid: 73c881570bc51e34583b40036f0c7231, type: 3}
   bossArrowHideDistance: 9
-  hasDefeatedTutorialGoblin: 0
-  facingDirection: {x: 1, y: 0}
+  hasDefeatedTutorialGoblin: 1
+  facingDirection: {x: 0, y: 1}
   parrySuccess: 0
 --- !u!114 &1464912404623044549
 MonoBehaviour:
@@ -317,6 +323,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   heartList: []
   transformHPUI: {fileID: 0}
+  followingHPUI: {fileID: 0}
   prefabNormalHeart: {fileID: 4870184538983673258, guid: 99a23d0eab42ce34a8cd7a328d39b9ff, type: 3}
   maxHP: 0
   currentHP: 0
@@ -326,6 +333,21 @@ MonoBehaviour:
   flickerNumber: 3
   deathSceneName: Game over screen
   healTest: 0
+--- !u!114 &912685949096851629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5327870854238468306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64e550a3adf6d3140addddb58457cdf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  followItemList: []
+  textCoins: {fileID: 0}
+  coins: 0
 --- !u!114 &2350193798477251471
 MonoBehaviour:
   m_ObjectHideFlags: 0
