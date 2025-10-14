@@ -17,7 +17,9 @@ namespace HLO.Door
         {
             base.Open();
 
-            GetComponent<SpriteRenderer>().enabled = false;
+            SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+
+            if(spriteRenderer) spriteRenderer.enabled = false;
         }
     }
 }

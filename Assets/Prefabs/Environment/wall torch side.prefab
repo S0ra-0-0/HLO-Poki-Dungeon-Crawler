@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9111643465933295864}
   - component: {fileID: 7366751462079276333}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: wall torch side
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -75,8 +75,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1051666013
-  m_SortingLayer: 4
+  m_SortingLayerID: -675265911
+  m_SortingLayer: 5
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: c0888c713aa35124d860c475b8dd1dc4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -99,7 +99,7 @@ GameObject:
   m_Component:
   - component: {fileID: 881505790544124479}
   - component: {fileID: 2302990441172899776}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: light small
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -162,8 +162,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1051666013
-  m_SortingLayer: 4
+  m_SortingLayerID: -675265911
+  m_SortingLayer: 5
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 02be8bc65934a7745b3ccfebf1376667, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.15686275}
@@ -186,7 +186,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8046619509060655853}
   - component: {fileID: 6602780484545191736}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Torch Flame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -249,8 +249,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1051666013
-  m_SortingLayer: 4
+  m_SortingLayerID: -675265911
+  m_SortingLayer: 5
   m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: db5a007809cf2dc49a0e6246d858de5e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

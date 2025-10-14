@@ -10,7 +10,7 @@ namespace HLO.Enemy.Spawn
 {
     public abstract class EnemySpawner : MonoBehaviour
     {
-        [SerializeField] protected Transform enemySpawnpointGroup;
+        [SerializeField] private Transform enemySpawnpointGroup;
         [SerializeField] protected GameObject[] enemyPrefabs;
 
         public abstract List<GameObject> Spawn();

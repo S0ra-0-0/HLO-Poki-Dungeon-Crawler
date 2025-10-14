@@ -612,7 +612,7 @@ Transform:
   m_GameObject: {fileID: 358853123}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.5, y: 0.31, z: 0}
+  m_LocalPosition: {x: 3.75, y: 0.34, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1358,7 +1358,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 3.1, y: 2.1}
+  m_Size: {x: 2.1, y: 1.1}
   m_EdgeRadius: 0
 --- !u!114 &901540752
 MonoBehaviour:
@@ -1373,8 +1373,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextSceneName: Main
-  animator: {fileID: 0}
-  animationDelay: 1
 --- !u!212 &901540753
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1650,7 +1648,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 3583
+    m_Bits: 11775
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -2803,7 +2801,7 @@ Transform:
   m_GameObject: {fileID: 1521274217}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.36, y: -2.65, z: 0}
+  m_LocalPosition: {x: 5.79, y: -2.55, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4699,7 +4697,7 @@ Transform:
   m_GameObject: {fileID: 1829538601}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.24, y: -0.3800001, z: 0}
+  m_LocalPosition: {x: -2.16, y: -0.07, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

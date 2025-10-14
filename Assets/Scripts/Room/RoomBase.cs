@@ -93,8 +93,8 @@ namespace HLO.Room
 
             Camera.main.GetComponent<CameraMovement>().Move(transform.position, 0.5f, ()=>
             {
-                onEnterRoom?.Invoke();
                 visitor.gameObject.SetActive(true);
+                onEnterRoom?.Invoke();
             });
         }
     }
