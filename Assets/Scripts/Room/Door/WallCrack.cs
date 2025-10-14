@@ -1,4 +1,6 @@
 using HLO.Door;
+using HLO.Room;
+using HLO.Layer;
 using UnityEngine;
 
 public class WallCrack : DoorBase
@@ -11,6 +13,8 @@ public class WallCrack : DoorBase
     private enum WallState { Default, Cracked, Broken }
     private WallState currentState = WallState.Default;
 
+    [SerializeField] private bool isRoomCleared = false;
+
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -20,6 +24,24 @@ public class WallCrack : DoorBase
             return;
         }
         spriteRenderer.sprite = defaultWallSprite;
+    }
+
+    protected override void RegisterRoomAction(RoomBase thisRoom)
+    {
+        base.RegisterRoomAction(thisRoom);
+
+        thisRoom.RegisterOnClearRoom(() =>
+        {
+            isRoomCleared = true;
+        });
+    }
+
+    protected override void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.layer == LayerDatas.PLAYER_LAYER && isRoomCleared && IsOpen)
+        {
+            connectedRoom.EnterRoom(DoorDirectionType, other.transform);
+        }
     }
 
     public void crackWall()
@@ -42,7 +64,7 @@ public class WallCrack : DoorBase
             {
                 spriteRenderer.sprite = brokenWallSprite;
                 currentState = WallState.Broken;
-                Open(); 
+                Open();
             }
             else
             {

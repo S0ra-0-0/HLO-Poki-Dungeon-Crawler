@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1467231317328516015}
   - component: {fileID: 4581765937828481630}
   - component: {fileID: 835959499799542159}
-  - component: {fileID: -7319042977314007302}
+  - component: {fileID: 4807277118565930659}
   m_Layer: 7
   m_Name: Wall Small Crack_Top
   m_TagString: Untagged
@@ -135,7 +135,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.86, y: 1.4}
   m_EdgeRadius: 0
---- !u!114 &-7319042977314007302
+--- !u!114 &4807277118565930659
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -144,10 +144,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1559183229848312027}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6a73f7035867eb4eb0ae5df83a8f71b, type: 3}
+  m_Script: {fileID: 11500000, guid: fcf0bb366a063ba458c5588ed64a2d32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   connectedRoom: {fileID: 0}
   doorDirectionType: 1
   isOpen: 0
-  wallOpenSprite: {fileID: 21300000, guid: aebee35297b50d14cb555438f18fd0df, type: 3}
+  defaultWallSprite: {fileID: 21300000, guid: e92b8035f50aa5f4ea34d7e3a4ad6f56, type: 3}
+  crackedWallSprite: {fileID: 21300000, guid: 007e06c92824d704e81f55f4f7d6dd56, type: 3}
+  brokenWallSprite: {fileID: 21300000, guid: aebee35297b50d14cb555438f18fd0df, type: 3}
+  isRoomCleared: 0
