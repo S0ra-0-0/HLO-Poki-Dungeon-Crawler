@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5468352102046922715}
   - component: {fileID: 3030349946561375856}
+  - component: {fileID: 3471214095956264960}
   m_Layer: 13
-  m_Name: lock (1)
+  m_Name: lock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -87,6 +88,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &3471214095956264960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2274910006860063749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cce89df67bd4d774390fa4acca04fa29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unlockSprite: {fileID: 21300000, guid: eacf7ca80c5dd7045b1d69d99ec29d8d, type: 3}
 --- !u!1 &6490786434609252847
 GameObject:
   m_ObjectHideFlags: 0
@@ -98,6 +112,7 @@ GameObject:
   - component: {fileID: 3211505643801778553}
   - component: {fileID: 6218122325044947624}
   - component: {fileID: 4247032062296281270}
+  - component: {fileID: 1351591979134339495}
   m_Layer: 13
   m_Name: gold treasure chest
   m_TagString: Untagged
@@ -162,9 +177,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -675265911
-  m_SortingLayer: 5
-  m_SortingOrder: 0
+  m_SortingLayerID: -1430232109
+  m_SortingLayer: 2
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 58e5c6bb8d4f4424188d0d3696c22fd9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -222,3 +237,21 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.6333333, y: 1.2666667}
   m_EdgeRadius: 0
+--- !u!114 &1351591979134339495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6490786434609252847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 877ade1a582080a4f95ae3652304ab60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  openedSprite: {fileID: 21300000, guid: 3b23f03e8f71b994cb9db989a74c6128, type: 3}
+  _lock: {fileID: 3471214095956264960}
+  items:
+  - {fileID: 0}
+  isOpened: 0
+  necessaryKeyAmount: 1
