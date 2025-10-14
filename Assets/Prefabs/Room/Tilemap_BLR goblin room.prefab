@@ -2741,6 +2741,7 @@ MonoBehaviour:
   - {fileID: 5065170632003165052}
   - {fileID: 5576177269361840225}
   - {fileID: 3231074885965523738}
+  - {fileID: 256686023775663852}
   isDiscovered: 0
   enemySpawner: {fileID: 0}
   enemySpawned: 0
@@ -3518,6 +3519,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 620b53eb203785049819afc149d5c4ad, type: 3}
+--- !u!114 &256686023775663852 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5851873855558162093, guid: 620b53eb203785049819afc149d5c4ad, type: 3}
+  m_PrefabInstance: {fileID: 5961049364960124993}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 269d21325feacae489d6037d40dce7f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &5108561698893460462 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1467231317328516015, guid: 620b53eb203785049819afc149d5c4ad, type: 3}
