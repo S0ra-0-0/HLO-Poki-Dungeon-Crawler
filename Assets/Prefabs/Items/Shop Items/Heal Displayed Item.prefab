@@ -141,6 +141,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 0}
   tooltipPositionOffset: {x: 0, y: 1}
+  usingTooltip: 0
   priceText: {fileID: 4214255631278124787}
   price: 0
 --- !u!114 &4366626194460838112
@@ -155,7 +156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfea91da9ee644440af80bce721c9f5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healAmount: 2
+  healAmount: 4
 --- !u!1001 &1959566110892091847
 PrefabInstance:
   m_ObjectHideFlags: 0
