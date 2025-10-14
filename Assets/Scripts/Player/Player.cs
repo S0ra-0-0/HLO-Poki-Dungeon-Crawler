@@ -47,7 +47,7 @@ public class Player : MonoBehaviour
     public Sprite[] parryDirectionSprites = new Sprite[8]; // Assign in Inspector: Right, UpRight, Up, UpLeft, Left, DownLeft, Down, DownRight
 
     [Header("Hit Flash")]
-    [SerializeField] private Material flashMaterial; // Assign FlashMaterial in Inspector
+    [SerializeField] private Material flashMaterial;
     private Material originalMaterial;
     private Coroutine flashRoutine;
 
