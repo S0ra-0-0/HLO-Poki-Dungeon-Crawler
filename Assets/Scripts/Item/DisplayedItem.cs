@@ -31,5 +31,10 @@ namespace HLO.Item
                 GetComponent<SpriteRenderer>().enabled = false;
             }
         }
+
+        public void Discard()
+        {
+            Destroy(gameObject);
+        }
     }
 }

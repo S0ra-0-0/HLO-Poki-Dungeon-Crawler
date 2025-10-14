@@ -44,9 +44,10 @@ namespace HLO.Door
                 }
                 else
                 {
+                    Inventory inventory = other.gameObject.GetComponent<Inventory>();
                     while (necessaryKeyAmount-- > 0)
                     {
-                        if (!other.gameObject.GetComponent<Inventory>().UseItem(typeof(KeyItem)))
+                        if (!inventory.UseItem(typeof(KeyItem)))
                         {
                             return;
                         }
