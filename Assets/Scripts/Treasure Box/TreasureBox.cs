@@ -46,6 +46,17 @@ public class TreasureBox : MonoBehaviour
 
         _lock.Unlock();
 
+        StartCoroutine(OpenCoroutine(player));
+    }
+
+    private IEnumerator OpenCoroutine(Transform player)
+    {
+        _lock.Unlock();
+
+        yield return new WaitForSeconds(0.25f);
+
+        _lock.Hide();
+
         StartCoroutine(DropItemsCoroutine(player));
     }
 
