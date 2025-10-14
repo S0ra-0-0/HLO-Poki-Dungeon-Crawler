@@ -29,7 +29,7 @@ TagManager:
   - Projectile
   - Item
   - CrackedWall
-  - 
+  - Environment
   - 
   - 
   - 
@@ -64,10 +64,10 @@ TagManager:
   - name: Effect
     uniqueID: 1051666013
     locked: 0
-  - name: MapIcon
+  - name: Environment
     uniqueID: 3619701385
     locked: 0
-  - name: CrackedWall
+  - name: MapIcon
     uniqueID: 1778522383
     locked: 0
   m_RenderingLayers:

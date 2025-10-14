@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1467231317328516015}
   - component: {fileID: 4581765937828481630}
-  - component: {fileID: 5851873855558162093}
-  - component: {fileID: 4852005537154660446}
-  m_Layer: 0
-  m_Name: wall small crack (1)
+  - component: {fileID: 835959499799542159}
+  - component: {fileID: -7319042977314007302}
+  m_Layer: 7
+  m_Name: Wall Small Crack_Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75,10 +75,10 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 2037686699
+  m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: aebee35297b50d14cb555438f18fd0df, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 007e06c92824d704e81f55f4f7d6dd56, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -89,23 +89,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5851873855558162093
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1559183229848312027}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 269d21325feacae489d6037d40dce7f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  connectedRoom: {fileID: 0}
-  doorDirectionType: 1
-  isOpen: 0
-  spriteRenderer: {fileID: 0}
---- !u!61 &4852005537154660446
+--- !u!61 &835959499799542159
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -149,5 +133,21 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.0666667, y: 2}
+  m_Size: {x: 0.86, y: 1.4}
   m_EdgeRadius: 0
+--- !u!114 &-7319042977314007302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1559183229848312027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6a73f7035867eb4eb0ae5df83a8f71b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  connectedRoom: {fileID: 0}
+  doorDirectionType: 1
+  isOpen: 0
+  wallOpenSprite: {fileID: 21300000, guid: aebee35297b50d14cb555438f18fd0df, type: 3}

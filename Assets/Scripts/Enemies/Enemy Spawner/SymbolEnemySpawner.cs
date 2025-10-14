@@ -15,7 +15,7 @@ namespace HLO.Enemy.Spawn
 
             for (int i = 0; i < spawnpointList.Count; i++)
             {
-                enemyList.Add(Instantiate(enemyPrefabs[0], spawnpointList[i].position, Quaternion.identity));
+                enemyList.Add(Instantiate(enemyPrefabs[i < enemyPrefabs.Length ? i : Random.Range(0, enemyPrefabs.Length)], spawnpointList[i].position, Quaternion.identity));
             }
 
             return enemyList;
