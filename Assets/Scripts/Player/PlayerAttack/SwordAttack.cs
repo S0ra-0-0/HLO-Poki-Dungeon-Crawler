@@ -16,8 +16,6 @@ public class SwordAttack : MonoBehaviour, IAttackType
 
     public void Attack(Player player)
     {
-
-
         Debug.Log("[SwordAttack] Normal attack executed");
 
         Vector3 spawnPosition = player.transform.position + (Vector3)player.facingDirection * .5f;
@@ -87,58 +85,33 @@ public class SwordAttack : MonoBehaviour, IAttackType
 
     public void heavyAttack(Player player)
     {
-        Debug.Log($"[SwordAttack] Heavy attack initiated. Last heavy attack: {player.lastHeavyAttackTime}, Current time: {Time.time}, Cooldown: {ParryCooldown}");
+        if (player.isHeavyAttacking) return;
 
-        if (Time.time < player.lastHeavyAttackTime + ParryCooldown)
-        {
-            Debug.Log("[SwordAttack] Heavy attack on cooldown - aborting");
-            return;
-        }
-
-        Debug.Log("[SwordAttack] Starting parry coroutine");
-        player.audioSource.PlayOneShot(player.parrySound);
-        player.StartCoroutine(ParryCoroutine(player));
-    }
-
-    private IEnumerator ParryCoroutine(Player player)
-    {
         player.isHeavyAttacking = true;
-        player.lastHeavyAttackTime = Time.time;
+        player.isShieldUp = true;
+        player.shieldRaiseTime = Time.time;
         player.SetParryVisual(true);
         player.SetInvulnerable(true);
-        bool parrySuccess = false;
+        player.audioSource.PlayOneShot(player.parrySound);
 
-        // Create parry visual
+        // Start the shield hold coroutine
+        player.StartCoroutine(ShieldHoldCoroutine(player));
+    }
+
+    private IEnumerator ShieldHoldCoroutine(Player player)
+    {
+        bool parrySuccess = false;
+        float parryTimer = 0f;
+        float holdTimer = 0f;
+
+        // Create shield visual
         if (player.parryDirectionSprites != null && player.parryDirectionSprites.Length == 8)
         {
-            Vector2 dir = player.facingDirection.normalized;
-            int dirIndex = 0;
-            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-            angle = (angle + 360) % 360;
-            if (angle >= 337.5f || angle < 22.5f) dirIndex = 0; // Right
-            else if (angle >= 22.5f && angle < 67.5f) dirIndex = 1; // UpRight
-            else if (angle >= 67.5f && angle < 112.5f) dirIndex = 2; // Up
-            else if (angle >= 112.5f && angle < 157.5f) dirIndex = 3; // UpLeft
-            else if (angle >= 157.5f && angle < 202.5f) dirIndex = 4; // Left
-            else if (angle >= 202.5f && angle < 247.5f) dirIndex = 5; // DownLeft
-            else if (angle >= 247.5f && angle < 292.5f) dirIndex = 6; // Down
-            else if (angle >= 292.5f && angle < 337.5f) dirIndex = 7; // DownRight
-
-            Vector3 spawnPosition = player.transform.position + (Vector3)player.facingDirection * 0.5f;
-            GameObject parrySprite = new GameObject("ParrySprite");
-            parrySprite.transform.position = spawnPosition;
-            parrySprite.transform.parent = player.transform;
-            SpriteRenderer spriteRenderer = parrySprite.AddComponent<SpriteRenderer>();
-            spriteRenderer.sprite = player.parryDirectionSprites[dirIndex];
-            spriteRenderer.sortingLayerName = "Player";
-            spriteRenderer.sortingOrder = (dirIndex == 1 || dirIndex == 2 || dirIndex == 3) ? -1 : 1;
-            Destroy(parrySprite, ParryWindow + 0.1f);
+            player.parrySprite = CreateParrySprite(player);
         }
 
-        float parryTimer = 0f;
-        bool frontEnemyWasAttacking = false;
-
-        while (parryTimer < ParryWindow)
+        // Only parry during the first few frames
+        while (parryTimer < player.shieldParryWindow)
         {
             parryTimer += Time.deltaTime;
             var enemies = Physics2D.OverlapCircleAll(
@@ -151,61 +124,89 @@ public class SwordAttack : MonoBehaviour, IAttackType
             {
                 GoblinEnemy goblin = enemy.GetComponent<GoblinEnemy>();
                 OgerMiniBoss ogre = enemy.GetComponent<OgerMiniBoss>();
-
                 if (goblin == null && ogre == null) continue;
 
                 Vector2 toEnemy = (Vector2)enemy.transform.position - (Vector2)player.transform.position;
                 float angle = Vector2.SignedAngle(player.facingDirection, toEnemy.normalized);
                 bool isInFront = Mathf.Abs(angle) <= ParryFrontCone;
 
-                Debug.Log($"Enemy: {enemy.name}, Angle: {angle}, Is in front: {isInFront}");
-
-                // Check if the enemy is attacking
                 bool isAttacking = false;
                 if (goblin != null && goblin.currentState == GoblinEnemy.State.Attacking)
-                {
                     isAttacking = true;
-                }
                 else if (ogre != null && ogre.currentState == OgerMiniBoss.State.Attacking)
-                {
                     isAttacking = true;
-                }
 
-                if (isInFront && isAttacking)
+                if (isInFront && isAttacking && player.WasAttackedThisFrame())
                 {
-                    frontEnemyWasAttacking = true;
-                    Debug.Log($"Enemy {enemy.name} is attacking and in front!");
+                    parrySuccess = true;
+                    Debug.Log("[Shield] PARRY SUCCESS!");
+                    break;
                 }
             }
 
-            if (player.WasAttackedThisFrame() && frontEnemyWasAttacking)
-            {
-                parrySuccess = true;
-                Debug.Log("[ParryCoroutine] PARRY SUCCESS! Enemy in front was attacking and player was hit.");
-                break;
-            }
-
+            if (parrySuccess) break;
             yield return null;
         }
 
+        // If parry was successful, trigger counter
         if (parrySuccess)
         {
-            Debug.Log("[ParryCoroutine] Parry success: performing directed counter (normal attack)");
-            yield return player.StartCoroutine(CounterFreezeFrames(0.2f));
-            player.attackDamage *= 2;
-            Attack(player);
-            player.attackDamage /= 2;
-            yield return new WaitForSeconds(ParryIframes);
-        }
-        else
-        {
-            Debug.Log("[ParryCoroutine] PARRY FAILED - Either no enemy in front was attacking or player wasn't hit.");
+            player.parrySuccess = true;
+            player.TriggerCounterAttack();
         }
 
+        // Keep the shield up for the full hold duration
+        while (holdTimer < player.shieldHoldDuration)
+        {
+            holdTimer += Time.deltaTime;
+            if (!Input.GetKey(KeyCode.K)) // If player releases the key, end early
+                break;
+            yield return null;
+        }
+
+        // End shield
+        player.isShieldUp = false;
         player.SetParryVisual(false);
         player.SetInvulnerable(false);
         player.isHeavyAttacking = false;
+        player.lastHeavyAttackTime = Time.time;
+
+        // Destroy the shield visual
+        if (player.parrySprite != null)
+        {
+            Destroy(player.parrySprite);
+            player.parrySprite = null;
+        }
     }
+
+
+    private GameObject CreateParrySprite(Player player)
+    {
+        Vector2 dir = player.facingDirection.normalized;
+        int dirIndex = 0;
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        angle = (angle + 360) % 360;
+        if (angle >= 337.5f || angle < 22.5f) dirIndex = 0; // Right
+        else if (angle >= 22.5f && angle < 67.5f) dirIndex = 1; // UpRight
+        else if (angle >= 67.5f && angle < 112.5f) dirIndex = 2; // Up
+        else if (angle >= 112.5f && angle < 157.5f) dirIndex = 3; // UpLeft
+        else if (angle >= 157.5f && angle < 202.5f) dirIndex = 4; // Left
+        else if (angle >= 202.5f && angle < 247.5f) dirIndex = 5; // DownLeft
+        else if (angle >= 247.5f && angle < 292.5f) dirIndex = 6; // Down
+        else if (angle >= 292.5f && angle < 337.5f) dirIndex = 7; // DownRight
+
+        Vector3 spawnPosition = player.transform.position + (Vector3)player.facingDirection * 0.5f;
+        GameObject parrySprite = new GameObject("ParrySprite");
+        parrySprite.transform.position = spawnPosition;
+        parrySprite.transform.parent = player.transform;
+        SpriteRenderer spriteRenderer = parrySprite.AddComponent<SpriteRenderer>();
+        spriteRenderer.sprite = player.parryDirectionSprites[dirIndex];
+        spriteRenderer.sortingLayerName = "Player";
+        spriteRenderer.sortingOrder = (dirIndex == 1 || dirIndex == 2 || dirIndex == 3) ? -1 : 1;
+
+        return parrySprite;
+    }
+
 
 
     private IEnumerator CounterFreezeFrames(float duration)

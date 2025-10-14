@@ -33,6 +33,13 @@ public class Player : MonoBehaviour
     public GameObject projectilePrefab;
     public Transform firePoint;
 
+    [Header("Shield Settings")]
+    public float shieldParryWindow = 0.2f;
+    public float shieldHoldDuration = 1.0f;
+    public bool isShieldUp = false;
+    public float shieldRaiseTime;
+
+
     [Header("Animation")]
     [SerializeField] private Animator animator;
     [SerializeField] private int facingXHash;
@@ -45,6 +52,8 @@ public class Player : MonoBehaviour
 
     [Header("Sprite Direction")]
     public Sprite[] parryDirectionSprites = new Sprite[8]; // Assign in Inspector: Right, UpRight, Up, UpLeft, Left, DownLeft, Down, DownRight
+    public GameObject parrySprite; // Store the shield visual
+
 
     [Header("Hit Flash")]
     [SerializeField] private Material flashMaterial;
@@ -188,6 +197,27 @@ public class Player : MonoBehaviour
         {
             DisplayBossArrow();
         }
+
+
+        if (isShieldUp && parrySprite != null)
+        {
+            Vector2 dir = facingDirection.normalized;
+            int dirIndex = 0;
+            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            angle = (angle + 360) % 360;
+            if (angle >= 337.5f || angle < 22.5f) dirIndex = 0; // Right
+            else if (angle >= 22.5f && angle < 67.5f) dirIndex = 1; // UpRight
+            else if (angle >= 67.5f && angle < 112.5f) dirIndex = 2; // Up
+            else if (angle >= 112.5f && angle < 157.5f) dirIndex = 3; // UpLeft
+            else if (angle >= 157.5f && angle < 202.5f) dirIndex = 4; // Left
+            else if (angle >= 202.5f && angle < 247.5f) dirIndex = 5; // DownLeft
+            else if (angle >= 247.5f && angle < 292.5f) dirIndex = 6; // Down
+            else if (angle >= 292.5f && angle < 337.5f) dirIndex = 7; // DownRight
+
+            parrySprite.GetComponent<SpriteRenderer>().sprite = parryDirectionSprites[dirIndex];
+            parrySprite.transform.position = transform.position + (Vector3)facingDirection * 0.5f;
+            parrySprite.GetComponent<SpriteRenderer>().sortingOrder = (dirIndex == 1 || dirIndex == 2 || dirIndex == 3) ? -1 : 1;
+        }
     }
 
     private void HandleMovement()
@@ -204,7 +234,7 @@ public class Player : MonoBehaviour
 
             facingDirection = Get8Direction(moveInput);
 
-            if(originalFacingDirection != facingDirection)
+            if (originalFacingDirection != facingDirection)
             {
                 animator.SetFloat(facingXHash, facingDirection.x);
                 animator.SetFloat(facingYHash, facingDirection.y);
@@ -415,6 +445,20 @@ public class Player : MonoBehaviour
     {
         Debug.Log("Counterattack triggered!");
 
+        Vector3 spawnPosition = transform.position + (Vector3)facingDirection * .5f;
+
+        GameObject swordHolder = Instantiate(
+            swordPrefabAttack,
+            spawnPosition,
+            Quaternion.identity
+        );
+
+        float swingAngle = Mathf.Atan2(facingDirection.y, facingDirection.x) * Mathf.Rad2Deg;
+        swordHolder.transform.rotation = Quaternion.Euler(0, 0, swingAngle);
+        swordHolder.transform.parent = transform;
+
+        Destroy(swordHolder, 0.3f);
+
         var enemies = Physics2D.OverlapCircleAll(transform.position, 1.5f, LayerMask.GetMask("Enemy"));
         foreach (var enemy in enemies)
         {
@@ -428,7 +472,7 @@ public class Player : MonoBehaviour
             }
         }
 
-        StartCoroutine(CounterFreezeFrames(.5f));
+        StartCoroutine(CounterFreezeFrames(.2f));
     }
 
     private IEnumerator CounterFreezeFrames(float duration)

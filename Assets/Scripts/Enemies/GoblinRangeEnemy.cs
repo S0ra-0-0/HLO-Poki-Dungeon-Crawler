@@ -294,12 +294,12 @@ public class GoblinRangeEnemy : MonoBehaviour
     private IEnumerator StunCoroutine(float duration)
     {
         currentState = State.Idle;
-        //animator.SetBool("isStunned", true);
+        //floorAnimator.SetBool("isStunned", true);
         rb.linearVelocity = Vector2.zero;
 
         yield return new WaitForSeconds(duration);
 
-        //animator.SetBool("isStunned", false);
+        //floorAnimator.SetBool("isStunned", false);
         stunRoutine = null;
     }
 

@@ -151,7 +151,7 @@ public class GoblinEnemy : MonoBehaviour
 
     IEnumerator Attack()
     {
-        //animator.SetTrigger("attack");
+        //floorAnimator.SetTrigger("attack");
         attackTimer = 0f;
 
         while (Vector2.Distance(transform.position, Player.transform.position) <= AttackRange)
@@ -222,12 +222,12 @@ public class GoblinEnemy : MonoBehaviour
     private IEnumerator StunCoroutine(float duration)
     {
         currentState = State.Idle;
-        //animator.SetBool("isStunned", true);
+        //floorAnimator.SetBool("isStunned", true);
         rb.linearVelocity = Vector2.zero;
 
         yield return new WaitForSeconds(duration);
 
-        //animator.SetBool("isStunned", false);
+        //floorAnimator.SetBool("isStunned", false);
         stunRoutine = null;
     }
 
