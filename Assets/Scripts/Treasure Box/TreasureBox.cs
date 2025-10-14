@@ -20,7 +20,7 @@ public class TreasureBox : MonoBehaviour
     private const float MIN_MIDDLE_POS_OFFSET = 1f;
     private const float MAX_MIDDLE_POS_OFFSET = 4.5f;
 
-    private const float ITEM_TO_PLAYER_TIME = 0.25f;
+    private const float ITEM_TO_PLAYER_TIME = 0.75f;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -62,22 +62,31 @@ public class TreasureBox : MonoBehaviour
 
     private IEnumerator DropItemsCoroutine(Transform target)
     {
-        foreach (ItemBase item in items)
+        Vector2 StartPos = transform.position;
+
+        Transform[] itemTransforms = new Transform[items.Length];
+        Vector2[] middlePositions = new Vector2[items.Length];
+
+        for (int i = 0; i < items.Length; i++)
         {
-            Transform itemTransform = Instantiate(item.gameObject, transform.position, Quaternion.identity).transform;
-            Vector2 StartPos = transform.position;
-            Vector2 middlePos = StartPos + Random.insideUnitCircle * Random.Range(MIN_MIDDLE_POS_OFFSET, MAX_MIDDLE_POS_OFFSET);
+            itemTransforms[i] = Instantiate(items[i].gameObject, transform.position, Quaternion.identity).transform;
 
-            float t = 0f;
-            while (t <= ITEM_TO_PLAYER_TIME)
+            middlePositions[i] = StartPos + Random.insideUnitCircle * Random.Range(MIN_MIDDLE_POS_OFFSET, MAX_MIDDLE_POS_OFFSET);
+        }
+        
+        float t = 0f;
+        while (t <= ITEM_TO_PLAYER_TIME)
+        {
+            t += Time.deltaTime;
+
+            for (int i = 0; i < items.Length; i++)
             {
-                if (!itemTransform) break;
+                if (!itemTransforms[i]) continue;
 
-                itemTransform.position = BezierCurve(StartPos, middlePos, target.position, t / ITEM_TO_PLAYER_TIME);
-                t += Time.deltaTime;
-
-                yield return null;
+                itemTransforms[i].position = BezierCurve(StartPos, middlePositions[i], target.position, t / ITEM_TO_PLAYER_TIME);
             }
+
+            yield return null;
         }
     }
     
