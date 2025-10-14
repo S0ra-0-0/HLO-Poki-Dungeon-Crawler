@@ -5,11 +5,19 @@ using UnityEngine.SceneManagement;
 public class Transistion : MonoBehaviour
 {
     [SerializeField] private Animator animator;
+    [SerializeField] private float transitionTime = 1f;
+    [SerializeField] private Player player;
 
-    public IEnumerator rollTheSphere(string sceneToLoad)
+    private void OnEnable()
     {
-        animator.SetTrigger("Start");
-        yield return new WaitForSeconds(1f);
-        SceneManager.LoadScene(sceneToLoad);
+      player.gameObject.SetActive(false);
+      animator.SetTrigger("Start");
+      StartCoroutine(EnablePlayerAfterTransition());
+
+    }
+    private IEnumerator EnablePlayerAfterTransition()
+    {
+        yield return new WaitForSeconds(transitionTime);
+        player.gameObject.SetActive(true);
     }
 }
