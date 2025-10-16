@@ -492,6 +492,11 @@ public class Player : MonoBehaviour
         {
             spriteRenderer.color = Color.white;
         }
+
+        if(parrySprite != null)
+        {
+            Destroy(parrySprite);
+        }
     }
 
     private GameObject bossArrow;

@@ -170,13 +170,6 @@ public class SwordAttack : MonoBehaviour, IAttackType
         player.SetInvulnerable(false);
         player.isHeavyAttacking = false;
         player.lastHeavyAttackTime = Time.time;
-
-        // Destroy the shield visual
-        if (player.parrySprite != null)
-        {
-            Destroy(player.parrySprite);
-            player.parrySprite = null;
-        }
     }
 
 

@@ -132,7 +132,6 @@ GameObject:
   - component: {fileID: 6505740048901179101}
   - component: {fileID: 1464912404623044549}
   - component: {fileID: 912685949096851629}
-  - component: {fileID: 2350193798477251471}
   - component: {fileID: 535401906660523576}
   - component: {fileID: 6008011499033396497}
   - component: {fileID: 3715738707509408962}
@@ -272,6 +271,10 @@ MonoBehaviour:
   isChargingHeavy: 0
   projectilePrefab: {fileID: 1835898706951933378, guid: c34904f2f280cd04abe14a2cbb2cea4d, type: 3}
   firePoint: {fileID: 9115868593580894882}
+  shieldParryWindow: 0.2
+  shieldHoldDuration: 1
+  isShieldUp: 0
+  shieldRaiseTime: 0
   animator: {fileID: 0}
   facingXHash: 0
   facingYHash: 0
@@ -287,6 +290,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 8e532f2ac90ce23449f500dc0abda081, type: 3}
   - {fileID: 21300000, guid: e17316b7bf11f9e40ab4301fd267c589, type: 3}
   - {fileID: 21300000, guid: cea144dc1e7da0d4ab997eca34c4e961, type: 3}
+  parrySprite: {fileID: 0}
   flashMaterial: {fileID: 2100000, guid: 4cdb45d0098659f44adc75182464e527, type: 2}
   swordPrefabAttack: {fileID: 5925944416369875127, guid: 85482a373b96a6549b2db9064c8e4075, type: 3}
   bossWeaponPrefabAttack: {fileID: 1162745733728871907, guid: e691adf170392e347bebdb9e4e3e290f, type: 3}
@@ -334,21 +338,6 @@ MonoBehaviour:
   deathSceneName: Game over screen
   healTest: 0
 --- !u!114 &912685949096851629
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5327870854238468306}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64e550a3adf6d3140addddb58457cdf5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  followItemList: []
-  textCoins: {fileID: 0}
-  coins: 0
---- !u!114 &2350193798477251471
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
