@@ -30,8 +30,8 @@ namespace HLO.Item
 
         public virtual void OnPointerDown(PointerEventData eventData)
         {
-            Tooltip.Instance.Rent((Vector2)transform.position + tooltipPositionOffset, item.Name, item.Description);
-            usingTooltip = true;
+            if(Tooltip.Instance.Rent((Vector2)transform.position + tooltipPositionOffset, item.Name, item.Description))
+                usingTooltip = true;
         }
 
         public virtual void OnPointerUp(PointerEventData eventData)

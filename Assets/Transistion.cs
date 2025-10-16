@@ -8,6 +8,7 @@ public class Transistion : MonoBehaviour
     [SerializeField] private Animator playerAnimator;
     [SerializeField] private float transitionTime = 1f;
     [SerializeField] private Player player;
+    [SerializeField] private GameObject transitionCanvasObject;
 
     private void OnEnable()
     {
@@ -26,5 +27,6 @@ public class Transistion : MonoBehaviour
     {
         yield return new WaitForSeconds(transitionTime);
         player.gameObject.SetActive(true);
+        transitionCanvasObject.SetActive(false);
     }
 }

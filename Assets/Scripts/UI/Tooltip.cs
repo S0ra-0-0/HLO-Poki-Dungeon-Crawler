@@ -27,9 +27,9 @@ public class Tooltip : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public void Rent(Vector2 worldPosition, string name, string description)
+    public bool Rent(Vector2 worldPosition, string name, string description)
     {
-        if (isUsed) return;
+        if (isUsed) return false;
 
         nameText.text = name;
         descriptionText.text = description;
@@ -38,6 +38,8 @@ public class Tooltip : MonoBehaviour
 
         isUsed = true;
         gameObject.SetActive(true);
+
+        return true;
     }
 
     public void Return()
